@@ -13,15 +13,24 @@ class Event extends Model
     protected $fillable = [
         'title',
         'event_date',
+        'events_date_finished',
         'country',
         'city',
         'venue',
         'description',
         'photo',
+        'sport_type_id',
     ];
 
     protected $casts = [
         'event_date' => 'date',
+        'events_date_finished' => 'date',
     ];
+
+    // Связь с видом спорта
+    public function sportType()
+    {
+        return $this->belongsTo(SportType::class);
+    }
 
 }

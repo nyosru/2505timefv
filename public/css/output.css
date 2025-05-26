@@ -942,6 +942,10 @@ select {
   right: 10px;
 }
 
+.right-\[20px\] {
+  right: 20px;
+}
+
 .start-0 {
   inset-inline-start: 0px;
 }
@@ -952,6 +956,10 @@ select {
 
 .top-1\/2 {
   top: 50%;
+}
+
+.top-\[10px\] {
+  top: 10px;
 }
 
 .z-0 {
@@ -1223,6 +1231,10 @@ select {
   margin-top: -2px;
 }
 
+.mt-\[5px\] {
+  margin-top: 5px;
+}
+
 .block {
   display: block;
 }
@@ -1431,6 +1443,10 @@ select {
 
 .max-h-\[70vh\] {
   max-height: 70vh;
+}
+
+.min-h-\[165px\] {
+  min-height: 165px;
 }
 
 .min-h-\[200px\] {
@@ -1685,6 +1701,11 @@ select {
   width: auto;
 }
 
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .w-full {
   width: 100%;
 }
@@ -1878,6 +1899,10 @@ select {
   flex-wrap: wrap;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-end {
   align-items: flex-end;
 }
@@ -1924,6 +1949,18 @@ select {
 
 .gap-6 {
   gap: 1.5rem;
+}
+
+.gap-\[10px\] {
+  gap: 10px;
+}
+
+.gap-\[20px\] {
+  gap: 20px;
+}
+
+.gap-\[7px\] {
+  gap: 7px;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -2051,6 +2088,10 @@ select {
   border-radius: 0.25rem;
 }
 
+.rounded-\[10px\] {
+  border-radius: 10px;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -2075,6 +2116,11 @@ select {
 .rounded-r-md {
   border-top-right-radius: 0.375rem;
   border-bottom-right-radius: 0.375rem;
+}
+
+.rounded-t-\[10px\] {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .border {
@@ -2143,6 +2189,11 @@ select {
 
 .border-none {
   border-style: none;
+}
+
+.border-\[\#E9E9E9\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(233 233 233 / var(--tw-border-opacity, 1));
 }
 
 .border-black {
@@ -2247,6 +2298,16 @@ select {
 .border-l-red-500 {
   --tw-border-opacity: 1;
   border-left-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
+}
+
+.bg-\[\#00A521\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 165 33 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#3579F4\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(53 121 244 / var(--tw-bg-opacity, 1));
 }
 
 .bg-black {
@@ -2661,6 +2722,10 @@ select {
   padding: 1.5rem;
 }
 
+.p-\[10px\] {
+  padding: 10px;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -2699,6 +2764,11 @@ select {
 .px-\[10\%\] {
   padding-left: 10%;
   padding-right: 10%;
+}
+
+.px-\[12px\] {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .py-0 {
@@ -2746,6 +2816,11 @@ select {
   padding-bottom: 1.5rem;
 }
 
+.py-\[1px\] {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -2772,6 +2847,10 @@ select {
 
 .pb-8 {
   padding-bottom: 2rem;
+}
+
+.pb-\[10px\] {
+  padding-bottom: 10px;
 }
 
 .pe-4 {
@@ -2846,6 +2925,10 @@ select {
   padding-top: 2rem;
 }
 
+.pt-\[5px\] {
+  padding-top: 5px;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2870,6 +2953,10 @@ select {
   vertical-align: bottom;
 }
 
+.font-\[Oswald\] {
+  font-family: Oswald;
+}
+
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -2886,6 +2973,18 @@ select {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-\[12px\] {
+  font-size: 12px;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
+}
+
+.text-\[18px\] {
+  font-size: 18px;
 }
 
 .text-\[36px\] {
@@ -2953,8 +3052,24 @@ select {
   line-height: 1.75rem;
 }
 
+.leading-\[24px\] {
+  line-height: 24px;
+}
+
+.leading-\[25px\] {
+  line-height: 25px;
+}
+
+.leading-\[30px\] {
+  line-height: 30px;
+}
+
 .leading-tight {
   line-height: 1.25;
+}
+
+.tracking-\[-2\%\] {
+  letter-spacing: -2%;
 }
 
 .tracking-wider {
@@ -2963,6 +3078,16 @@ select {
 
 .tracking-widest {
   letter-spacing: 0.1em;
+}
+
+.text-\[\#003493\] {
+  --tw-text-opacity: 1;
+  color: rgb(0 52 147 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#252525\] {
+  --tw-text-opacity: 1;
+  color: rgb(37 37 37 / var(--tw-text-opacity, 1));
 }
 
 .text-\[\#c2c7d0\] {
@@ -4230,6 +4355,10 @@ select {
 @media (min-width: 1280px) {
   .xl\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

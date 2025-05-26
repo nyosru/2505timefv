@@ -3,6 +3,7 @@
 namespace App\Livewire\Event;
 
 use App\Models\Event;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,6 +12,9 @@ class Listing extends Component
     use WithPagination;
 
     public $perPage = 10;
+
+//    #[Url]
+//    public $page = 1;
 
     public function render()
     {

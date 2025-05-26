@@ -51,6 +51,8 @@ class DatabaseSeeder extends Seeder
 //        $this->call(LeedColumnsSeeder::class);
         $this->call([
             AthleteSeeder::class,
+            SportTypeSeeder::class,
+
             EventSeeder::class,
             NewsSeeder::class,
         ]);
