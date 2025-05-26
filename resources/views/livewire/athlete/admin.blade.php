@@ -1,9 +1,12 @@
 <div>
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-2xl font-bold">Управление спортсменами</h2>
-        <button wire:click="create" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        <a href="{{ route('admin.athletes.form') }}"
+           wire:navigate
+{{--        button wire:click="create" --}}
+           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             + Добавить спортсмена
-        </button>
+        </a>
     </div>
 
     @if(session()->has('success'))
