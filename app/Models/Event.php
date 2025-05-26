@@ -11,15 +11,18 @@ class Event extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+
         'title',
         'event_date',
         'events_date_finished',
-        'country',
-        'city',
-        'venue',
+
         'description',
         'photo',
+
         'sport_type_id',
+        'country_id',
+        'city_id',
+
     ];
 
     protected $casts = [
