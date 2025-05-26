@@ -298,4 +298,5 @@ if (1 == 2) {
 
 //require __DIR__ . '/auth.php';
 //Route::get('login', \App\Livewire\Index::class)->name('login');
-Route::get('', \App\Livewire\Index::class)->name('login');
+//Route::get('', \App\Livewire\Index::class)->name('login');
+Route::get('', \App\Livewire\News\Listing::class)->name('login');

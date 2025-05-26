@@ -9,6 +9,7 @@
                    class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('news*') ? 'bg-orange-300 text-gray-700 ' : '' }}
+                {{ Request::routeIs('login') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

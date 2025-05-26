@@ -13,7 +13,9 @@
         </div>
         <div class="sm:w-1/2 flex justify-center items-center ">
             @guest
+                @if(1==2)
                 {!! Socialite::driver('telegram')->getButton() !!}
+                    @endif
             @else
                 <div>
                     <!-- Authentication -->
