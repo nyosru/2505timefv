@@ -22,4 +22,13 @@ class SportPlace extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    /**
+     * Все мероприятия, связанные с этим спортивным местом
+     */
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
 }

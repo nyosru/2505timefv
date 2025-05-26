@@ -33,4 +33,12 @@ class Event extends Model
         return $this->belongsTo(SportType::class);
     }
 
+    /**
+     * Связь с моделью SportPlace (спортивное место)
+     */
+    public function sportPlace()
+    {
+        return $this->belongsTo(SportPlace::class);
+    }
+
 }

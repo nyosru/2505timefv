@@ -18,7 +18,21 @@ class Listing extends Component
 
     public function render()
     {
-        $events = Event::orderByDesc('event_date')->paginate($this->perPage);
+        $events = Event::with([
+            'sportPlace' => function ($query) {
+
+                $query->select(['id', 'city_id', 'name']);
+
+                $query->with(['city' => function ($query) {
+
+                    $query->select(['id', 'country_id', 'name']);
+
+                    $query->with(['country' => function ($query) {
+                        $query->select(['id',  'name']);
+                    }]);
+                }]);
+            }
+        ])->orderByDesc('event_date')->paginate($this->perPage);
 
         return view('livewire.event.listing', [
             'events' => $events,

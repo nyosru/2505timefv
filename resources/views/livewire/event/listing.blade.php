@@ -7,6 +7,7 @@
 
     <div id="card-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] w-full">
         @forelse($events as $event)
+{{--            <div><pre>{{ print_r($event->toArray()) }}</pre></div>--}}
             <livewire:event.listing-item :event="$event"/>
             @endforeach
     </div>

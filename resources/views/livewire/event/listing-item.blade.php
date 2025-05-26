@@ -38,14 +38,25 @@
         </a>
     </div>
     @endif
+
+    @if( !empty($event->sportPlace->name) )
     <div class="flex flex-col mt-[5px]">
         <h4 class="leading-[30px] font-bold">Место проведения</h4>
+
+        <div class="text-[14px]" >
+        {{$event->sportPlace->city->country->name ?? '-' }}
+        >
+        {{$event->sportPlace->city->name ?? '-' }}
+        </div>
+
         <a class="text-[14px] leading-[25px] pb-[10px] text-[#003493] underline" href="#">
-            {{ $event->country }}<br/>
-            {{ $event->city }}<br/>
-            {{ $event->venue }}
+{{--            {{ $event->country }}<br/>--}}
+{{--            {{ $event->city }}<br/>--}}
+{{--            {{ $event->venue }}--}}
+            {{ $event->sportPlace->name }}
         </a>
     </div>
+    @endif
 
     @if( !empty($event->event_date) )
     <div class="flex flex-col mt-[5px]">

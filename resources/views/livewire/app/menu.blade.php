@@ -1,6 +1,8 @@
 <div class="px-1 pt-5 text-gray-600 w-[200px]">
 
     <div class="flex flex-col space-y-1">
+
+        <b>Норм меню</b>
         <ul>
 
             <li class="w-full">
@@ -19,21 +21,6 @@
                 </a>
             </li>
 
-            <li class="w-full">
-                <a href="{{ route('admin.news') }}"
-                   wire:navigate
-                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
-                hover:bg-orange-200 hover:text-gray-700
-{{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
-                {{ Request::routeIs('admin.news') ? 'bg-orange-300 text-gray-700 ' : '' }}
-                "
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                    </svg>
-                    <span>Новости Админ</span>
-                </a>
-            </li>
 
             <li class="w-full">
                 <a href="{{ route('events.index') }}"
@@ -48,6 +35,45 @@
                         <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
                     </svg>
                     <span>Мероприятия</span>
+                </a>
+            </li>
+
+
+            <li class="w-full">
+                <a href="{{ route('athletes.index') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+                hover:bg-orange-200 hover:text-gray-700
+{{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
+                {{ Request::routeIs('athletes.index') ? 'bg-orange-300 text-gray-700 ' : '' }}
+                "
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Спортсмены</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <b>Админ меню</b>
+
+        <ul>
+
+            <li class="w-full">
+                <a href="{{ route('admin.news') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+                hover:bg-orange-200 hover:text-gray-700
+{{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
+                {{ Request::routeIs('admin.news') ? 'bg-orange-300 text-gray-700 ' : '' }}
+                "
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Новости Админ</span>
                 </a>
             </li>
 
@@ -80,22 +106,6 @@
                         <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
                     </svg>
                     <span>Мероприятия Админ Добавить</span>
-                </a>
-            </li>
-
-            <li class="w-full">
-                <a href="{{ route('athletes.index') }}"
-                   wire:navigate
-                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
-                hover:bg-orange-200 hover:text-gray-700
-{{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
-                {{ Request::routeIs('athletes.index') ? 'bg-orange-300 text-gray-700 ' : '' }}
-                "
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                    </svg>
-                    <span>Спортсмены</span>
                 </a>
             </li>
 
@@ -149,7 +159,6 @@
             </li>
 
 
-
             <li class="w-full">
                 <a href="{{ route('admin.countries') }}"
                    wire:navigate
@@ -183,18 +192,21 @@
             </li>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+            <li class="w-full">
+                <a href="{{ route('admin.sport-places') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+                hover:bg-orange-200 hover:text-gray-700
+{{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
+                {{ Request::routeIs('admin.sport-places') ? 'bg-orange-300 text-gray-700 ' : '' }}
+                "
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>СпортМеста Админ</span>
+                </a>
+            </li>
 
 
             @if(1==2)

@@ -117,6 +117,10 @@ Route::get('/admin/cities', \App\Livewire\DataIn\CityCrudComponent::class)
 //    ->middleware('auth')
 ; // если нужна авторизация
 
+Route::get('/admin/sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
+    ->name('admin.sport-places')
+//    ->middleware('auth')
+; // если нужна авторизация
 
 
 
