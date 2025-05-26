@@ -70,8 +70,10 @@ jobs:
           #key: ${{ secrets.DEPLOY_KEY }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker exec ${{ env.DOCKER_CONTAINER }} composer i --no-dev --optimize-autoloader
+#            docker exec ${{ env.DOCKER_CONTAINER }} composer i --no-dev --optimize-autoloader
+            docker exec ${{ env.DOCKER_CONTAINER }} composer i --optimize-autoloader
             docker exec ${{ env.DOCKER_CONTAINER }} php artisan migrate:fresh --seed
+
 #            docker exec ${{ env.DOCKER_CONTAINER }} npm i && npm run build
 
 #            echo "start_setup - ${{ needs.deploy.outputs.start_setup }}"
