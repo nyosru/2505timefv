@@ -98,6 +98,36 @@ Route::get('/admin/athletes/form/{id?}', A_AdminForm::class)
 //    ->middleware('auth')
 ; // при необходимости
 
+
+Route::get('/admin/sport-types', \App\Livewire\SportTypeCrud::class)
+    ->name('admin.sport-types')
+//    ->middleware('auth')
+; // если нужна авторизация
+
+use App\Livewire\CountryCrud;
+
+Route::get('/admin/countries', CountryCrud::class)
+    ->name('admin.countries')
+//    ->middleware('auth')
+; // если нужна авторизация
+
+
+Route::get('/admin/cities', \App\Livewire\DataIn\CityCrudComponent::class)
+    ->name('admin.cities')
+//    ->middleware('auth')
+; // если нужна авторизация
+
+
+
+
+
+
+
+
+
+
+
+
 if (1 == 2) {
 
     //Route::get('/auth/telegram-in/callback', [TelegramController::class, 'callbackOrigin']);

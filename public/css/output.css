@@ -3712,6 +3712,11 @@ select {
   background-color: rgb(212 212 216 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-green-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:px-1:hover {
   padding-left: 0.25rem;
   padding-right: 0.25rem;

@@ -53,6 +53,10 @@ class DatabaseSeeder extends Seeder
             AthleteSeeder::class,
             SportTypeSeeder::class,
 
+            CountrySeeder::class,
+            CitySeeder::class,
+            SportPlaceSeeder::class,
+
             EventSeeder::class,
             NewsSeeder::class,
         ]);
