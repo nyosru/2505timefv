@@ -32,20 +32,19 @@
             {{--        <livewire:app.header/>--}}
             <livewire:app.navigation/>
 
-
             <div class="flex flex-row space-x-5">
-                @if (Route::is('tech*')
-                    || Route::is('lk*')
-                    || Route::is('board*')
-                    || Route::is('leed*')
-                    || Route::is('clients*')
-                    || Route::is('order*')
-                    )
-                    {{--            <div class="w-[200px] bg-orange-500">--}}
-                    {{--                меню--}}
-                    {{--            </div>--}}
-                    <livewire:app.menu/>
-                @endif
+                {{--                @if (Route::is('tech*')--}}
+                {{--                    || Route::is('lk*')--}}
+                {{--                    || Route::is('board*')--}}
+                {{--                    || Route::is('leed*')--}}
+                {{--                    || Route::is('clients*')--}}
+                {{--                    || Route::is('order*')--}}
+                {{--                    )--}}
+                {{--            <div class="w-[200px] bg-orange-500">--}}
+                {{--                меню--}}
+                {{--            </div>--}}
+                <livewire:app.menu/>
+                {{--                @endif--}}
                 <div class="flex-1 min-h-[400px]">
                     {{ $slot }}
                 </div>
@@ -220,35 +219,39 @@
 
         @livewireScripts
 
-        <!-- Yandex.Metrika counter -->
-        <script type="text/javascript">
-            (function (m, e, t, r, i, k, a) {
-                m[i] = m[i] || function () {
-                    (m[i].a = m[i].a || []).push(arguments);
-                };
-                m[i].l = 1 * new Date();
-                for (var j = 0; j < document.scripts.length; j++) {
-                    if (document.scripts[j].src === r) {
-                        return;
+        @if(1==2)
+            <!-- Yandex.Metrika counter -->
+            <script type="text/javascript">
+                (function (m, e, t, r, i, k, a) {
+                    m[i] = m[i] || function () {
+                        (m[i].a = m[i].a || []).push(arguments);
+                    };
+                    m[i].l = 1 * new Date();
+                    for (var j = 0; j < document.scripts.length; j++) {
+                        if (document.scripts[j].src === r) {
+                            return;
+                        }
                     }
-                }
-                k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(
-                    k, a);
-            })
-            (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+                    k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(
+                        k, a);
+                })
+                (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-            ym(100568272, 'init', {
-                clickmap: true,
-                trackLinks: true,
-                accurateTrackBounce: true,
-                webvisor: true
-            });
-        </script>
-        <noscript>
-            <div><img src="https://mc.yandex.ru/watch/100568272" style="position:absolute; left:-9999px;" alt=""/></div>
-        </noscript>
-        <!-- /Yandex.Metrika counter -->
+                ym(100568272, 'init', {
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+            </script>
+            <noscript>
+                <div><img src="https://mc.yandex.ru/watch/100568272" style="position:absolute; left:-9999px;" alt=""/>
+                </div>
+            </noscript>
+            <!-- /Yandex.Metrika counter -->
+        @endif
+
     </div>
-    </div>
+</div>
 </body>
 </html>

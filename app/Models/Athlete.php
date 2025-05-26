@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Athlete extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'last_name',
+        'first_name',
+        'middle_name',
+        'photo',
+        'birth_date',
+    ];
+
+    protected $casts = [
+        'birth_date' => 'date',
+    ];
+}
