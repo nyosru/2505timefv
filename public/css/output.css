@@ -1401,6 +1401,10 @@ select {
   height: 100vh;
 }
 
+.h-48 {
+  height: 12rem;
+}
+
 .max-h-32 {
   max-height: 8rem;
 }
@@ -1708,6 +1712,14 @@ select {
 
 .w-full {
   width: 100%;
+}
+
+.w-32 {
+  width: 8rem;
+}
+
+.w-\[48px\] {
+  width: 48px;
 }
 
 .min-w-0 {
@@ -2947,6 +2959,10 @@ select {
 
 .text-end {
   text-align: end;
+}
+
+.align-top {
+  vertical-align: top;
 }
 
 .align-bottom {

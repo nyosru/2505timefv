@@ -21,4 +21,19 @@ class Athlete extends Model
     protected $casts = [
         'birth_date' => 'date',
     ];
+
+
+    /**
+     * Все участия данного спортсмена в мероприятиях
+     */
+    public function eventParticipants()
+    {
+        return $this->hasMany(EventParticipant::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_participants');
+    }
+
 }

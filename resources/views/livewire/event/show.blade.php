@@ -15,9 +15,24 @@
 
             @if(1==2)
                 <div class="bg-yellow-200 m-2 rounded p-2">
-                <pre class="text-xs">{{ print_r($event->toArray(), true) }}</pre>
-            </div>
+                    <pre class="text-xs">{{ print_r($event->toArray(), true) }}</pre>
+                </div>
             @endif
+
+            <div class="bg-yellow-200 m-2 rounded p-2">
+                <h3 class="font-bold">Участники</h3>
+                <div class="flex flex-col space-y-2">
+                    @foreach( $event->athletes as $athlete)
+                        {{--                    <pre>{{ print_r($athlete->toArray(), true) }}</pre>--}}
+                        <livewire:event.show-athlete :athlete="$athlete"/>
+                    @endforeach
+                    @foreach( $event->athletesNoPlace as $athlete)
+                        {{--                    <pre>{{ print_r($athlete->toArray(), true) }}</pre>--}}
+                        <livewire:event.show-athlete :athlete="$athlete"/>
+                    @endforeach
+
+                </div>
+            </div>
 
             <div class="bg-yellow-200 m-2 rounded p-2">
                 <h3 class="font-bold">Время проведения</h3>
@@ -33,26 +48,26 @@
                     --
                 @endif
             </div>
-                <div class="bg-yellow-200 m-2 rounded p-2">
+            <div class="bg-yellow-200 m-2 rounded p-2">
                 <h3 class="font-bold">Место проведения</h3>
                 {{ $event->sportPlace->city->country->name  ?? '--' }}<br>
                 {{ $event->sportPlace->city->name  ?? '--' }}<br>
                 {{ $event->sportPlace->name ?? '--' }}<br>
             </div>
-                <div class="bg-yellow-200 m-2 rounded p-2">
+            <div class="bg-yellow-200 m-2 rounded p-2">
                 <h3 class="font-bold">Описание</h3>
                 {{$event->description ?? '--'}}
             </div>
-                <div class="bg-yellow-200 m-2 rounded p-2">
+            <div class="bg-yellow-200 m-2 rounded p-2">
                 <h3 class="font-bold">Вид спорта</h3>
                 {{$event->sportType->name ?? '--'}}
             </div>
 
         </div>
-<br/>
-<br/>
-<br/>
-<br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <div class="text-gray-600 mb-4">
             <strong>Дата проведения:</strong> {{ $event->event_date->format('d.m.Y') }}<br>
             {{--            <strong>Место проведения:</strong> {{ $event->venue }}, {{ $event->city }}, {{ $event->country }}--}}

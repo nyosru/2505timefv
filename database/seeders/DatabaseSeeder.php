@@ -58,6 +58,10 @@ class DatabaseSeeder extends Seeder
             SportPlaceSeeder::class,
 
             EventSeeder::class,
+
+            EventParticipantSeeder::class,
+
+
             NewsSeeder::class,
         ]);
 

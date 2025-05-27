@@ -43,5 +43,21 @@ class Event extends Model
     {
         return $this->belongsTo(SportPlace::class);
     }
+    /**
+     * Все участники данного мероприятия
+     */
+    public function participants()
+    {
+        return $this->hasMany(EventParticipant::class);
+    }
 
+    public function athletes()
+    {
+        return $this->belongsToMany(Athlete::class, 'event_participants');
+    }
+
+    public function athletesNoPlace()
+    {
+        return $this->belongsToMany(Athlete::class, 'event_participants');
+    }
 }

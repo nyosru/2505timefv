@@ -9,27 +9,36 @@ class Show extends Component
 {
 
     public Event $event;
+    public Event $event_no_place;
 
     public function mount($id)
     {
+
         $this->event = Event::with([
-            'sportType' => function ($query) {
-                $query->select(['id', 'name']);
+            'athletes' => function ($query) {
+                $query->withPivot('place')
+                    ->where('place', '!=', 0)
+                    ->orderBy('place', 'asc');
             },
+            'athletesNoPlace' => function ($query) {
+                $query->withPivot('place')
+                    ->where('place', '=', null)
+//                    ->orderBy('place', 'asc')
+                ;
+            },
+            'sportType:id,name',
             'sportPlace' => function ($query) {
-
-                $query->select(['id', 'city_id', 'name']);
-
-                $query->with(['city' => function ($query) {
-
-                    $query->select(['id', 'country_id', 'name']);
-
-                    $query->with(['country' => function ($query) {
-                        $query->select(['id',  'name']);
-                    }]);
-                }]);
+                $query->select('id', 'city_id', 'name')->with([
+                    'city' => function ($query) {
+                        $query->select('id', 'country_id', 'name')->with([
+                            'country:id,name'
+                        ]);
+                    }
+                ]);
             }
         ])->findOrFail($id);
+
+
     }
 
 

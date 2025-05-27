@@ -122,7 +122,10 @@ Route::get('/admin/sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
 //    ->middleware('auth')
 ; // если нужна авторизация
 
-
+Route::get('/admin/event-participants', App\Livewire\Event\EventParticipantCrud::class)
+    ->name('admin.event-participants')
+//    ->middleware('auth')
+; // если нужна авторизация
 
 
 
