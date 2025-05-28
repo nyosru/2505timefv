@@ -20,6 +20,8 @@
     <link href="/css/output.css?v={{ filemtime(public_path('/css/output.css')) }}" rel="stylesheet">
     {{--    @livewireStyles--}}
 
+    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+
 </head>
 <body class="antialiased font-sans bg-gray-100 min-h-screen">
 <div class=" ">

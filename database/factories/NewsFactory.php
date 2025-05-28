@@ -23,6 +23,10 @@ class NewsFactory extends Factory
      */
     public function definition(): array
     {
+
+//        $faker = \Faker\Factory::create('ru_RU');
+//        $this->faker = Factory::create('ru_RU');
+
         // Получаем случайный id мероприятия (или null)
         $eventIds = Event::pluck('id')->toArray();
         $eventId = $this->faker->optional()->randomElement($eventIds);
@@ -31,13 +35,15 @@ class NewsFactory extends Factory
         $athleteIds = Athlete::pluck('id')->toArray();
         $athleteId = $this->faker->optional()->randomElement($athleteIds);
 
+        $minitext = $this->faker->optional()->text(100);
+
         return [
-            'title' => $this->faker->sentence(6, true),
+            'title' => 'новость заголовок '.$this->faker->sentence(rand(3, 10), true),
             'date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
-            'short_text' => $this->faker->optional()->text(100),
-            'full_text' => $this->faker->paragraphs(3, true),
-            'event_id' => $eventId,
-            'athlete_id' => $athleteId,
+            'short_text' => ( !empty($minitext) ? 'короткий текст новости '.$minitext : null ),
+            'full_text' => 'полный текст новости '.$this->faker->paragraphs(3, true) ,
+            'event_id' => rand(1,5) == 5 ? $eventId : null,
+            'athlete_id' => rand(1,5) == 5 ? $athleteId: null,
         ];
     }
 }

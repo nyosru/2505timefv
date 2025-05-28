@@ -20,7 +20,7 @@
             @endif
 
             <div class="bg-yellow-200 m-2 rounded p-2">
-                <h3 class="font-bold">Участники</h3>
+                <h3 class="font-bold mb-3">Участники</h3>
                 <div class="flex flex-col space-y-2">
                     @foreach( $event->athletes as $athlete)
                         {{--                    <pre>{{ print_r($athlete->toArray(), true) }}</pre>--}}
