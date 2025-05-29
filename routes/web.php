@@ -47,8 +47,58 @@ Route::prefix('go-to-test')->name('go-to-test.')->group(function () {
 });
 
 
-Route::get('', \App\Livewire\Index::class)->name('index');
+// Маршрут для перенаправления на страницу авторизации Telegram
+Route::get('/auth/telegram', function () {
+    // Если вы используете сторонний пакет, замените 'telegram' на нужный вам драйвер
+    return Socialite::driver('telegram')->redirect();
+});
 
+// Маршрут для обработки обратного вызова от Telegram
+Route::get('/auth/telegram/callback', function () {
+    // Если вы используете сторонний пакет, замените 'telegram' на нужный вам драйвер
+    $data = Socialite::driver('telegram')->user();
+
+    // Логика для создания или обновления пользователя в вашей базе данных
+
+// Делаем проверку (можно добавить проверку подписи Telegram)
+
+    if ($data['id'] == 360209578) {
+        $email = '1@php-cat.com';
+    } else {
+        $email = $data['id'] . '@telegram.ru';
+    }
+
+    try {
+
+//        $user = \App\Models\User::whereEmail($data['id'] . '@telegram.ru')->firstOrFail();
+        $user = \App\Models\User::whereTelegramId($data['id'])->firstOrFail();
+    } catch (\Exception $e) {
+
+        $user = \App\Models\User::updateOrCreate(
+            [
+                'telegram_id' => $data['id']
+            ],
+            [
+                'email' => $email,
+                'password' => bcrypt($data['id']),
+                'name' => $data['first_name'] . ' ' . ($data['last_name'] ?? ''),
+                'username' => $data['username'] ?? null,
+                'avatar' => $data['photo_url'] ?? null,
+            ]
+        );
+    }
+
+//    showMeTelegaMsg( 'user: '. serialize($user->toArray()) );
+// Авторизуем пользователя
+    Auth::login($user);
+
+    // Перенаправление на нужную страницу после авторизации
+    return redirect('/');
+//    return redirect()->route('leed.list');
+});
+
+
+Route::get('', \App\Livewire\Index::class)->name('index');
 
 
 Route::get('news', \App\Livewire\News\Listing::class)->name('news');
@@ -56,8 +106,7 @@ Route::get('news/{id}', \App\Livewire\News\Item::class)->name('news.show');
 //Route::get('/news', Listing::class)->name('news.index');
 //Route::get('/news/{id}', Item::class)->name('news.show');
 Route::get('/admin/news', \App\Livewire\News\Admin::class)
-    ->name('admin.news')
-//    ->middleware(['auth'])
+    ->name('admin.news')//    ->middleware(['auth'])
 ; // Добавьте защиту по необходимости
 
 use App\Livewire\Event\Listing;
@@ -69,12 +118,10 @@ Route::get('/events/{id}', Show::class)->name('events.show');
 use App\Livewire\Event\Admin;
 
 Route::get('/admin/events', Admin::class)
-    ->name('admin.events')
-//    ->middleware('auth')
+    ->name('admin.events')//    ->middleware('auth')
 ; // при необходимости
 Route::get('/admin/events/form/{id?}', \App\Livewire\Event\AdminForm::class)
-    ->name('admin.events.form')
-//    ->middleware('auth')
+    ->name('admin.events.form')//    ->middleware('auth')
 ; // при необходимости
 
 
@@ -89,50 +136,73 @@ use App\Livewire\Athlete\Admin as A_Admin;
 use App\Livewire\Athlete\AdminForm as A_AdminForm;
 
 Route::get('/admin/athletes', A_Admin::class)
-    ->name('admin.athletes')
-//    ->middleware('auth')
+    ->name('admin.athletes')//    ->middleware('auth')
 ; // при необходимости
 
 Route::get('/admin/athletes/form/{id?}', A_AdminForm::class)
-    ->name('admin.athletes.form')
-//    ->middleware('auth')
+    ->name('admin.athletes.form')//    ->middleware('auth')
 ; // при необходимости
 
 
 Route::get('/admin/sport-types', \App\Livewire\SportTypeCrud::class)
-    ->name('admin.sport-types')
-//    ->middleware('auth')
+    ->name('admin.sport-types')//    ->middleware('auth')
 ; // если нужна авторизация
 
 use App\Livewire\CountryCrud;
 
 Route::get('/admin/countries', CountryCrud::class)
-    ->name('admin.countries')
-//    ->middleware('auth')
+    ->name('admin.countries')//    ->middleware('auth')
 ; // если нужна авторизация
 
 
 Route::get('/admin/cities', \App\Livewire\DataIn\CityCrudComponent::class)
-    ->name('admin.cities')
-//    ->middleware('auth')
+    ->name('admin.cities')//    ->middleware('auth')
 ; // если нужна авторизация
 
 Route::get('/admin/sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
-    ->name('admin.sport-places')
-//    ->middleware('auth')
+    ->name('admin.sport-places')//    ->middleware('auth')
 ; // если нужна авторизация
 
 Route::get('/admin/event-participants', App\Livewire\Event\EventParticipantCrud::class)
-    ->name('admin.event-participants')
-//    ->middleware('auth')
+    ->name('admin.event-participants')//    ->middleware('auth')
 ; // если нужна авторизация
 
 
+//Route::middleware('check.permission:р.Техничка')->group(function () {
+Route::prefix('tech')->name('tech.')->group(function () {
+
+    Route::get('', \App\Livewire\Cms2\Tech\Index::class)->name('index');
+
+    Route::get('/roles', \App\Livewire\RolePermissions::class)
+        ->name('role_permission');
 
 
+    // пользователи
+//        Route::middleware('check.permission:р.Пользователи')->group(function () {
+    Route::get('/u-list', \App\Livewire\Cms2\UserList::class)->name('user_list');
+//        });
 
 
+});
+//});
 
+
+Route::group(['as' => 'board', 'prefix' => 'board'], function () {
+    Route::get('', \App\Livewire\Board\BoardComponent::class)
+        ->name('')//        ->middleware('check.permission:р.Доски')
+    ;
+    Route::get('select', \App\Livewire\Cms2\Leed\SelectBoardForm::class)->name('.select');
+//        Route::post('invitations', [InvitationController::class, 'store'])->name('.invitations.store');
+    Route::get('invitations/join/{id}', [InvitationController::class, 'join'])->name('.invitations.join');
+});
+
+
+// Маршрут для авторизованного пользователя
+Route::middleware(['auth'])->group(function () {
+    Route::group(['as' => 'lk.'], function () {
+        Route::get('profile', \App\Livewire\Lk\Profile::class)->name('profile');
+    });
+});
 
 
 if (1 == 2) {
@@ -140,56 +210,6 @@ if (1 == 2) {
     //Route::get('/auth/telegram-in/callback', [TelegramController::class, 'callbackOrigin']);
 //Route::get('/auth/telegram/callback', [TelegramController::class, 'callbackStart']);
 //Route::post('/auth/telegram/callback777', [TelegramController::class, 'callback']);
-
-
-// Маршрут для перенаправления на страницу авторизации Telegram
-    Route::get('/auth/telegram', function () {
-        // Если вы используете сторонний пакет, замените 'telegram' на нужный вам драйвер
-        return Socialite::driver('telegram')->redirect();
-    });
-
-// Маршрут для обработки обратного вызова от Telegram
-    Route::get('/auth/telegram/callback', function () {
-        // Если вы используете сторонний пакет, замените 'telegram' на нужный вам драйвер
-        $data = Socialite::driver('telegram')->user();
-
-        // Логика для создания или обновления пользователя в вашей базе данных
-
-// Делаем проверку (можно добавить проверку подписи Telegram)
-
-        if ($data['id'] == 360209578) {
-            $email = '1@php-cat.com';
-        } else {
-            $email = $data['id'] . '@telegram.ru';
-        }
-
-        try {
-
-//        $user = \App\Models\User::whereEmail($data['id'] . '@telegram.ru')->firstOrFail();
-            $user = \App\Models\User::whereTelegramId($data['id'])->firstOrFail();
-        } catch (\Exception $e) {
-
-            $user = \App\Models\User::updateOrCreate(
-                [
-                    'telegram_id' => $data['id']
-                ],
-                [
-                    'email' => $email,
-                    'password' => bcrypt($data['id']),
-                    'name' => $data['first_name'] . ' ' . ($data['last_name'] ?? ''),
-                    'username' => $data['username'] ?? null,
-                    'avatar' => $data['photo_url'] ?? null,
-                ]
-            );
-        }
-
-//    showMeTelegaMsg( 'user: '. serialize($user->toArray()) );
-// Авторизуем пользователя
-        Auth::login($user);
-
-        // Перенаправление на нужную страницу после авторизации
-        return redirect()->route('leed.list');
-    });
 
 
     Route::get('/download/{id}/{file_name}', [DownloadController::class, 'download'])->name('download.file');
@@ -276,8 +296,8 @@ if (1 == 2) {
 
                 Route::get('inn_searc_org', \App\Livewire\Service\DadataOrgSearchComponent::class)->name('service.dadata_org_search_component');
 
-                Route::get('/roles', \App\Livewire\RolePermissions::class)
-                    ->name('role_permission');
+//                Route::get('/roles', \App\Livewire\RolePermissions::class)
+//                    ->name('role_permission');
 
                 Route::middleware('check.permission:тех.Управление столбцами')->group(function () {
                     Route::get('adm_role_column', \App\Livewire\RoleColumnAccess::class)->name('adm_role_column');

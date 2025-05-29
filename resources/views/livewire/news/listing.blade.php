@@ -1,8 +1,8 @@
 <div>
 
-{{--    <div class="mt-4">--}}
-{{--        {{ $news->links() }}--}}
-{{--    </div>--}}
+    <div class="mt-4">
+        {{ $news->links('vendor.pagination.my1tailwind') }}
+    </div>
 
     <div id="cards-container" class="grid grid-cols-3 gap-[20px] w-full">
 
