@@ -196,7 +196,6 @@ Route::group(['as' => 'board', 'prefix' => 'board'], function () {
     Route::get('invitations/join/{id}', [InvitationController::class, 'join'])->name('.invitations.join');
 });
 
-
 // Маршрут для авторизованного пользователя
 Route::middleware(['auth'])->group(function () {
     Route::group(['as' => 'lk.'], function () {

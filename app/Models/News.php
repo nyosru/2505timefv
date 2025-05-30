@@ -20,4 +20,15 @@ class News extends Model
     protected $casts = [
         'date' => 'date',
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function athlete()
+    {
+        return $this->belongsTo(Athlete::class);
+    }
+
 }
