@@ -36,19 +36,19 @@ Route::get('/setWebhook', function () {
 
 Route::any('webhook', function () {
 
-    $update = json_decode(file_get_contents('php://input'), true);
+//    $update = json_decode(file_get_contents('php://input'), true);
+//
+//    $message = $update['message'];
+//    $text = $message['text'];
+//    $chatId = $message['chat']['id'];
+//
+//    // Обработка сообщения
+//    Telegram::sendMessage([
+//        'chat_id' => $chatId,
+//        'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
+//    ]);
 
-    $message = $update['message'];
-    $text = $message['text'];
-    $chatId = $message['chat']['id'];
-
-    // Обработка сообщения
-    Telegram::sendMessage([
-        'chat_id' => $chatId,
-        'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . $text
-    ]);
-
-//    TelegramController::showMeTelegaMsg();
+    TelegramController::showMeTelegaMsg();
 
     return response('ok', 200);
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
