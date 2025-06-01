@@ -99,6 +99,7 @@ Route::any('webhook', function () {
 //        }
 
             }
+
         }
     } catch (\Exception $e) {
         Telegram::sendMessage([
@@ -109,43 +110,6 @@ Route::any('webhook', function () {
 
     return response('ok', 200);
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
-
-
-////Route::post('/webhook', function () {
-//Route::any('/webhook', function () {
-//
-//    TelegramController::showMeTelegaMsg();
-//
-//    $update = Telegram::getWebhookUpdate();
-//
-//    // Обработка входящего сообщения
-//    if (isset($update['message'])) {
-//        $message = $update['message'];
-//        $chatId = $message['chat']['id'];
-//        $text = $message['text'];
-//
-//        // Ответ пользователю
-//        Telegram::sendMessage([
-//            'chat_id' => $chatId,
-//            'text' => "Вы отправили: $text"
-//        ]);
-//
-//        try {
-//            $u = User::where('telegram_id', $chatId)->where('phone_number','not', null )->firstOrFail();
-//            Telegram::sendMessage([
-//                'chat_id' => $chatId,
-//                'text' => 'tel:' . ($u->phone_number ?? 'x')
-//            ]);
-//            if ($u && empty($u->phone_number))
-//                TelegramController::getContactMsg($chatId);
-//        }catch (\Throwable $e) {}
-//
-//    }
-//
-//    return response('ok', 200);
-////    return response()->json(['ok'], 200);
-//
-//})->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
 
 
 Route::post('/webhook1', function () {
@@ -233,6 +197,126 @@ Route::post('/webhook1', function () {
 
 });
 Route::post('/webhook2', [\App\Http\Controllers\TelegramController::class, 'inWebhook']);
+
+
+Route::get('/auth1111/telegram/callback', function (Request $request) {
+    showMeTelegaMsg();
+    return view('auth-telegram.callback1');
+});
+
+Route::post('/auth/telegram/callback2', function (Request $request) {
+
+    showMeTelegaMsg(__FUNCTION__);
+
+    $jsonData = $request->input('tgAuthResult'); // Получаем строку
+    $data = json_decode(base64_decode($jsonData), true); // Декодируем данные
+//dd($data);
+    if (!$data) {
+        return response()->json(['error' => 'Ошибка при разборе данных'], 400);
+    }
+
+
+// Делаем проверку (можно добавить проверку подписи Telegram)
+    $user = \App\Models\User::updateOrCreate(
+        ['telegram_id' => $data['id']],
+        [
+            'email' => $data['id'] . '@telegram.ru',
+            'password' => bcrypt($data['id']),
+            'name' => $data['first_name'] . ' ' . ($data['last_name'] ?? ''),
+            'username' => $data['username'] ?? null,
+            'avatar' => $data['photo_url'] ?? null,
+        ]
+    );
+
+//    dd($user);
+//    dd($user->toArray());
+
+//    showMeTelegaMsg( 'user: '. serialize($user->toArray()) );
+// Авторизуем пользователя
+//    Auth::login($user);
+
+//    return redirect('/');
+    return response()->json(['data' => $data, 'user' => $user->toArray()], 200);
+//    return response()->json(['data' => $data], 200);
+
+})->name('telegram.callback2');
+
+Route::post('/webhook/tele2', function () {
+    $update = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($update['message'])) {
+        $message = $update['message'];
+        $text = $message['text'];
+        $chatId = $message['chat']['id'];
+
+        // Обработка сообщения
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => "Вы написали: $text"
+        ]);
+    }
+
+    showMeTelegaMsg();
+
+    return response('ok', 200);
+})->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+
+Route::post('/webhook/tele2', function () {
+    return response()->json(['ok' => true]);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////Route::post('/webhook', function () {
+//Route::any('/webhook', function () {
+//
+//    TelegramController::showMeTelegaMsg();
+//
+//    $update = Telegram::getWebhookUpdate();
+//
+//    // Обработка входящего сообщения
+//    if (isset($update['message'])) {
+//        $message = $update['message'];
+//        $chatId = $message['chat']['id'];
+//        $text = $message['text'];
+//
+//        // Ответ пользователю
+//        Telegram::sendMessage([
+//            'chat_id' => $chatId,
+//            'text' => "Вы отправили: $text"
+//        ]);
+//
+//        try {
+//            $u = User::where('telegram_id', $chatId)->where('phone_number','not', null )->firstOrFail();
+//            Telegram::sendMessage([
+//                'chat_id' => $chatId,
+//                'text' => 'tel:' . ($u->phone_number ?? 'x')
+//            ]);
+//            if ($u && empty($u->phone_number))
+//                TelegramController::getContactMsg($chatId);
+//        }catch (\Throwable $e) {}
+//
+//    }
+//
+//    return response('ok', 200);
+////    return response()->json(['ok'], 200);
+//
+//})->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+
 
 //Route::any('/webhook2', function () {
 //    $update = json_decode(file_get_contents('php://input'), true);
@@ -390,70 +474,6 @@ Route::post('/webhook2', [\App\Http\Controllers\TelegramController::class, 'inWe
 //}
 //
 
-Route::get('/auth1111/telegram/callback', function (Request $request) {
-    showMeTelegaMsg();
-    return view('auth-telegram.callback1');
-});
-
-
-Route::post('/auth/telegram/callback2', function (Request $request) {
-
-    showMeTelegaMsg(__FUNCTION__);
-
-    $jsonData = $request->input('tgAuthResult'); // Получаем строку
-    $data = json_decode(base64_decode($jsonData), true); // Декодируем данные
-//dd($data);
-    if (!$data) {
-        return response()->json(['error' => 'Ошибка при разборе данных'], 400);
-    }
-
-
-// Делаем проверку (можно добавить проверку подписи Telegram)
-    $user = \App\Models\User::updateOrCreate(
-        ['telegram_id' => $data['id']],
-        [
-            'email' => $data['id'] . '@telegram.ru',
-            'password' => bcrypt($data['id']),
-            'name' => $data['first_name'] . ' ' . ($data['last_name'] ?? ''),
-            'username' => $data['username'] ?? null,
-            'avatar' => $data['photo_url'] ?? null,
-        ]
-    );
-
-//    dd($user);
-//    dd($user->toArray());
-
-//    showMeTelegaMsg( 'user: '. serialize($user->toArray()) );
-// Авторизуем пользователя
-//    Auth::login($user);
-
-//    return redirect('/');
-    return response()->json(['data' => $data, 'user' => $user->toArray()], 200);
-//    return response()->json(['data' => $data], 200);
-
-})->name('telegram.callback2');
-
-
-Route::post('/webhook/tele2', function () {
-    $update = json_decode(file_get_contents('php://input'), true);
-
-    if (isset($update['message'])) {
-        $message = $update['message'];
-        $text = $message['text'];
-        $chatId = $message['chat']['id'];
-
-        // Обработка сообщения
-        Telegram::sendMessage([
-            'chat_id' => $chatId,
-            'text' => "Вы написали: $text"
-        ]);
-    }
-
-    showMeTelegaMsg();
-
-    return response('ok', 200);
-})->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
-
 
 ////    $update = file_get_contents('php://input');
 ////    showMeTelegaMsg();
@@ -530,11 +550,6 @@ Route::post('/webhook/tele2', function () {
 //
 //    return redirect('/dashboard'); // Перенаправление после входа
 //});
-
-
-Route::post('/webhook/tele2', function () {
-    return response()->json(['ok' => true]);
-});
 
 
 //require __DIR__ . '/telega.php';
