@@ -318,6 +318,7 @@ Route::post('/webhook', function () {
     $update = json_decode(file_get_contents('php://input'), true);
 
     if (isset($update['message'])) {
+
         $message = $update['message'];
         $text = $message['text'];
         $chatId = $message['chat']['id'];
@@ -325,14 +326,15 @@ Route::post('/webhook', function () {
         // Обработка сообщения
         Telegram::sendMessage([
             'chat_id' => $chatId,
-            'text' => 'api/webhook'.PHP_EOL.'Вы написали: '.$text
+            'text' => 'api/webhook' . PHP_EOL . 'Вы написали: ' . $text
         ]);
 
         TelegramController::showMeTelegaMsg();
 
-        if ($text == 11) {
-            TelegramController::getContactMsg($text, $chatId);
-        }
+        $u = User::where('telegram_id', $chatId)->first();
+        if ( $u && empty($u->phone_number))
+            TelegramController::getContactMsg($chatId);
+
 
     }
 
