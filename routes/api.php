@@ -32,54 +32,47 @@ Route::post('/webhook', function () {
 
         try {
 
-        $message = $update['message'];
-        $text = $message['text'];
-        $chatId = $message['chat']['id'];
+            $message = $update['message'];
+            $text = $message['text'];
+            $chatId = $message['chat']['id'];
 
-        // Обработка сообщения
-        Telegram::sendMessage([
-            'chat_id' => $chatId,
-            'text' => 'api/webhook' . PHP_EOL . 'Вы написали: ' . $text
-        ]);
-
-        TelegramController::showMeTelegaMsg();
-
-        if (isset($message['contact']['phone_number'])) {
-
-            $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
-            $u->phone_number = $message['contact']['phone_number'];
-            $u->save();
-
+            // Обработка сообщения
             Telegram::sendMessage([
                 'chat_id' => $chatId,
-                'text' => 'номер телефона записан '.$message['contact']['phone_number'].' успещно'
+                'text' => 'api/webhook' . PHP_EOL . 'Вы написали: ' . $text
             ]);
 
-            //        "contact" => array(
-            //            "phone_number" => "79937252289",
-            //            "first_name" => "Сергей Сбер",
-            //            "user_id" => 7747953333
-            //        )
+            TelegramController::showMeTelegaMsg();
 
-        }
+            if (isset($message['contact']['phone_number'])) {
 
-        try {
+                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
+                $u->phone_number = $message['contact']['phone_number'];
+                $u->save();
 
-            $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
-            Telegram::sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'tel:' . ($u->phone_number ?? 'x')
-            ]);
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'номер телефона записан ' . $message['contact']['phone_number'] . ' успещно'
+                ]);
 
-            if ($u && empty($u->phone_number))
-                TelegramController::getContactMsg($chatId);
+                //        "contact" => array(
+                //            "phone_number" => "79937252289",
+                //            "first_name" => "Сергей Сбер",
+                //            "user_id" => 7747953333
+                //        )
 
-        } catch (\Exception $e) {
-            Telegram::sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'err:' . $e->getFile() . ':' . $e->getLine() . ':' . $e->getMessage()
-            ]);
-        }
+            } else {
+
+                $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'tel:' . ($u->phone_number ?? 'x')
+                ]);
+
+                if ($u && empty($u->phone_number))
+                    TelegramController::getContactMsg($chatId);
+
+            }
         } catch (\Exception $e) {
             Telegram::sendMessage([
                 'chat_id' => $chatId,
