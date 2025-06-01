@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Время для победы!') }}</title>
+    <title>{{ config('app.name', 'Время побед!') }}</title>
 
     <link rel="icon" href="/favicons/favicon.ico"> <!-- 32×32 -->
     {{--    <link rel="icon" href="images/favicons/icon.svg" type="image/svg+xml">--}}

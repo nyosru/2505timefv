@@ -21,6 +21,7 @@
                 <!-- Authentication -->
                 {{--    {{ auth()->user()->name ?? '-' }}--}}
                 <div x-data="{ open: false }">
+                    777
                     <button @click="open = !open" class="inline xw-full text-start">
                         {{ auth()->user()->name ?? '-' }}
                     </button>
