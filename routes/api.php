@@ -36,17 +36,17 @@ Route::get('/setWebhook', function () {
 
 Route::any('webhook', function () {
 
-//    $update = json_decode(file_get_contents('php://input'), true);
-//
-//    $message = $update['message'];
-//    $text = $message['text'];
-//    $chatId = $message['chat']['id'];
-//
-//    // Обработка сообщения
-//    Telegram::sendMessage([
-//        'chat_id' => $chatId,
-//        'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
-//    ]);
+    $update = json_decode(file_get_contents('php://input'), true);
+
+    $message = $update['message'];
+    $text = ($message['text'] ?? 'text-no');
+    $chatId = ($message['chat']['id'] ?? 'chatId-no');
+
+    // Обработка сообщения
+    Telegram::sendMessage([
+        'chat_id' => $chatId,
+        'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
+    ]);
 
     TelegramController::showMeTelegaMsg();
 
