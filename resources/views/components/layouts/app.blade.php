@@ -17,8 +17,9 @@
 
     <!-- Styles -->
     {{--    @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
-    <link href="/css/output.css?v={{ filemtime(public_path('/css/output.css')) }}" rel="stylesheet">
-    {{--    @livewireStyles--}}
+
+    {{--    <link href="/css/output.css?v={{ filemtime(public_path('/css/output.css')) }}" rel="stylesheet">--}}
+    @livewireStyles
 
     <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
 
