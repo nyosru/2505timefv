@@ -29,6 +29,9 @@ Route::post('/webhook', function () {
 
     if (isset($update['message'])) {
 
+
+        try {
+
         $message = $update['message'];
         $text = $message['text'];
         $chatId = $message['chat']['id'];
@@ -42,9 +45,11 @@ Route::post('/webhook', function () {
         TelegramController::showMeTelegaMsg();
 
         if (isset($message['contact']['phone_number'])) {
-            $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
+
+            $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
             $u->phone_number = $message['contact']['phone_number'];
             $u->save();
+
             Telegram::sendMessage([
                 'chat_id' => $chatId,
                 'text' => 'номер телефона записан '.$message['contact']['phone_number'].' успещно'
@@ -55,17 +60,31 @@ Route::post('/webhook', function () {
             //            "first_name" => "Сергей Сбер",
             //            "user_id" => 7747953333
             //        )
+
         }
 
         try {
+
             $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
             Telegram::sendMessage([
                 'chat_id' => $chatId,
                 'text' => 'tel:' . ($u->phone_number ?? 'x')
             ]);
+
             if ($u && empty($u->phone_number))
                 TelegramController::getContactMsg($chatId);
-        } catch (\Throwable $e) {
+
+        } catch (\Exception $e) {
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'err:' . $e->getFile() . ':' . $e->getLine() . ':' . $e->getMessage()
+            ]);
+        }
+        } catch (\Exception $e) {
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'err:' . $e->getFile() . ':' . $e->getLine() . ':' . $e->getMessage()
+            ]);
         }
 
     }
