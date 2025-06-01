@@ -23,6 +23,17 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 Route::post('/dadata/find-org', [DadataOrgController::class, 'findByInn'])->name('dadata.find-org');
 
 
+Route::get('/setWebhook', function () {
+    TelegramController::showMeTelegaMsg();
+    $response = Telegram::setWebhook([
+//            'url' => 'https://your-domain.com/webhook'
+//                'url' => env('APP_URL2') . '/api/webhook',
+        'url' => env('APP_URL2') . '/api/webhook',
+    ]);
+
+    return $response ? 'Webhook установлен' : 'Ошибка установки вебхука';
+});
+
 Route::any('webhook', function () {
 
     $update = json_decode(file_get_contents('php://input'), true);
@@ -93,6 +104,17 @@ Route::any('webhook', function () {
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
 
 
+
+
+
+
+
+
+
+
+
+
+
 ////Route::post('/webhook', function () {
 //Route::any('/webhook', function () {
 //
@@ -133,9 +155,17 @@ Route::any('webhook', function () {
 Route::post('/webhook1', function () {
 
     $update = json_decode(file_get_contents('php://input'), true);
-
     Log::info('Telegram Webhook:', $update);
+
     $chatId = $update['message']['chat']['id'] ?? null;
+
+    Telegram::sendMessage([
+        'chat_id' => $chatId,
+        'text' => 'origin: '
+            . serialize($update)
+
+    ]);
+
     if (!empty($chatId)) {
 
         $l = '';
@@ -407,17 +437,6 @@ Route::post('/auth/telegram/callback2', function (Request $request) {
 
 })->name('telegram.callback2');
 
-
-Route::get('/setWebhook', function () {
-    TelegramController::showMeTelegaMsg();
-    $response = Telegram::setWebhook([
-//            'url' => 'https://your-domain.com/webhook'
-//                'url' => env('APP_URL2') . '/api/webhook',
-        'url' => env('APP_URL2') . '/api/webhook1',
-    ]);
-
-    return $response ? 'Webhook установлен' : 'Ошибка установки вебхука';
-});
 
 
 Route::post('/webhook/tele2', function () {
