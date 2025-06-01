@@ -332,6 +332,12 @@ Route::post('/webhook', function () {
         TelegramController::showMeTelegaMsg();
 
         $u = User::where('telegram_id', $chatId)->first();
+
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'tel:'. ( $u->phone_number ?? 'x' )
+        ]);
+
         if ( $u && empty($u->phone_number))
             TelegramController::getContactMsg($chatId);
 
