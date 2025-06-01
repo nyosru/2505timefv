@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Illuminate\Support\Facades\Log;
@@ -36,6 +37,61 @@ class TelegramController extends Controller
             'reply_markup' => json_encode($keyboard)
         ]);
 
+
+    }
+
+
+    public static function checkUserPhoneNumber(User $user, $update)
+    {
+
+        $message = $update['message'];
+        $text = ($message['text'] ?? 'text-no');
+        $chatId = ($message['chat']['id'] ?? 'chatId-no');
+
+//        if (1 == 2) {
+        if (!empty($message['contact']['phone_number'])) {
+
+//                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
+//                $u = User::where('telegram_id', $chatId)->first();
+
+            if ($user) {
+
+                $user->phone_number = $message['contact']['phone_number'];
+                $user->save();
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'номер телефона записан ' . $message['contact']['phone_number'] . ' успещно'
+                ]);
+            }
+
+            //        "contact" => array(
+            //            "phone_number" => "79937252289",
+            //            "first_name" => "Сергей Сбер",
+            //            "user_id" => 7747953333
+            //        )
+
+        } else {
+
+//            $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->first();
+            if ($user && empty($user->phone_number)) {
+
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'tel запрос:' . ($user->phone_number ?? 'x')
+                ]);
+
+                TelegramController::getContactMsg($chatId);
+            }
+
+        }
+//        } catch (\Exception $e) {
+//            Telegram::sendMessage([
+//                'chat_id' => $chatId,
+//                'text' => 'err:' . $e->getFile() . ':' . $e->getLine() . ':' . $e->getMessage()
+//            ]);
+//        }
+
+//        }
 
     }
 

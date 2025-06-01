@@ -47,7 +47,9 @@ Route::any('webhook', function () {
         'chat_id' => $chatId,
         'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
     ]);
+    $user = User::where('telegram_id', $chatId)->first();
 
+    TelegramController::checkUserPhoneNumber($user, $update);
     TelegramController::showMeTelegaMsg();
 
     return response('ok', 200);
