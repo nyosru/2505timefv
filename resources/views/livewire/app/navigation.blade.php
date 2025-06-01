@@ -12,6 +12,7 @@
             </a>
         </div>
         <div class="sm:w-1/2 flex justify-center items-center ">
+            123
             @guest
                 @if(1==1)
                     {!! Socialite::driver('telegram')->getButton() !!}
@@ -21,7 +22,6 @@
                 <!-- Authentication -->
                 {{--    {{ auth()->user()->name ?? '-' }}--}}
                 <div x-data="{ open: false }">
-                    777
                     <button @click="open = !open" class="inline xw-full text-start">
                         {{ auth()->user()->name ?? '-' }}
                     </button>
