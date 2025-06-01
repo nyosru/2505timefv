@@ -32,23 +32,24 @@ Route::any('webhook', function () {
 
 //        try {
 
-            $message = $update['message'];
-            $text = $message['text'];
-            $chatId = $message['chat']['id'];
+        $message = $update['message'];
+        $text = $message['text'];
+        $chatId = $message['chat']['id'];
 
-            // Обработка сообщения
-            Telegram::sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . $text
-            ]);
+        // Обработка сообщения
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . $text
+        ]);
 
-            TelegramController::showMeTelegaMsg();
+        TelegramController::showMeTelegaMsg();
 
-            if ( !empty($message['contact']['phone_number'])) {
+        if (1 == 2) {
+            if (!empty($message['contact']['phone_number'])) {
 
 //                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
                 $u = User::where('telegram_id', $chatId)->first();
-                if( $u ) {
+                if ($u) {
                     $u->phone_number = $message['contact']['phone_number'];
                     $u->save();
                     Telegram::sendMessage([
@@ -84,6 +85,7 @@ Route::any('webhook', function () {
 //            ]);
 //        }
 
+        }
     }
 
 
