@@ -23,6 +23,95 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 Route::post('/dadata/find-org', [DadataOrgController::class, 'findByInn'])->name('dadata.find-org');
 
 
+Route::post('/webhook', function () {
+
+    $update = json_decode(file_get_contents('php://input'), true);
+
+    if (isset($update['message'])) {
+
+        $message = $update['message'];
+        $text = $message['text'];
+        $chatId = $message['chat']['id'];
+
+        // Обработка сообщения
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'api/webhook' . PHP_EOL . 'Вы написали: ' . $text
+        ]);
+
+        TelegramController::showMeTelegaMsg();
+
+        if (isset($message['contact']['phone_number'])) {
+            $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
+            $u->phone_number = $message['contact']['phone_number'];
+            $u->save();
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'номер телефона записан '.$message['contact']['phone_number'].' успещно'
+            ]);
+
+            //        "contact" => array(
+            //            "phone_number" => "79937252289",
+            //            "first_name" => "Сергей Сбер",
+            //            "user_id" => 7747953333
+            //        )
+        }
+
+        try {
+            $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'tel:' . ($u->phone_number ?? 'x')
+            ]);
+            if ($u && empty($u->phone_number))
+                TelegramController::getContactMsg($chatId);
+        } catch (\Throwable $e) {
+        }
+
+    }
+
+
+    return response('ok', 200);
+})->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
+
+
+////Route::post('/webhook', function () {
+//Route::any('/webhook', function () {
+//
+//    TelegramController::showMeTelegaMsg();
+//
+//    $update = Telegram::getWebhookUpdate();
+//
+//    // Обработка входящего сообщения
+//    if (isset($update['message'])) {
+//        $message = $update['message'];
+//        $chatId = $message['chat']['id'];
+//        $text = $message['text'];
+//
+//        // Ответ пользователю
+//        Telegram::sendMessage([
+//            'chat_id' => $chatId,
+//            'text' => "Вы отправили: $text"
+//        ]);
+//
+//        try {
+//            $u = User::where('telegram_id', $chatId)->where('phone_number','not', null )->firstOrFail();
+//            Telegram::sendMessage([
+//                'chat_id' => $chatId,
+//                'text' => 'tel:' . ($u->phone_number ?? 'x')
+//            ]);
+//            if ($u && empty($u->phone_number))
+//                TelegramController::getContactMsg($chatId);
+//        }catch (\Throwable $e) {}
+//
+//    }
+//
+//    return response('ok', 200);
+////    return response()->json(['ok'], 200);
+//
+//})->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
+
+
 Route::post('/webhook1', function () {
 
     $update = json_decode(file_get_contents('php://input'), true);
@@ -313,31 +402,6 @@ Route::get('/setWebhook', function () {
 });
 
 
-Route::post('/webhook', function () {
-
-    $update = json_decode(file_get_contents('php://input'), true);
-
-    if (isset($update['message'])) {
-
-        $message = $update['message'];
-        $text = $message['text'];
-        $chatId = $message['chat']['id'];
-
-        // Обработка сообщения
-        Telegram::sendMessage([
-            'chat_id' => $chatId,
-            'text' => 'api/webhook' . PHP_EOL . 'Вы написали: ' . $text
-        ]);
-
-        TelegramController::showMeTelegaMsg();
-
-
-    }
-
-
-    return response('ok', 200);
-})->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
-
 Route::post('/webhook/tele2', function () {
     $update = json_decode(file_get_contents('php://input'), true);
 
@@ -356,43 +420,6 @@ Route::post('/webhook/tele2', function () {
     showMeTelegaMsg();
 
     return response('ok', 200);
-})->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
-
-
-//Route::post('/webhook', function () {
-Route::any('/webhook', function () {
-
-    TelegramController::showMeTelegaMsg();
-
-    $update = Telegram::getWebhookUpdate();
-
-    // Обработка входящего сообщения
-    if (isset($update['message'])) {
-        $message = $update['message'];
-        $chatId = $message['chat']['id'];
-        $text = $message['text'];
-
-        // Ответ пользователю
-        Telegram::sendMessage([
-            'chat_id' => $chatId,
-            'text' => "Вы отправили: $text"
-        ]);
-
-        try {
-            $u = User::where('telegram_id', $chatId)->where('phone_number','not', null )->firstOrFail();
-            Telegram::sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'tel:' . ($u->phone_number ?? 'x')
-            ]);
-            if ($u && empty($u->phone_number))
-                TelegramController::getContactMsg($chatId);
-        }catch (\Throwable $e) {}
-
-    }
-
-    return response('ok', 200);
-//    return response()->json(['ok'], 200);
-
 })->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
 
 
