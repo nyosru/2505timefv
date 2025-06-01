@@ -46,7 +46,8 @@ Route::post('/webhook', function () {
 
             if (isset($message['contact']['phone_number'])) {
 
-                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
+//                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
+                $u = User::where('telegram_id', $chatId)->firstOrFail();
                 $u->phone_number = $message['contact']['phone_number'];
                 $u->save();
 
@@ -63,7 +64,7 @@ Route::post('/webhook', function () {
 
             } else {
 
-                $u = User::where('telegram_id', $chatId)->where('phone_number', 'not', null)->firstOrFail();
+                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
                 Telegram::sendMessage([
                     'chat_id' => $chatId,
                     'text' => 'tel:' . ($u->phone_number ?? 'x')
