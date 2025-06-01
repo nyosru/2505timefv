@@ -8,11 +8,10 @@
     <div class="flex flex-col sm:w-full sm:flex-row space-y-2 pb-3">
         <div class="w-full sm:w-1/2 sm:pt-3 flex justify-center items-center py-2">
             <a href="/" class="hover:underline text-2xl pl-4 font-bold">
-                <nobr>ВремяПобед</nobr>
+                <nobr>ВремяПобед!</nobr>
             </a>
         </div>
         <div class="sm:w-1/2 flex justify-center items-center ">
-            0011
             @guest
                 @if(1==1)
                     {!! Socialite::driver('telegram')->getButton() !!}
