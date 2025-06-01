@@ -12,6 +12,35 @@ use Nyos\Msg;
 class TelegramController extends Controller
 {
 
+    public static function getContactMsg( $text = '', $chatId ){
+        if ( empty($phone) || $text == '11') {
+
+// Define the keyboard with the "Share Phone Number" button
+            $keyboard = [
+                'keyboard' => [
+                    [
+                        [
+                            'text' => 'Отправить свой номер телефона',
+                            'request_contact' => true
+                        ]
+                    ]
+                ],
+                'resize_keyboard' => true,
+                'one_time_keyboard' => true
+            ];
+
+// Send the message with the keyboard
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'Поделитесь вашим номером телефона'.PHP_EOL.'кнопка ниже ↓↓↓ (Share Phone Number)',
+                'reply_markup' => json_encode($keyboard)
+            ]);
+
+        }
+    }
+
+
+
     public static function showMeTelegaMsg($msg = '')
     {
         $update = json_decode(file_get_contents('php://input'), true);
