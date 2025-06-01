@@ -325,7 +325,7 @@ Route::post('/webhook', function () {
         // Обработка сообщения
         Telegram::sendMessage([
             'chat_id' => $chatId,
-            'text' => "Вы написали: $text"
+            'text' => 'api/webhook'.PHP_EOL.'Вы написали: '.$text
         ]);
 
         TelegramController::showMeTelegaMsg();
