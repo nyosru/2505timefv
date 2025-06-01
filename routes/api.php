@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\Service\DadataOrgController;
+use App\Http\Controllers\TelegramController;
 use Illuminate\Support\Facades\Route;
 
 use App\Livewire\Cms2\Client;
@@ -286,6 +287,10 @@ Route::post('/auth/telegram/callback2', function (Request $request) {
             'avatar' => $data['photo_url'] ?? null,
         ]
     );
+
+//    dd($user);
+//    dd($user->toArray());
+
 //    showMeTelegaMsg( 'user: '. serialize($user->toArray()) );
 // Авторизуем пользователя
 //    Auth::login($user);
@@ -298,7 +303,7 @@ Route::post('/auth/telegram/callback2', function (Request $request) {
 
 
 Route::get('/setWebhook', function () {
-    showMeTelegaMsg();
+    TelegramController::showMeTelegaMsg();
     $response = Telegram::setWebhook([
 //            'url' => 'https://your-domain.com/webhook'
 //                'url' => env('APP_URL2') . '/api/webhook',
@@ -310,6 +315,7 @@ Route::get('/setWebhook', function () {
 
 
 Route::post('/webhook', function () {
+
     $update = json_decode(file_get_contents('php://input'), true);
 
     if (isset($update['message'])) {
@@ -324,7 +330,7 @@ Route::post('/webhook', function () {
         ]);
     }
 
-    showMeTelegaMsg();
+    TelegramController::showMeTelegaMsg();
 
     return response('ok', 200);
 })->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
@@ -353,7 +359,7 @@ Route::post('/webhook/tele2', function () {
 //Route::post('/webhook', function () {
 Route::any('/webhook', function () {
 
-    showMeTelegaMsg();
+    TelegramController::showMeTelegaMsg();
 
     $update = Telegram::getWebhookUpdate();
 

@@ -168,39 +168,47 @@ Route::get('/admin/event-participants', App\Livewire\Event\EventParticipantCrud:
 ; // если нужна авторизация
 
 
+// Маршрут для авторизованного пользователя
+Route::middleware(['auth'])->group(function () {
+
 //Route::middleware('check.permission:р.Техничка')->group(function () {
-Route::prefix('tech')->name('tech.')->group(function () {
+    Route::prefix('tech')->name('tech.')->group(function () {
 
-    Route::get('', \App\Livewire\Cms2\Tech\Index::class)->name('index');
+        Route::get('', \App\Livewire\Cms2\Tech\Index::class)->name('index');
 
-    Route::get('/roles', \App\Livewire\RolePermissions::class)
-        ->name('role_permission');
+        Route::get('/roles', \App\Livewire\RolePermissions::class)
+            ->name('role_permission');
 
 
-    // пользователи
+        // пользователи
 //        Route::middleware('check.permission:р.Пользователи')->group(function () {
-    Route::get('/u-list', \App\Livewire\Cms2\UserList::class)->name('user_list');
+        Route::get('/u-list', \App\Livewire\Cms2\UserList::class)->name('user_list');
 //        });
 
 
-});
-//});
 
+    });
 
-Route::group(['as' => 'board', 'prefix' => 'board'], function () {
-    Route::get('', \App\Livewire\Board\BoardComponent::class)
-        ->name('')//        ->middleware('check.permission:р.Доски')
-    ;
-    Route::get('select', \App\Livewire\Cms2\Leed\SelectBoardForm::class)->name('.select');
+    Route::group(['as' => 'board', 'prefix' => 'board'], function () {
+        Route::get('', \App\Livewire\Board\BoardComponent::class)
+            ->name('')//        ->middleware('check.permission:р.Доски')
+        ;
+        Route::get('select', \App\Livewire\Cms2\Leed\SelectBoardForm::class)->name('.select');
 //        Route::post('invitations', [InvitationController::class, 'store'])->name('.invitations.store');
-    Route::get('invitations/join/{id}', [InvitationController::class, 'join'])->name('.invitations.join');
-});
+        Route::get('invitations/join/{id}', [InvitationController::class, 'join'])->name('.invitations.join');
+    });
 
-// Маршрут для авторизованного пользователя
-Route::middleware(['auth'])->group(function () {
     Route::group(['as' => 'lk.'], function () {
         Route::get('profile', \App\Livewire\Lk\Profile::class)->name('profile');
     });
+
+        Route::get('leed', \App\Livewire\Cms2\Leed\LeedBoardList::class)->name('leed.list');
+//  чел переходит в доску, проверяем и назначаем права и переадресовываем на доску
+        Route::get('leed/goto/{board_id}/{role_id}', [\App\Http\Controllers\BoardController::class, 'goto'])->name('leed.goto');
+        Route::get('leed/{board_id}', \App\Livewire\Cms2\Leed\LeedBoard::class)->name('leed');
+        Route::get('leed/{board}/config', \App\Livewire\Board\ConfigComponent::class)->name('board.config');
+
+//});
 });
 
 
@@ -262,7 +270,6 @@ if (1 == 2) {
         Route::get('leed/goto/{board_id}/{role_id}', [\App\Http\Controllers\BoardController::class, 'goto'])->name('leed.goto');
 
         Route::get('leed/{board_id}', \App\Livewire\Cms2\Leed\LeedBoard::class)->name('leed');
-
         Route::get('leed/{board}/config', \App\Livewire\Board\ConfigComponent::class)->name('board.config');
 
 

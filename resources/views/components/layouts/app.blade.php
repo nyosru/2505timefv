@@ -35,6 +35,8 @@
             {{--        <livewire:app.header/>--}}
             <livewire:app.navigation/>
 
+            <livewire:informer/>
+
             <div class="flex flex-row space-x-5">
                 {{--                @if (Route::is('tech*')--}}
                 {{--                    || Route::is('lk*')--}}
