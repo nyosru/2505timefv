@@ -23,7 +23,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 Route::post('/dadata/find-org', [DadataOrgController::class, 'findByInn'])->name('dadata.find-org');
 
 
-Route::post('/webhook', function () {
+Route::any('webhook', function () {
 
     $update = json_decode(file_get_contents('php://input'), true);
 
@@ -39,12 +39,12 @@ Route::post('/webhook', function () {
             // Обработка сообщения
             Telegram::sendMessage([
                 'chat_id' => $chatId,
-                'text' => 'api/webhook' . PHP_EOL . 'Вы написали: ' . $text
+                'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . $text
             ]);
 
             TelegramController::showMeTelegaMsg();
 
-            if (isset($message['contact']['phone_number'])) {
+            if ( !empty($message['contact']['phone_number'])) {
 
 //                $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->firstOrFail();
                 $u = User::where('telegram_id', $chatId)->first();
