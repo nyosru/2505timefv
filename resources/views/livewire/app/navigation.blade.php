@@ -12,7 +12,6 @@
             </a>
         </div>
         <div class="sm:w-1/2 flex justify-center items-center ">
-            123
             @guest
                 @if(1==1)
                     {!! Socialite::driver('telegram')->getButton() !!}
