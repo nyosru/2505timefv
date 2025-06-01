@@ -378,18 +378,15 @@ Route::any('/webhook', function () {
             'text' => "Вы отправили: $text"
         ]);
 
-
-
-        $u = User::where('telegram_id', $chatId)->first();
-
-        Telegram::sendMessage([
-            'chat_id' => $chatId,
-            'text' => 'tel:'. ( $u->phone_number ?? 'x' )
-        ]);
-
-        if ( $u && empty($u->phone_number))
-            TelegramController::getContactMsg($chatId);
-
+        try {
+            $u = User::where('telegram_id', $chatId)->where('phone_number','not', null )->firstOrFail();
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'tel:' . ($u->phone_number ?? 'x')
+            ]);
+            if ($u && empty($u->phone_number))
+                TelegramController::getContactMsg($chatId);
+        }catch (\Throwable $e) {}
 
     }
 

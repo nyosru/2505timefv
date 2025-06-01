@@ -32,7 +32,7 @@ class TelegramController extends Controller
 // Send the message with the keyboard
         Telegram::sendMessage([
             'chat_id' => $chatId,
-            'text' => 'Поделитесь вашим номером телефона' . PHP_EOL . 'кнопка ниже ↓↓↓ (Share Phone Number)',
+            'text' => 'Поделитесь вашим номером телефона' . PHP_EOL . 'кнопка ниже ↓↓↓ (Share Phone Number) (Отправить свой номер телефона)',
             'reply_markup' => json_encode($keyboard)
         ]);
 
