@@ -53,12 +53,17 @@ class TelegramController extends Controller
         // Обработка сообщения
         Telegram::sendMessage([
             'chat_id' => $chatId,
-            'text' => 'api_webhook47' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
+            'text' => 'api_webhook48' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
         ]);
         $user = User::where('telegram_id', $chatId)->first();
 
-        TelegramController::checkUserPhoneNumber($user, $update);
-        TelegramController::showMeTelegaMsg();
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'тел в базе: ' .  ($user->phone_number ?? 'xx')
+        ]);
+
+        self::checkUserPhoneNumber($user, $update);
+        self::showMeTelegaMsg();
 
         return response('ok', 200);
 
