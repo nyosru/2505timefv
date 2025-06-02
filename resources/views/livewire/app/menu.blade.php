@@ -56,7 +56,7 @@
         @permission('р.Техничка')
         <ul>
 
-            <li class="w-full bg-gray-300 py-1 px-2" >
+            <li class="w-full bg-gray-300 py-1 px-2">
                 <a href="{{ route('tech.index') }}"
                    wire:navigate
                    class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
@@ -70,8 +70,6 @@
                     <span>Тех. отдел</span>
                 </a>
             </li>
-
-
 
 
             @if(1==2)
@@ -116,6 +114,7 @@
             @endif
 
 
+            @permission('р.Новости')
             <li class="w-full">
                 <a href="{{ route('admin.news') }}"
                    wire:navigate
@@ -131,6 +130,7 @@
                     <span>Новости Админ</span>
                 </a>
             </li>
+            @endpermission
 
             <li class="w-full">
                 <a href="{{ route('admin.events') }}"

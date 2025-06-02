@@ -73,14 +73,14 @@ class TelegramController extends Controller
         } else {
 
 //            $u = User::where('telegram_id', $chatId)->whereNull('phone_number')->first();
-            if ($user && empty($user->phone_number)) {
+            if ( empty($user->phone_number)) {
 
                 Telegram::sendMessage([
                     'chat_id' => $chatId,
-                    'text' => 'tel запрос:' . ($user->phone_number ?? 'x')
+                    'text' => 'tel пустой запрос:' . ($user->phone_number ?? 'x')
                 ]);
 
-                TelegramController::getContactMsg($chatId);
+                self::getContactMsg($chatId);
             }
 
         }

@@ -14,7 +14,8 @@ class Informer extends Component
 
         try {
             $user_id = auth()->user()->id;
-            $this->ar1 = User::find($user_id)
+//            dd(auth()->user()->toArray());
+            $this->ar1 = User::whereId($user_id)
                 ->with([
                     'boardUser',
                     'currentBoard',

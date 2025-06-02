@@ -5,7 +5,9 @@
 {{--        <button wire:click="create" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">--}}
 {{--            + Добавить новость--}}
 {{--        </button>--}}
+        @permission('р.Договора / Шаблоны')
         <button wire:click="create" class="btn btn-primary">+ Добавить новость</button>
+        @permission('р.Договора / Шаблоны')
     </div>
 
     <!-- Search -->
