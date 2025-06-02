@@ -41,6 +41,30 @@ class TelegramController extends Controller
     }
 
 
+    public function msgInTelegram()
+    {
+
+        $update = json_decode(file_get_contents('php://input'), true);
+
+        $message = $update['message'];
+        $text = ($message['text'] ?? 'text-no');
+        $chatId = ($message['chat']['id'] ?? 'chatId-no');
+
+        // Обработка сообщения
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'api_webhook' . PHP_EOL . 'Вы написали: ' . ($text ?? 'xx')
+        ]);
+        $user = User::where('telegram_id', $chatId)->first();
+
+        TelegramController::checkUserPhoneNumber($user, $update);
+        TelegramController::showMeTelegaMsg();
+
+        return response('ok', 200);
+
+    }
+
+
     public static function checkUserPhoneNumber(User $user, $update)
     {
 

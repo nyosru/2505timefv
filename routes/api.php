@@ -34,7 +34,9 @@ Route::get('/setWebhook', function () {
     return $response ? 'Webhook установлен' : 'Ошибка установки вебхука';
 });
 
-Route::any('webhook', function () {
+Route::any('webhook', [ TelegramController::class,'msgInTelegram'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+Route::any('webhook250602', function () {
 
     $update = json_decode(file_get_contents('php://input'), true);
 
