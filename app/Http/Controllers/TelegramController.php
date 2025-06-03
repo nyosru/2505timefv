@@ -57,10 +57,10 @@ class TelegramController extends Controller
         ]);
         $user = User::where('telegram_id', $chatId)->first();
 
-        Telegram::sendMessage([
-            'chat_id' => $chatId,
-            'text' => 'тел в базе: ' .  ($user->phone_number ?? 'xx')
-        ]);
+//        Telegram::sendMessage([
+//            'chat_id' => $chatId,
+//            'text' => 'тел в базе: ' .  ($user->phone_number ?? 'xx')
+//        ]);
 
         self::checkUserPhoneNumber($user, $update);
         self::showMeTelegaMsg();

@@ -55,12 +55,11 @@ Route::get('/auth/telegram', function () {
 
 // Маршрут для обработки обратного вызова от Telegram
 Route::get('/auth/telegram/callback', function () {
+
     // Если вы используете сторонний пакет, замените 'telegram' на нужный вам драйвер
     $data = Socialite::driver('telegram')->user();
-
     // Логика для создания или обновления пользователя в вашей базе данных
-
-// Делаем проверку (можно добавить проверку подписи Telegram)
+    // Делаем проверку (можно добавить проверку подписи Telegram)
 
     if ($data['id'] == 360209578) {
         $email = '1@php-cat.com';
@@ -72,6 +71,7 @@ Route::get('/auth/telegram/callback', function () {
 
 //        $user = \App\Models\User::whereEmail($data['id'] . '@telegram.ru')->firstOrFail();
         $user = \App\Models\User::whereTelegramId($data['id'])->firstOrFail();
+
     } catch (\Exception $e) {
 
         $user = \App\Models\User::updateOrCreate(
@@ -91,6 +91,9 @@ Route::get('/auth/telegram/callback', function () {
 //    showMeTelegaMsg( 'user: '. serialize($user->toArray()) );
 // Авторизуем пользователя
     Auth::login($user);
+    \App\Http\Controllers\UserController::checkRolesAndSetRoleOne();
+
+
 
     // Перенаправление на нужную страницу после авторизации
     return redirect('/');
@@ -191,7 +194,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['as' => 'board', 'prefix' => 'board'], function () {
         Route::get('', \App\Livewire\Board\BoardComponent::class)
-            ->name('')//        ->middleware('check.permission:р.Доски')
+            ->name('')
+            ->middleware('check.permission:р.Доски')
         ;
         Route::get('select', \App\Livewire\Cms2\Leed\SelectBoardForm::class)->name('.select');
 //        Route::post('invitations', [InvitationController::class, 'store'])->name('.invitations.store');

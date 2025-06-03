@@ -62,11 +62,11 @@
 
                 <td class="px-6 py-4">
 
-
-
+                    @permission('р.Доски / создавать приглашения')
                     <livewire:board.invitations-form
                         :board_id="$board->id" :show_select_board_id="false"
                         key="{{ $board->id }}" />
+                    @endpermission
 
                     <livewire:board.invitations-list
                         :board_id="$board->id"

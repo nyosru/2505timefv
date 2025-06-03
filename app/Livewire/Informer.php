@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Livewire\Component;
 
@@ -12,6 +13,8 @@ class Informer extends Component
     public function render()
     {
 
+//        UserController::checkRolesAndSetRoleOne();
+
         try {
             $user_id = auth()->user()->id;
 //            dd(auth()->user()->toArray());
@@ -19,7 +22,9 @@ class Informer extends Component
                 ->with([
                     'boardUser',
                     'currentBoard',
-                    'invitations'
+                    'invitations',
+                    'roles',
+//                    'role'
                 ])->first();
         } catch (\Exception $e) {
         }

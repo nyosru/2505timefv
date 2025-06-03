@@ -57,20 +57,22 @@
         <ul>
 
             <li class="w-full bg-gray-300 py-1 px-2">
-                <a href="{{ route('tech.index') }}"
-                   wire:navigate
-                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+                @if(1==2)
+                    <a href="{{ route('tech.index') }}"
+                       wire:navigate
+                       class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('tech*') ? 'bg-orange-300 text-gray-700 ' : '' }}"
-                >
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    <img src="/icon/gear.svg" class="w-[18px]"/>
-                    <span>Тех. отдел</span>
-                </a>
+                    >
+                        {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+                        {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+                        {{--                </svg>--}}
+                        <img src="/icon/gear.svg" class="w-[18px]"/>
+                        <span>Тех. отдел</span>
+                    </a>
+                @endif
             </li>
-
+            <livewire:app.menuItem label="Тех. отедл" routeName="tech.index"/>
 
             @if(1==2)
                 <li class="w-full">
@@ -93,7 +95,11 @@
 
             <livewire:app.menuItem label="Управление ролями" routeName="tech.role_permission"/>
             <livewire:app.menuItem :label="'Управление пользователями'" routeName="tech.user_list"/>
+
+
+            @permission('р.Доски')
             <livewire:app.menuItem :label="'Доски'" routeName="board"/>
+            @endpermission
 
             @if(1==2)
                 <li class="w-full">
