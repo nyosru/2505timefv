@@ -9,7 +9,7 @@
                     aria-label="Фото мероприятия"
             ></div>
 
-{{--            <h1 class="text-3xl font-bold mt-6 mb-4">Кубок губернатора Тюменской области</h1>--}}
+            {{--            <h1 class="text-3xl font-bold mt-6 mb-4">Кубок губернатора Тюменской области</h1>--}}
             <h1 class="text-3xl font-bold mt-6 mb-4">{{ $event->title ?? '-' }}</h1>
 
             <div class="space-y-3 text-gray-700">
@@ -64,15 +64,23 @@
             <!-- Фото с мероприятия -->
             <section>
 
-                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>
+                {{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
+{{--                <pre class="text-xs">{{ print_r($event->photos->toArray(),1) }}</pre>--}}
 
                 @php
                     // Пример: массив ссылок на фото
                     $photos = [
-                        asset('storage/events/photo1.jpg'),
-                        asset('storage/events/photo2.jpg'),
-                        asset('storage/events/photo3.jpg'),
+//                        asset('storage/events/photo1.jpg'),
+//                        asset('storage/events/photo2.jpg'),
+//                        asset('storage/events/photo3.jpg'),
                     ];
+                    foreach( $event->photos as $k => $v )
+                        {
+//                            $photos[] = asset($v->url);
+                            if(!empty($v->url)){
+                            $photos[] = asset('storage/'.$v->url);
+                        }
+                        }
                 @endphp
 
                 <section x-data="{ open: false, current: 0, photos: {{ Js::from($photos) }} }">
@@ -109,13 +117,21 @@
                                     class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow hover:bg-white"
                                     @click.stop="current = (current - 1 + photos.length) % photos.length"
                             >
-                                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M15 19l-7-7 7-7"/>
+                                </svg>
                             </button>
                             <button
                                     class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2 shadow hover:bg-white"
                                     @click.stop="current = (current + 1) % photos.length"
                             >
-                                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M9 5l7 7-7 7"/>
+                                </svg>
                             </button>
 
                             <!-- Закрыть -->
@@ -123,29 +139,25 @@
                                     class="absolute top-2 right-2 text-gray-700 hover:text-red-600"
                                     @click="open = false"
                             >
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </section>
 
-
-
-
-
-
-
-
-
-
-                <h2 class="text-xl font-semibold mb-4">Фото с мероприятия</h2>
-                <div class="grid grid-cols-3 gap-4">
-                    @foreach(range(1,3) as $photo)
-                        <div class="bg-gray-100 rounded-lg h-40 flex items-center justify-center text-gray-500 font-semibold">
-                            Фото {{ $photo }}
-                        </div>
-                    @endforeach
-                </div>
+                @if(1==2)
+                    <h2 class="text-xl font-semibold mb-4">Фото с мероприятия</h2>
+                    <div class="grid grid-cols-3 gap-4">
+                        @foreach(range(1,3) as $photo)
+                            <div class="bg-gray-100 rounded-lg h-40 flex items-center justify-center text-gray-500 font-semibold">
+                                Фото {{ $photo }}
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </section>
 
             <!-- Видео с мероприятия -->
