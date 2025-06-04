@@ -22,6 +22,12 @@
     {{--    @livewireStyles--}}
 
     <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+{{--    @stack('styles')--}}
+
+{{--    <link rel="stylesheet" href="https://unpkg.com/trix@2.0.0/dist/trix.css">--}}
+{{--    <script src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>--}}
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 <body class="antialiased font-sans bg-gray-100 min-h-screen">
@@ -35,7 +41,7 @@
             {{--        <livewire:app.header/>--}}
             <livewire:app.navigation/>
 
-            <livewire:informer/>
+{{--            <livewire:informer/>--}}
 
             <div class="flex flex-row space-x-5">
                 {{--                @if (Route::is('tech*')--}}
@@ -62,5 +68,6 @@
 </div>
 
 @livewireScripts
+@stack('scripts')
 </body>
 </html>

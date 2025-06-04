@@ -1297,10 +1297,6 @@ select {
   height: 6rem;
 }
 
-.h-32 {
-  height: 8rem;
-}
-
 .h-4 {
   height: 1rem;
 }
@@ -3050,6 +3046,10 @@ select {
 
 .lowercase {
   text-transform: lowercase;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .leading-4 {

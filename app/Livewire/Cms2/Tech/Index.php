@@ -13,6 +13,8 @@ class Index extends Component
 //        'Заказ: Типы оплаты' => ['route' => 'tech.order.payment-type-manager', 'permission' => 'тех.ТипОплатыМен'],
 //
 //
+        'Доски' => ['route' => 'board', 'permission' => 'р.Доски'],
+
         'Права доступа должностям' => ['route' => 'tech.role_permission', 'permission' => 'р.Права доступа'],
 ////        'Источники лида' => ['route' => 'tech.ClientSupplierManager', 'permission' => 'р.Поставщики лидов'],
         'Пользователи' => ['route' => 'tech.user_list', 'permission' => 'р.Пользователи'],

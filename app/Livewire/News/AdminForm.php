@@ -4,12 +4,13 @@ namespace App\Livewire\News;
 
 use App\Models\News;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Admin extends Component
+class AdminForm extends Component
 {
 
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     public $title;
     public $date;
@@ -17,11 +18,23 @@ class Admin extends Component
     public $full_text;
     public $event_id;
     public $athlete_id;
+    public $photo;
 
     public $currentNews = null;
     public $editMode = false;
     public $perPage = 15;
     public $search = '';
+
+
+    // В компоненте добавьте:
+    public $events;
+    public $athletes;
+
+    public function mount()
+    {
+        $this->events = \App\Models\Event::pluck('title', 'id');
+        $this->athletes = \App\Models\Athlete::pluck('last_name', 'id');
+    }
 
     protected function rules()
     {
@@ -29,12 +42,17 @@ class Admin extends Component
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'short_text' => 'nullable|string|max:500',
-            'full_text' => 'required|string',
+//            'full_text' => 'required|string',
+            'full_text' => 'nullable|string',
             'event_id' => 'nullable|integer',
             'athlete_id' => 'nullable|integer',
+//            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image',
         ];
+
+
     }
-    public $showForm = false;
+
 
     public function create()
     {
@@ -66,6 +84,12 @@ class Admin extends Component
     {
         $this->validate();
 
+        // Временная проверка данных
+        logger()->info('Saving data:', [
+            'full_text' => $this->full_text,
+            'other_fields' => $this->only(['title', 'date'])
+        ]);
+
         $data = [
             'title' => $this->title,
             'date' => $this->date,
@@ -75,19 +99,21 @@ class Admin extends Component
             'athlete_id' => $this->athlete_id,
         ];
 
-        dd($data);
+        if ($this->photo) {
+            $path = $this->photo->store('news_photos', 'public');
+            $data['photo'] = $path;
+        }
 
         if ($this->editMode) {
             $this->currentNews->update($data);
             session()->flash('success', 'Новость обновлена');
         } else {
-            $ee = News::create($data);
-            dd($ee);
+            News::create($data);
             session()->flash('success', 'Новость создана');
         }
 
         $this->resetForm();
-        $this->dispatch('hide-edit-modal');
+//        $this->dispatch('hide-edit-modal');
     }
 
     public function delete(News $news)
@@ -98,21 +124,12 @@ class Admin extends Component
 
     private function resetForm()
     {
-        $this->reset(['title', 'date', 'short_text', 'full_text', 'event_id', 'athlete_id', 'currentNews', 'editMode']);
+        $this->reset(['title', 'date', 'short_text', 'photo', 'full_text', 'event_id', 'athlete_id', 'currentNews', 'editMode']);
         $this->resetErrorBag();
     }
 
     public function render()
     {
-        $news = News::when($this->search, fn($q) => $q->where('title', 'like', '%'.$this->search.'%'))
-            ->orderByDesc('date')
-            ->paginate($this->perPage);
-
-        return view('livewire.news.admin', compact('news'));
+        return view('livewire.news.admin-form');
     }
-
-//    public function render()
-//    {
-//        return view('livewire.news.admin');
-//    }
 }

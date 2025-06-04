@@ -16,6 +16,7 @@ class News extends Model
         'full_text',
         'event_id',
         'athlete_id',
+        'photo'
     ];
     protected $casts = [
         'date' => 'date',

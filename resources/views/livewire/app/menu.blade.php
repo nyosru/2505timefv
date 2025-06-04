@@ -94,7 +94,7 @@
 
 
             <livewire:app.menuItem label="Управление ролями" routeName="tech.role_permission"/>
-            <livewire:app.menuItem :label="'Управление пользователями'" routeName="tech.user_list"/>
+            {{--            <livewire:app.menuItem :label="'Управление пользователями'" routeName="tech.user_list"/>--}}
 
 
             @permission('р.Доски')
@@ -119,23 +119,25 @@
                 </li>
             @endif
 
-
-            @permission('р.Новости')
-            <li class="w-full">
-                <a href="{{ route('admin.news') }}"
-                   wire:navigate
-                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            @permission('р.НовостиАдмин')
+            @if(1==2)
+                <li class="w-full">
+                    <a href="{{ route('admin.news') }}"
+                       wire:navigate
+                       class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.news') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                    </svg>
-                    <span>Новости Админ</span>
-                </a>
-            </li>
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                        </svg>
+                        <span>Новости Админ</span>
+                    </a>
+                </li>
+            @endif
+            <livewire:app.menuItem :label="'Новости Админ'" routeName="admin.news"/>
             @endpermission
 
             <li class="w-full">
@@ -580,9 +582,6 @@
                 {{--            </a>--}}
                 {{--        </li>--}}
                 {{--        @endpermission--}}
-
-
-
 
                 @permission('р.Доски')
                 <li class="w-full">

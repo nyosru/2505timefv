@@ -101,6 +101,24 @@ Route::get('/auth/telegram/callback', function () {
 });
 
 
+
+
+
+
+
+use App\Http\Controllers\Service\TrixUploadController;
+Route::post('/trix-upload', [TrixUploadController::class, 'upload'])->name('trix.upload');
+
+
+
+
+
+
+
+
+
+
+
 Route::get('', \App\Livewire\Index::class)->name('index');
 
 
@@ -110,6 +128,9 @@ Route::get('news/{id}', \App\Livewire\News\Item::class)->name('news.show');
 //Route::get('/news/{id}', Item::class)->name('news.show');
 Route::get('/admin/news', \App\Livewire\News\Admin::class)
     ->name('admin.news')//    ->middleware(['auth'])
+; // Добавьте защиту по необходимости
+Route::get('/admin/news/create', \App\Livewire\News\AdminForm::class)
+    ->name('admin.news.create')//    ->middleware(['auth'])
 ; // Добавьте защиту по необходимости
 
 use App\Livewire\Event\Listing;
@@ -175,7 +196,9 @@ Route::get('/admin/event-participants', App\Livewire\Event\EventParticipantCrud:
 Route::middleware(['auth'])->group(function () {
 
 //Route::middleware('check.permission:р.Техничка')->group(function () {
-    Route::prefix('tech')->name('tech.')->group(function () {
+    Route::prefix('tech')->name('tech.')->
+        middleware('check.permission:р.Техничка')->
+        group(function () {
 
         Route::get('', \App\Livewire\Cms2\Tech\Index::class)->name('index');
 

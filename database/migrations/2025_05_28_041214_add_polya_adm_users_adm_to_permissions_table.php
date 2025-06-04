@@ -4,18 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
 
     public $a = [
 
-        'р.Новости' => 28,
-        'р.Новости / добавить новость' => 29,
-        'р.Новости / редактировать, удалить' => 29,
-
-//        'р.Новости' => 28,
-//        'р.Новости / добавить новость' => 29,
-//        'р.Новости / редактировать, удалить' => 29,
+        'р.Пользователи' => 50,
+        'р.Права доступа' => 55,
+//        'р.НовостиАдмин' => 25,
+//        'р.НовостиАдмин / добавить новость' => 26,
+//        'р.НовостиАдмин / редактировать, удалить' => 26,
 
 //        'р.Лиды / добавить лида' => 32,
 //        'р.Лиды / отправить лида с дог-ом' => 32,
@@ -52,12 +49,13 @@ return new class extends Migration
 //        '' => 30,
 //        '' => 30,
     ];
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        foreach( $this->a as $k => $v ) {
+        foreach ($this->a as $k => $v) {
             DB::table('permissions')->insert([
                 'name' => $k,
                 'guard_name' => 'web',
@@ -73,8 +71,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        foreach( $this->a as $k => $v ) {
-            DB::table('permissions')->where('name', $k )->delete();
+        foreach ($this->a as $k => $v) {
+            DB::table('permissions')->where('name', $k)->delete();
         }
     }
 };
