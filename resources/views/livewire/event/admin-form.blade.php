@@ -36,44 +36,43 @@
             @error('event_date') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
         </div>
 
+
         <!-- Страна -->
         <div class="mb-4">
-            <label for="country" class="block font-semibold mb-1">Страна *</label>
-            <input
-                    id="country"
-                    type="text"
-                    wire:model.defer="country"
-                    class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
-                    required
-            >
-            @error('country') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            <label for="country_id" class="block font-semibold mb-1">Страна *</label>
+            <select id="country_id" wire:model.live="country_id" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300" required>
+                <option value="">Выберите страну</option>
+                @foreach($countries as $country)
+                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                @endforeach
+            </select>
+            @error('country_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <!-- Город -->
         <div class="mb-4">
-            <label for="city" class="block font-semibold mb-1">Город *</label>
-            <input
-                    id="city"
-                    type="text"
-                    wire:model.defer="city"
-                    class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
-                    required
-            >
-            @error('city') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            <label for="city_id" class="block font-semibold mb-1">Город *</label>
+            <select id="city_id" wire:model.live="city_id" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300" required>
+                <option value="">Выберите город</option>
+                @foreach($cities as $city)
+                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
+            </select>
+            @error('city_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <!-- Место проведения -->
         <div class="mb-4">
-            <label for="venue" class="block font-semibold mb-1">Место проведения *</label>
-            <input
-                    id="venue"
-                    type="text"
-                    wire:model.defer="venue"
-                    class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
-                    required
-            >
-            @error('venue') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            <label for="sport_place_id" class="block font-semibold mb-1">Место проведения *</label>
+            <select id="sport_place_id" wire:model.live="sport_place_id" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300" required>
+                <option value="">Выберите место</option>
+                @foreach($venues as $venue)
+                    <option value="{{ $venue->id }}">{{ $venue->name }}</option>
+                @endforeach
+            </select>
+            @error('sport_place_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
         </div>
+
 
         <!-- Описание -->
         <div class="mb-4">

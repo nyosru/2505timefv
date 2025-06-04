@@ -223,6 +223,10 @@
                 </li>
             @endif
 
+
+
+
+
             @if(2==3)
                 <li class="w-full">
                     <a href="{{ route('admin.sport-types') }}"
@@ -241,7 +245,25 @@
                 </li>
             @endif
 
-            @if(2==3)
+            @permission('р.Виды спорта')
+            <livewire:app.menuItem label="Виды спорта" routeName="admin.sport-types"/>
+            @endpermission
+
+            @permission('р.Страны')
+            <livewire:app.menuItem label="Страны" routeName="admin.countries"/>
+            @endpermission
+
+            @permission('р.Города')
+            <livewire:app.menuItem label="Города" routeName="admin.cities"/>
+            @endpermission
+
+            @permission('р.Место проведения')
+            <livewire:app.menuItem label="Место проведения" routeName="admin.sport-places"/>
+            @endpermission
+
+
+
+        @if(2==3)
                 <li class="w-full">
                     <a href="{{ route('admin.countries') }}"
                        wire:navigate

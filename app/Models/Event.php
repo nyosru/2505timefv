@@ -20,8 +20,10 @@ class Event extends Model
         'photo',
 
         'sport_type_id',
+
         'country_id',
         'city_id',
+        'sport_place_id',
 
     ];
 

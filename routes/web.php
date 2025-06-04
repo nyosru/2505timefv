@@ -172,24 +172,32 @@ Route::get('/admin/athletes/form/{id?}', A_AdminForm::class)
 ; // при необходимости
 
 
-Route::get('/admin/sport-types', \App\Livewire\SportTypeCrud::class)
-    ->name('admin.sport-types')//    ->middleware('auth')
-; // если нужна авторизация
+Route::middleware('check.permission:р.Виды спорта')->group(function () {
+    Route::get('/admin/sport-types', \App\Livewire\SportTypeCrud::class)
+        ->name('admin.sport-types')//    ->middleware('auth')
+    ; // если нужна авторизация
+});
 
 use App\Livewire\CountryCrud;
 
-Route::get('/admin/countries', CountryCrud::class)
-    ->name('admin.countries')//    ->middleware('auth')
-; // если нужна авторизация
+Route::middleware('check.permission:р.Страны')->group(function () {
+    Route::get('/admin/countries', CountryCrud::class)
+        ->name('admin.countries')//    ->middleware('auth')
+    ; // если нужна авторизация
+});
 
+Route::middleware('check.permission:р.Города')->group(function () {
+    Route::get('/admin/cities', \App\Livewire\DataIn\CityCrudComponent::class)
+        ->name('admin.cities')//    ->middleware('auth')
+    ; // если нужна авторизация
+});
 
-Route::get('/admin/cities', \App\Livewire\DataIn\CityCrudComponent::class)
-    ->name('admin.cities')//    ->middleware('auth')
-; // если нужна авторизация
+Route::middleware('check.permission:р.Место проведения')->group(function () {
+    Route::get('/admin/sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
+        ->name('admin.sport-places')//    ->middleware('auth')
+    ; // если нужна авторизация
+});
 
-Route::get('/admin/sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
-    ->name('admin.sport-places')//    ->middleware('auth')
-; // если нужна авторизация
 
 Route::get('/admin/event-participants', App\Livewire\Event\EventParticipantCrud::class)
     ->name('admin.event-participants')//    ->middleware('auth')
