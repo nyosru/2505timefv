@@ -1,4 +1,4 @@
-<div class="px-1 pt-5 text-gray-600 w-[200px]">
+<div class="px-1 pt-5 text-gray-600 hidden md:block md:w-[200px]">
     <div class="flex flex-col space-y-1">
         {{--        <b>Норм меню</b>--}}
         <ul>

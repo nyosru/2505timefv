@@ -54,7 +54,9 @@
                 {{--            <div class="w-[200px] bg-orange-500">--}}
                 {{--                меню--}}
                 {{--            </div>--}}
+
                 <livewire:app.menu/>
+
                 {{--                @endif--}}
                 <div class="flex-1 min-h-[400px]">
                     {{ $slot }}

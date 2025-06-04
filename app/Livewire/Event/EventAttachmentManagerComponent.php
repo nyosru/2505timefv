@@ -21,10 +21,12 @@ class EventAttachmentManagerComponent extends Component
     public $file;
     public $files = [];
     public $type;
+    public $urls;
 
     protected $rules = [
 //        'name' => 'required|string|max:255',
         'name' => 'nullable|string|max:255',
+        'urls' => 'nullable|string',
 //        'file' => 'required|file|max:10240', // max 10MB, настройте по необходимости
         'files.*' => 'required|file|max:10240', // проверка для каждого файла
         'type' => 'required|in:image,video,document',
@@ -43,7 +45,13 @@ class EventAttachmentManagerComponent extends Component
 
     public function updatedEventId()
     {
-        $this->reset(['attachments', 'name', 'file', 'type']);
+        $this->reset([
+            'attachments',
+            'name',
+            'file',
+            'files'
+//            , 'type'
+        ]);
         $this->loadAttachments();
     }
 
