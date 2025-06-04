@@ -29,14 +29,14 @@ class Admin extends Component
     {
         $this->selectedEventId = null;
         $this->showForm = true;
-        $this->emit('openForm', null);
+//        $this->emit('openForm', null);
     }
 
     public function edit($id)
     {
         $this->selectedEventId = $id;
         $this->showForm = true;
-        $this->emit('openForm', $id);
+//        $this->emit('openForm', $id);
     }
 
     public function delete($id)

@@ -10,7 +10,7 @@ class SportType extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'logo'];
 
     // Мероприятия данного вида спорта
     public function events()

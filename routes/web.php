@@ -24,6 +24,7 @@ Route::get('/a/{id}', function ($id) {
         $user = User::findOrFail($id);
         // Входим в систему как этот пользователь
         Auth::login($user);
+        \App\Http\Controllers\UserController::checkRolesAndSetRoleOne();
     } catch (Exception $e) {
         Auth::logout();
     }
@@ -94,29 +95,14 @@ Route::get('/auth/telegram/callback', function () {
     \App\Http\Controllers\UserController::checkRolesAndSetRoleOne();
 
 
-
     // Перенаправление на нужную страницу после авторизации
     return redirect('/');
 //    return redirect()->route('leed.list');
 });
 
 
-
-
-
-
-
-use App\Http\Controllers\Service\TrixUploadController;
-Route::post('/trix-upload', [TrixUploadController::class, 'upload'])->name('trix.upload');
-
-
-
-
-
-
-
-
-
+//use App\Http\Controllers\Service\TrixUploadController;
+//Route::post('/trix-upload', [TrixUploadController::class, 'upload'])->name('trix.upload');
 
 
 Route::get('', \App\Livewire\Index::class)->name('index');
@@ -124,14 +110,32 @@ Route::get('', \App\Livewire\Index::class)->name('index');
 
 Route::get('news', \App\Livewire\News\Listing::class)->name('news');
 Route::get('news/{id}', \App\Livewire\News\Item::class)->name('news.show');
+
 //Route::get('/news', Listing::class)->name('news.index');
 //Route::get('/news/{id}', Item::class)->name('news.show');
-Route::get('/admin/news', \App\Livewire\News\Admin::class)
-    ->name('admin.news')//    ->middleware(['auth'])
-; // Добавьте защиту по необходимости
-Route::get('/admin/news/create', \App\Livewire\News\AdminForm::class)
-    ->name('admin.news.create')//    ->middleware(['auth'])
-; // Добавьте защиту по необходимости
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::group(['as' => 'admin', 'prefix' => 'admin'], function () {
+
+        Route::get('news', \App\Livewire\News\Admin::class)
+            ->name('.news')//    ->middleware(['auth'])
+        ; // Добавьте защиту по необходимости
+
+        Route::get('news/create', \App\Livewire\News\AdminForm::class)
+            ->name('.news.create')//    ->middleware(['auth'])
+        ; // Добавьте защиту по необходимости
+
+        Route::get('news/{news}/edit', \App\Livewire\News\AdminForm::class)
+            ->name('.news.edit');
+//
+//        Route::get('events', \App\Livewire\News\AdminForm::class)
+//            ->name('.events')//    ->middleware(['auth'])
+//        ; // Добавьте защиту по необходимости
+
+    });
+});
+
 
 use App\Livewire\Event\Listing;
 use App\Livewire\Event\Show;
@@ -197,8 +201,8 @@ Route::middleware(['auth'])->group(function () {
 
 //Route::middleware('check.permission:р.Техничка')->group(function () {
     Route::prefix('tech')->name('tech.')->
-        middleware('check.permission:р.Техничка')->
-        group(function () {
+    middleware('check.permission:р.Техничка')->
+    group(function () {
 
         Route::get('', \App\Livewire\Cms2\Tech\Index::class)->name('index');
 
@@ -212,14 +216,12 @@ Route::middleware(['auth'])->group(function () {
 //        });
 
 
-
     });
 
     Route::group(['as' => 'board', 'prefix' => 'board'], function () {
         Route::get('', \App\Livewire\Board\BoardComponent::class)
             ->name('')
-            ->middleware('check.permission:р.Доски')
-        ;
+            ->middleware('check.permission:р.Доски');
         Route::get('select', \App\Livewire\Cms2\Leed\SelectBoardForm::class)->name('.select');
 //        Route::post('invitations', [InvitationController::class, 'store'])->name('.invitations.store');
         Route::get('invitations/join/{id}', [InvitationController::class, 'join'])->name('.invitations.join');
@@ -229,11 +231,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('profile', \App\Livewire\Lk\Profile::class)->name('profile');
     });
 
-        Route::get('leed', \App\Livewire\Cms2\Leed\LeedBoardList::class)->name('leed.list');
+    Route::get('leed', \App\Livewire\Cms2\Leed\LeedBoardList::class)->name('leed.list');
 //  чел переходит в доску, проверяем и назначаем права и переадресовываем на доску
-        Route::get('leed/goto/{board_id}/{role_id}', [\App\Http\Controllers\BoardController::class, 'goto'])->name('leed.goto');
-        Route::get('leed/{board_id}', \App\Livewire\Cms2\Leed\LeedBoard::class)->name('leed');
-        Route::get('leed/{board}/config', \App\Livewire\Board\ConfigComponent::class)->name('board.config');
+    Route::get('leed/goto/{board_id}/{role_id}', [\App\Http\Controllers\BoardController::class, 'goto'])->name('leed.goto');
+    Route::get('leed/{board_id}', \App\Livewire\Cms2\Leed\LeedBoard::class)->name('leed');
+    Route::get('leed/{board}/config', \App\Livewire\Board\ConfigComponent::class)->name('board.config');
 
 //});
 });

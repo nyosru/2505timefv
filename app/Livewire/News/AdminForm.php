@@ -30,10 +30,34 @@ class AdminForm extends Component
     public $events;
     public $athletes;
 
-    public function mount()
+    public $newsId;
+
+
+    public function mount($news = null)
     {
         $this->events = \App\Models\Event::pluck('title', 'id');
         $this->athletes = \App\Models\Athlete::pluck('last_name', 'id');
+
+
+
+        if ($news) {
+
+            $news = News::find($news);
+
+            $this->currentNews = $news;
+            $this->newsId = $news->id;
+            $this->title = $news->title;
+            $this->date = $news->date->format('Y-m-d');
+            $this->short_text = $news->short_text;
+            $this->full_text = $news->full_text;
+            $this->event_id = $news->event_id;
+            $this->athlete_id = $news->athlete_id;
+            $this->editMode = true;
+        } else {
+            $this->editMode = false;
+        }
+
+
     }
 
     protected function rules()
@@ -114,6 +138,7 @@ class AdminForm extends Component
 
         $this->resetForm();
 //        $this->dispatch('hide-edit-modal');
+        return redirect(route('admin.news'));
     }
 
     public function delete(News $news)

@@ -11,7 +11,7 @@ class Listing extends Component
     use WithPagination;
 
     public $perPage = 10;
-    public $sortDirection = 'desc';
+    public $sortDirection = 'desc'; // 'desc' — сначала новые, 'asc' — сначала старые
     public $selectedEvent = '';
     public $selectedAthlete = '';
 

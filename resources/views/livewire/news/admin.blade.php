@@ -8,12 +8,18 @@
         {{--        </button>--}}
 
         @permission('р.НовостиАдмин / добавить новость')
-{{--        <button wire:click="create" class="btn btn-primary">+ Добавить новость</button>--}}
+        {{--        <button wire:click="create" class="btn btn-primary">+ Добавить новость</button>--}}
         <a href="{{ route('admin.news.create') }}" class="btn btn-primary">+ Добавить новость</a>
         @endpermission
 
 
     </div>
+
+    @if (session()->has('success'))
+        <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <!-- Search -->
     <div class="mb-4">
@@ -41,12 +47,14 @@
                     <td class="px-6 py-4">{{ $item->title }}</td>
                     <td class="px-6 py-4">{{ $item->date->format('d.m.Y') }}</td>
                     <td class="px-6 py-4 text-right space-x-2">
-                        <button
+                        @permission('р.НовостиАдмин / редактировать, удалить')
+                        <a
+                                href="{{ route('admin.news.edit', ['news' => $item->id]) }}"
                                 class="text-blue-600 hover:text-blue-800"
-                                wire:click="edit({{ $item->id }})"
+{{--                                wire:click="edit({{ $item->id }})"--}}
                         >
                             ✏️
-                        </button>
+                        </a>
                         <button
                                 class="text-red-600 hover:text-red-800"
                                 wire:click="delete({{ $item->id }})"
@@ -55,6 +63,7 @@
                         >
                         🗑️
                         </button>
+                        @endpermission
                     </td>
                 </tr>
             @empty
