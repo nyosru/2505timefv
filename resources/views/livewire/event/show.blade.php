@@ -3,6 +3,8 @@
 
     <livewire:event.show-item :event="$event" />
 
+    @if(1==2)
+
     <Br/>
     <Br/>
     <Br/>
@@ -469,7 +471,7 @@
             </div>
         </div>
     </div>
-
+    @endif
 </div>
 
 
