@@ -100,7 +100,7 @@ class AdminForm extends Component
         ];
 
         if ($this->photo) {
-            $path = $this->photo->store('news_photos', 'public');
+            $path = $this->photo->store('timefv_news_photos', 'public');
             $data['photo'] = $path;
         }
 

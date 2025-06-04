@@ -1,6 +1,6 @@
 <div class="px-1 pt-5 text-gray-600 w-[200px]">
     <div class="flex flex-col space-y-1">
-        <b>Норм меню</b>
+        {{--        <b>Норм меню</b>--}}
         <ul>
             <li class="w-full">
                 <a href="{{ route('news') }}"
@@ -53,6 +53,7 @@
 
         </ul>
 
+
         @permission('р.Техничка')
         <ul>
 
@@ -72,7 +73,8 @@
                     </a>
                 @endif
             </li>
-            <livewire:app.menuItem label="Тех. отедл" routeName="tech.index"/>
+
+            <livewire:app.menuItem label="Тех. отдел" routeName="tech.index"/>
 
             @if(1==2)
                 <li class="w-full">
@@ -92,8 +94,9 @@
                 </li>
             @endif
 
-
-            <livewire:app.menuItem label="Управление ролями" routeName="tech.role_permission"/>
+            @if(2==3)
+                <livewire:app.menuItem label="Управление ролями" routeName="tech.role_permission"/>
+            @endif
             {{--            <livewire:app.menuItem :label="'Управление пользователями'" routeName="tech.user_list"/>--}}
 
 
@@ -140,6 +143,8 @@
             <livewire:app.menuItem :label="'Новости Админ'" routeName="admin.news"/>
             @endpermission
 
+
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.events') }}"
                    wire:navigate
@@ -155,7 +160,9 @@
                     <span>Мероприятия Админ</span>
                 </a>
             </li>
+                @endif
 
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.events.form') }}"
                    wire:navigate
@@ -171,7 +178,9 @@
                     <span>Мероприятия Админ Добавить</span>
                 </a>
             </li>
+                @endif
 
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.athletes') }}"
                    wire:navigate
@@ -187,7 +196,9 @@
                     <span>Спортсмены Админ</span>
                 </a>
             </li>
+                @endif
 
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.athletes.form') }}"
                    wire:navigate
@@ -203,8 +214,9 @@
                     <span>Спортсмены Админ Добавить</span>
                 </a>
             </li>
+                @endif
 
-
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.sport-types') }}"
                    wire:navigate
@@ -220,8 +232,9 @@
                     <span>Виды спорта Админ</span>
                 </a>
             </li>
+            @endif
 
-
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.countries') }}"
                    wire:navigate
@@ -237,7 +250,9 @@
                     <span>Страны Админ</span>
                 </a>
             </li>
+                @endif
 
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.cities') }}"
                    wire:navigate
@@ -253,8 +268,10 @@
                     <span>Города Админ</span>
                 </a>
             </li>
+                @endif
 
 
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.sport-places') }}"
                    wire:navigate
@@ -270,8 +287,9 @@
                     <span>СпортМеста Админ</span>
                 </a>
             </li>
+                @endif
 
-
+            @if(2==3)
             <li class="w-full">
                 <a href="{{ route('admin.event-participants') }}"
                    wire:navigate
@@ -287,7 +305,7 @@
                     <span>Кто в каких мероприятиях участвовал (победил) Админ</span>
                 </a>
             </li>
-
+                @endif
 
             @if(1==2)
 
