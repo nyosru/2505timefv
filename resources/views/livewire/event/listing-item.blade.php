@@ -1,10 +1,19 @@
 <div class="card w-full p-4 bg-white rounded-[10px] mb-6 border-1 border-[#E9E9E9]"
      style="opacity: 1; transform: translateY(0px); transition: opacity 1s, transform 0.4s;">
 
+    {{--    <pre>{{ print_r($event->toArray()) }}</pre>--}}
+
+
     <a href="{{ route('events.show', ['id' => $event->id]) }}" wire:navigate>
         <div class="min-h-[165px] justify-between items-baseline rounded-t-[10px] w-full relative flex gap-[10px]"
              style="
+
+        @if($event->photo)
+            background-image: url('{{ asset('storage/' . $event->photo) }}');
+        @else
             background-image: url('https://media.istockphoto.com/id/502301173/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%BF%D0%BE%D1%80%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D1%85-%D0%B3%D0%B5%D1%80%D0%BE%D0%B8.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=hvF4ffHr63Qy3uATLQovIvCfV0uxVmbmjLxVjc4V-zs=');
+        @endif
+
             background-size: cover;
             background-position: center;
           ">

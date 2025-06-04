@@ -1,5 +1,43 @@
 <div>
 
+    <div class="w-full flex flex-col gap-2 mb-2">
+
+        <div class="w-full" >
+            <button class="back-button" onclick="history.back()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+                Назад
+            </button>
+        </div>
+
+        <div class="w-full flex flex-col md:flex-row gap-2 mb-2">
+            <div class="w-full sm:w-1/2">
+                @if($event->photo)
+                    <img src="{{ asset('storage/' . $event->photo) }}" alt="{{ $event->title }}" class="w-full h-auto mb-6 rounded max-w-[350px] float-left mr-2">
+                @endif
+            </div>
+            <div class="w-full md:w-1/2">
+            @foreach( $event->getAttributes() as $k => $v )
+                {{ $k }} - {{ $v }} <br/>
+            @endforeach
+            </div>
+        </div>
+
+    </div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
     <button class="back-button" onclick="history.back()">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M15 18l-6-6 6-6"></path>
