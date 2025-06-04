@@ -35,7 +35,9 @@ class Show extends Component
                         ]);
                     }
                 ]);
-            }
+            },
+            'photos',
+            'attachments'
         ])->findOrFail($id);
 
 

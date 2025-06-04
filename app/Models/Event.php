@@ -68,4 +68,9 @@ class Event extends Model
         return $this->hasMany(EventAttachment::class);
     }
 
+    public function photos()
+    {
+        return $this->hasMany(EventAttachment::class)->where('type', 'image');
+    }
+
 }

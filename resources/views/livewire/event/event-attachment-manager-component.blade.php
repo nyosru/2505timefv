@@ -70,7 +70,7 @@
                                 {{--                                <strong>{{ $attachment->name }}</strong>--}}
                                 {{--                                <span class="ml-2 text-sm text-gray-600">[{{ ucfirst($attachment->type) }}]</span>--}}
                                 @if($attachment->type === 'image')
-                                    <img src="{{ Storage::url($attachment->s3_url) }}" alt="{{ $attachment->name }}"
+                                    <img src="{{ Storage::url($attachment->url) }}" alt="{{ $attachment->name }}"
                                          class="max-w-[100px] max-h-[100px]"/>
                                 @elseif($attachment->type === 'video')
                                     <strong>{{ $attachment->name }}</strong>
@@ -79,12 +79,10 @@
                                     <strong>{{ $attachment->name }}</strong>
                                     <span class="ml-2 text-sm text-gray-600">[{{ ucfirst($attachment->type) }}]</span>
                                 @endif
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <a href="{{ Storage::url($attachment->s3_url) }}" target="_blank"
-                                   class="text-blue-600 hover:underline text-sm">
-                                    Открыть
-                                </a>
+{{--                                <a href="{{ Storage::url($attachment->url) }}" target="_blank"--}}
+{{--                                   class="text-blue-600 hover:underline text-sm">--}}
+{{--                                    Открыть--}}
+{{--                                </a>--}}
                                 <button wire:click="deleteAttachment({{ $attachment->id }})"
                                         onclick="return confirm('Удалить вложение?')"
                                         class="text-red-600 hover:underline text-sm">

@@ -9,7 +9,8 @@
                     aria-label="Фото мероприятия"
             ></div>
 
-            <h1 class="text-3xl font-bold mt-6 mb-4">Кубок губернатора Тюменской области</h1>
+{{--            <h1 class="text-3xl font-bold mt-6 mb-4">Кубок губернатора Тюменской области</h1>--}}
+            <h1 class="text-3xl font-bold mt-6 mb-4">{{ $event->title ?? '-' }}</h1>
 
             <div class="space-y-3 text-gray-700">
                 <div>
@@ -63,12 +64,7 @@
             <!-- Фото с мероприятия -->
             <section>
 
-{{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
-
-
-
-
-
+                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>
 
                 @php
                     // Пример: массив ссылок на фото

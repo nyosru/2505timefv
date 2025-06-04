@@ -15,6 +15,7 @@ class EventAttachment extends Model
         'name',
         'filename',
         'image_mini',
+        'url',
         's3_url',
         'type',
     ];

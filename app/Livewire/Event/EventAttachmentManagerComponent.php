@@ -76,7 +76,7 @@ class EventAttachmentManagerComponent extends Component
                 'event_id' => $this->eventId,
                 'name' => $this->name,
                 'filename' => $file->getClientOriginalName(),
-                's3_url' => $path,
+                'url' => $path,
                 'type' => $this->type,
             ]);
         }

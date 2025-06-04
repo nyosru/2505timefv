@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('filename')->nullable();
             $table->string('image_mini')->nullable();
+            $table->string('url')->nullable();
             $table->string('s3_url')->nullable();
             $table->enum('type', ['image', 'video', 'document']);
 
