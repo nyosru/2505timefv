@@ -62,4 +62,10 @@ class Event extends Model
     {
         return $this->belongsToMany(Athlete::class, 'event_participants');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(EventAttachment::class);
+    }
+
 }

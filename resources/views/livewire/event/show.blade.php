@@ -1,5 +1,17 @@
 <div>
 
+
+    <livewire:event.show-item :event="$event" />
+
+    <Br/>
+    <Br/>
+    <Br/>
+    <Br/>
+    <Br/>
+    <Br/>
+    <Br/>
+
+
     <div class="w-full flex flex-col gap-2 mb-2">
 
         <div class="w-full" >
@@ -18,6 +30,24 @@
                 @endif
             </div>
             <div class="w-full md:w-1/2">
+
+
+                Вид спорта:<br/>
+                Футбол
+                <br/>
+                Место проведения:<br/>
+                {{ $event->sportPlace->city->country->name  ?? '--' }}<br>
+                {{ $event->sportPlace->city->name  ?? '--' }}<br>
+                {{ $event->sportPlace->name ?? '--' }}<br>
+<br/>
+<br/>
+                Период проведения:
+                <br/>
+
+                20/12/2025 - 24/12/2026
+                <br/>
+                <br/>
+
             @foreach( $event->getAttributes() as $k => $v )
                 {{ $k }} - {{ $v }} <br/>
             @endforeach
@@ -27,6 +57,18 @@
     </div>
 
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+    <livewire:event.show2 :event="$event" />
+
 <br/>
 <br/>
 <br/>
