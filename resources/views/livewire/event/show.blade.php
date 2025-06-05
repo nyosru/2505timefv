@@ -180,7 +180,7 @@
                                 $filename = '/file-icon/48px/' . substr($attachment->filename, -3) . '.png';
                             @endphp
 
-                            <div class="flex flex-row items-center justify-center space-x-2 w-full">
+                            <div class="flex flex-col items-center justify-center space-x-2 w-full">
 
                                 <div class="flex-1">
                                     <a href="{{ Storage::url($attachment->url) }}" target="_blank">
