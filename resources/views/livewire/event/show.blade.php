@@ -342,10 +342,15 @@
 
         <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
 
+            @if( $event->athletes->count() > 0 )
             <livewire:event.informer.event-participiant-list :list="$event->athletes"/>
+            @endif
+            @if( $event->guests->count() > 0 )
             <livewire:event.informer.event-guests-list :list="$event->guests"/>
+            @endif
+            @if( $event->sponsors->count() > 0 )
             <livewire:event.informer.event-sponsor-list :list="$event->sponsors"/>
-
+            @endif
 {{--            <div>--}}
 {{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
 {{--            </div>--}}
