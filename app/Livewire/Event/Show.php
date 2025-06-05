@@ -16,6 +16,9 @@ class Show extends Component
 
         $this->event = Event::with([
 
+            'guests' => function ($query) {
+//            $query->with('guests');
+            },
             'athletes' => function ($query) {
                 $query->withPivot('place')
 //                    ->where('place', '!=', 0)

@@ -2,19 +2,21 @@
 
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\InvitationController;
-use App\Http\Controllers\TelegramController;
+use App\Livewire\Athlete\Admin as A_Admin;
+use App\Livewire\Athlete\AdminForm as A_AdminForm;
+use App\Livewire\Athlete\Listing as A_Listing;
+use App\Livewire\Athlete\Show as A_Show;
 use App\Livewire\Cms2\Client;
 use App\Livewire\Cms2\Order;
+use App\Livewire\CountryCrud;
+use App\Livewire\Event\Admin;
+use App\Livewire\Event\Listing;
+use App\Livewire\Event\Show;
 use App\Models\User;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\Auth;
-use Nyos\Msg;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 
 Route::get('/a/{id}', function ($id) {
@@ -137,13 +139,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-use App\Livewire\Event\Listing;
-use App\Livewire\Event\Show;
-
 Route::get('/events', Listing::class)->name('events.index');
 Route::get('/events/{id}', Show::class)->name('events.show');
-
-use App\Livewire\Event\Admin;
 
 Route::get('/admin/events', Admin::class)
     ->name('admin.events')//    ->middleware('auth')
@@ -153,15 +150,9 @@ Route::get('/admin/events/form/{id?}', \App\Livewire\Event\AdminForm::class)
 ; // при необходимости
 
 
-use App\Livewire\Athlete\Listing as A_Listing;
-use App\Livewire\Athlete\Show as A_Show;
-
 Route::get('/athletes', A_Listing::class)->name('athletes.index');
 Route::get('/athletes/{id}', A_Show::class)->name('athletes.show');
 
-
-use App\Livewire\Athlete\Admin as A_Admin;
-use App\Livewire\Athlete\AdminForm as A_AdminForm;
 
 Route::get('/admin/athletes', A_Admin::class)
     ->name('admin.athletes')//    ->middleware('auth')
@@ -172,13 +163,28 @@ Route::get('/admin/athletes/form/{id?}', A_AdminForm::class)
 ; // при необходимости
 
 
+
+
+
 Route::middleware('check.permission:р.Виды спорта')->group(function () {
     Route::get('/admin/sport-types', \App\Livewire\SportTypeCrud::class)
         ->name('admin.sport-types')//    ->middleware('auth')
     ; // если нужна авторизация
 });
 
-use App\Livewire\CountryCrud;
+Route::middleware('check.permission:р.Гости')->group(function () {
+    Route::get('/admin/guest/manager', \App\Livewire\Event\GuestManagerComponent::class)
+        ->name('admin.guest.manager')//    ->middleware('auth')
+    ; // если нужна авторизация
+});
+
+//Route::middleware('check.permission:р.Спонсоры')->group(function () {
+    Route::get('/admin/sponsor/manager', \App\Livewire\EventAdm\SponsorManagerComponent::class)
+        ->name('admin.sponsor.manager')//    ->middleware('auth')
+    ; // если нужна авторизация
+//});
+
+
 
 Route::middleware('check.permission:р.Страны')->group(function () {
     Route::get('/admin/countries', CountryCrud::class)

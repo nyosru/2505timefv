@@ -45,12 +45,34 @@ class Event extends Model
     {
         return $this->belongsTo(SportPlace::class);
     }
+
     /**
      * Все участники данного мероприятия
      */
     public function participants()
     {
         return $this->hasMany(EventParticipant::class);
+    }
+
+//    public function guests()
+//    {
+//        return $this->belongsToMany(Guest::class, 'event_guests')
+//            ->using(EventGuest::class)
+//            ->withTimestamps();
+//    }
+
+//    public function guests()
+//    {
+//        return $this->hasMany(EventGuest::class);
+//    }
+
+
+    public function guests()
+    {
+        return $this->belongsToMany(Guest::class, 'event_guests')
+//            ->using(EventGuest::class)
+//            ->withTimestamps()
+            ;
     }
 
     public function athletes()
@@ -72,13 +94,21 @@ class Event extends Model
     {
         return $this->hasMany(EventAttachment::class)->where('type', 'image');
     }
+
     public function videos()
     {
         return $this->hasMany(EventAttachment::class)->where('type', 'video');
     }
+
     public function docs()
     {
         return $this->hasMany(EventAttachment::class)->where('type', 'document');
+    }
+
+    public function sponsors()
+    {
+        return $this->belongsToMany(Sponsor::class, 'event_sponsor')
+            ->withTimestamps();
     }
 
 }

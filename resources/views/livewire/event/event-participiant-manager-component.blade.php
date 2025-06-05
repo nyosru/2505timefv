@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto p-6 bg-white rounded shadow">
+<div class="w-full p-2">
 
     @if(session()->has('success'))
         <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">

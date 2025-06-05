@@ -1,4 +1,4 @@
-<div class="w-full xl:max-w-[90%] mx-auto p-6 bg-white rounded shadow mt-10">
+<div class="w-full p-6 mt-10">
     <h3 class="text-2xl font-bold mb-6">
         {{ $id ? 'Редактирование мероприятия' : 'Добавление нового мероприятия' }}
     </h3>
@@ -137,13 +137,22 @@
                 <div class="bg-cyan-100">
                     <livewire:event.event-attachment-manager-component :eventId="$id" :type="'video'"/>
                 </div>
-                <div class="bg-red-100">
-                    <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'"/>
-                </div>
-                <div class="bg-red-100">
-                    <livewire:event.event-participiant-manager-component :eventId="$id" />
-                </div>
+
             @endif
+        </div>
+    </div>
+    <div class="flex flex-wrap flex-row">
+        <div class="bg-red-100 w-1/2">
+            <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'"/>
+        </div>
+        <div class="bg-blue-100 w-1/2">
+            <livewire:event.event-participiant-manager-component :eventId="$id"/>
+        </div>
+        <div class="bg-orange-100 w-1/2">
+            <livewire:event.event-guest-manager-component :eventId="$id"/>
+        </div>
+        <div class="bg-green-100 w-1/2">
+            <livewire:event.event-sponsor-manager-component :eventId="$id"/>
         </div>
     </div>
 </div>
