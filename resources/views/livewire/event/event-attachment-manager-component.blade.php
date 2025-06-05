@@ -105,6 +105,12 @@
 
                                 <img src="{{ Storage::url($attachment->url) }}" alt="{{ $attachment->name }}"
                                      class="max-w-[100px] max-h-[100px]"/>
+                                <Br/>
+                                <button wire:click="deleteAttachment({{ $attachment->id }})"
+                                        wire:confirm="Удалить вложение?"
+                                        class="text-red-600 hover:underline text-sm">
+                                    Удалить
+                                </button>
 
                             @elseif($attachment->type === 'video')
 

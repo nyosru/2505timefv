@@ -146,13 +146,13 @@
             <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'" :key="'atachment-'.rand()" />
         </div>
         <div class="bg-blue-100 w-1/2">
-            <livewire:event.event-participiant-manager-component :eventId="$id" :key="'parcipants'"/>
+            <livewire:event.event-participiant-manager-component :eventId="$id" key="parcipants"/>
         </div>
         <div class="bg-orange-100 w-1/2">
-            <livewire:event.event-guest-manager-component :eventId="$id" :key="guest" />
+            <livewire:event.event-guest-manager-component :eventId="$id" key="guest" />
         </div>
         <div class="bg-green-100 w-1/2">
-            <livewire:event.event-sponsor-manager-component :eventId="$id" :key="sponsor" />
+            <livewire:event.event-sponsor-manager-component :eventId="$id" key="sponsor" />
         </div>
     </div>
 </div>
