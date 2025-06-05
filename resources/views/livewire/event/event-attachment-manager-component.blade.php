@@ -102,10 +102,9 @@
 
                         <div class="float-left p-1 m-1 rounded-md">
                             @if($attachment->type === 'image')
-
                                 <img src="{{ Storage::url($attachment->url) }}" alt="{{ $attachment->name }}"
                                      class="max-w-[100px] max-h-[100px]"/>
-                                <Br/>
+                                <br/>
                                 <button wire:click="deleteAttachment({{ $attachment->id }})"
                                         wire:confirm="Удалить вложение?"
                                         class="text-red-600 hover:underline text-sm">
