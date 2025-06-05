@@ -1526,6 +1526,10 @@ select {
   max-height: 400px;
 }
 
+.max-h-96 {
+  max-height: 24rem;
+}
+
 .min-h-\[165px\] {
   min-height: 165px;
 }
@@ -1805,6 +1809,10 @@ select {
 
 .w-7 {
   width: 1.75rem;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .min-w-0 {
@@ -2225,6 +2233,10 @@ select {
 
 .overflow-x-scroll {
   overflow-x: scroll;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .truncate {

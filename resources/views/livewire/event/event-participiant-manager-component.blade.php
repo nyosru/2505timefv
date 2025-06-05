@@ -13,9 +13,10 @@
     @endif
 
     <!-- Выбор мероприятия -->
+        @if( empty( $eventId ))
     <div class="mb-4">
         <label class="block font-semibold mb-1">Мероприятие *</label>
-        <select wire:model="eventId" class="w-full border rounded p-2">
+        <select wire:model.live="eventId" class="w-full border rounded p-2">
             <option value="">-- Выберите мероприятие --</option>
             @foreach($events as $event)
                 <option value="{{ $event->id }}">{{ $event->title }}</option>
@@ -23,6 +24,7 @@
         </select>
         @error('eventId') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
     </div>
+        @endif
 
     @if($eventId)
         <!-- Выбор спортсмена -->
@@ -43,7 +45,20 @@
             @error('athleteId') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
         </div>
 
-        <button wire:click="addParticipant" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            <!-- Выбор места -->
+            <div class="mb-4">
+                <label class="block font-semibold mb-1">Место (1-3 или пусто)</label>
+                <select wire:model="place" class="w-full border rounded p-2">
+                    <option value="">-- Не указано --</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                @error('place') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            </div>
+
+
+            <button wire:click="addParticipant" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             Добавить спортсмена
         </button>
 
@@ -57,6 +72,9 @@
                 @foreach($participants as $participant)
                     <li class="flex justify-between items-center border rounded p-3">
                         <span>
+                            @if(!empty($participant->place))
+                            ({{ $participant->place ?? '-' }})
+                            @endif
                             {{ $participant->athlete->last_name }}
                             {{ $participant->athlete->first_name }}
                         </span>

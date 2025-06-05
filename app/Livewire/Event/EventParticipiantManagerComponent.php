@@ -12,6 +12,7 @@ class EventParticipiantManagerComponent extends Component
 
     public $eventId;
     public $athleteId;
+    public $place;
 
     public $events = [];
     public $athletes = [];
@@ -20,6 +21,7 @@ class EventParticipiantManagerComponent extends Component
     protected $rules = [
         'eventId' => 'required|exists:events,id',
         'athleteId' => 'required|exists:athletes,id',
+        'place' => 'nullable|integer|in:1,2,3',
     ];
 
     public function mount()
@@ -27,7 +29,10 @@ class EventParticipiantManagerComponent extends Component
         $this->events = Event::orderBy('title')->get();
 //        $this->athletes = collect();
         $this->athletes = Athlete::orderBy('last_name')->get();
-        $this->participants = collect();
+//        $this->participants = collect();
+        if (!empty($this->eventId)) {
+            $this->updatedEventId($this->eventId);
+        }
     }
 
     public function updatedEventId($value)
@@ -35,12 +40,13 @@ class EventParticipiantManagerComponent extends Component
         // Загрузить участников данного мероприятия
         $this->participants = EventParticipant::with('athlete')
             ->where('event_id', $value)
+            ->orderByRaw('place IS NULL, place ASC')
             ->get();
 
         // Загрузить спортсменов, которые еще не привязаны к этому мероприятию
         $attachedAthleteIds = $this->participants->pluck('athlete_id')->toArray();
         $this->athletes = Athlete::whereNotIn('id', $attachedAthleteIds)
-            ->orderBy('name')
+            ->orderBy('last_name')
             ->get();
 
         // Сбросить выбранного спортсмена
@@ -64,13 +70,17 @@ class EventParticipiantManagerComponent extends Component
         EventParticipant::create([
             'event_id' => $this->eventId,
             'athlete_id' => $this->athleteId,
-            'is_winner' => false,
+            'place' => $this->place ?: null,
         ]);
 
         session()->flash('success', 'Спортсмен успешно добавлен.');
 
         // Обновить список участников и доступных спортсменов
         $this->updatedEventId($this->eventId);
+
+        // Сброс полей формы
+        $this->athleteId = null;
+        $this->place = null;
     }
 
     public function removeParticipant($participantId)

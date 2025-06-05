@@ -57,7 +57,7 @@
                 <!-- Фото с мероприятия -->
                 <section>
 
-                    {{--                    <pre class="max-h-[200px] overflow-auto p-2 text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
+                                        <pre class="max-h-[200px] overflow-auto p-2 text-xs">{{ print_r($event->toArray(),1) }}</pre>
 
                     @php
                         // Пример: массив ссылок на фото
@@ -342,20 +342,22 @@
 
     <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
 
-        @foreach(range(1, 5) as $index )
-            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">
-                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>
-                <ul class="space-y-2">
-                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)
-                        <li class="flex items-center gap-3">
-                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
-                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                            <span>{{ $athlete }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-            </section>
-        @endforeach
+        <livewire:event.informer.event-participiant-list :list="$event->athletes"/>
+
+{{--        @foreach(range(1, 5) as $index )--}}
+{{--            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">--}}
+{{--                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>--}}
+{{--                <ul class="space-y-2">--}}
+{{--                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)--}}
+{{--                        <li class="flex items-center gap-3">--}}
+{{--                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>--}}
+{{--                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>--}}
+{{--                            <span>{{ $athlete }}</span>--}}
+{{--                        </li>--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
+{{--            </section>--}}
+{{--        @endforeach--}}
     </div>
 </div>
 </div>

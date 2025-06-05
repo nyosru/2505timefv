@@ -15,17 +15,26 @@ class Show extends Component
     {
 
         $this->event = Event::with([
+
             'athletes' => function ($query) {
                 $query->withPivot('place')
-                    ->where('place', '!=', 0)
-                    ->orderBy('place', 'asc');
-            },
-            'athletesNoPlace' => function ($query) {
-                $query->withPivot('place')
-                    ->where('place', '=', null)
+//                    ->where('place', '!=', 0)
 //                    ->orderBy('place', 'asc')
+                    ->orderByRaw('place IS NULL, place ASC')
                 ;
             },
+//            'athletes' => function ($query) {
+//                $query->withPivot('place')
+//                    ->where('place', '!=', 0)
+//                    ->orderBy('place', 'asc');
+//            },
+//            'athletesNoPlace' => function ($query) {
+//                $query->withPivot('place')
+//                    ->where('place', '=', null)
+////                    ->orderBy('place', 'asc')
+//                ;
+//            },
+
             'sportType:id,name',
             'sportPlace' => function ($query) {
                 $query->select('id', 'city_id', 'name')->with([
@@ -40,7 +49,15 @@ class Show extends Component
             'docs',
             'videos',
 //            'attachments'
+
+
+
         ])->findOrFail($id);
+
+//        $this->participants = EventParticipant::with('athlete')
+//            ->where('event_id', $value)
+//            ->orderByRaw('place IS NULL, place ASC')
+//            ->get();
 
 
     }
