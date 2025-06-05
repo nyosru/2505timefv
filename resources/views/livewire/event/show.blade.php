@@ -158,7 +158,7 @@
                 </section>
 
                 <!-- Видео с мероприятия -->
-                @if(1==1)
+                @if( count($event->videos) > 0  )
                     <section>
                         <h2 class="text-xl font-semibold mb-4">Видео</h2>
                         @foreach( $event->videos as $video)
@@ -177,7 +177,7 @@
 
                     {{--                    <div class="grid grid-cols-3 gap-4">--}}
                     @foreach($event->docs as $attachment)
-                        <div>
+                        <div class="mb-1" >
                             @php
                                 $filename = '/file-icon/48px/' . substr($attachment->filename, -3) . '.png';
                             @endphp
