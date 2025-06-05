@@ -174,188 +174,190 @@
 
                 <section>
                     <h2 class="text-xl font-semibold mb-4">Документы</h2>
-                    <div class="grid grid-cols-3 gap-4">
-                        @foreach($event->docs as $attachment)
+
+                    {{--                    <div class="grid grid-cols-3 gap-4">--}}
+                    @foreach($event->docs as $attachment)
+                        <div>
                             @php
                                 $filename = '/file-icon/48px/' . substr($attachment->filename, -3) . '.png';
                             @endphp
 
-                            <div class="flex flex-col items-center justify-center space-x-2 w-full">
+                            {{--                            <div class="flex flex-col items-center justify-center space-x-2 w-full">--}}
 
-                                <div class="flex-1">
-                                    <a href="{{ Storage::url($attachment->url) }}" target="_blank">
-                                        @if(file_exists(public_path($filename)))
-                                            <img src="{{ $filename }}" alt=""/>
-                                        @else
-                                            <strong class="text-lg font-bold
+                            {{--                                <div class="flex-1">--}}
+                            <a href="{{ Storage::url($attachment->url) }}" target="_blank">
+                                @if(file_exists(public_path($filename)))
+                                    <img src="{{ $filename }}" class="inline" alt=""/>
+                                @else
+                                    <strong class="text-lg font-bold
                                                     border-gray-800
                                                     border border-1
                                                     px-2 py-1 mr-1 mb-1
                                                     rounded">{{ substr($attachment->filename, -4) }}</strong>
-                                        @endif
-                                    </a>
-                                </div>
+                                @endif
+                            </a>
+                            {{--                                </div>--}}
 
-                                <div class="flex-auto">
-                                    <a href="{{ Storage::url($attachment->url) }}" target="_blank">
-                                        <strong>{{ $attachment->name ?? $attachment->filename }}</strong>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </section>
-
-                @if(1==2)
-                    <!-- Сетки с колонками -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                        <!-- Колонка 1 -->
-                        <div class="space-y-8">
-                            <!-- Пьедестал -->
-                            <section>
-                                <h3 class="text-lg font-semibold mb-3">Пьедестал</h3>
-                                <ul class="space-y-2">
-                                    @foreach([
-                                      ['name' => 'Исматов М', 'medal' => 'gold.svg'],
-                                      ['name' => 'Точиев С', 'medal' => 'gold.svg'],
-                                      ['name' => 'Казаков А', 'medal' => 'gold.svg'],
-                                      ['name' => 'Киселев В', 'medal' => 'silver.svg'],
-                                      ['name' => 'Петров С', 'medal' => 'silver.svg'],
-                                      ['name' => 'Галеев Д', 'medal' => 'bronze.svg'],
-                                      ['name' => 'Концевенко М', 'medal' => 'bronze.svg'],
-                                    ] as $index => $person)
-                                        <li class="flex items-center gap-3">
-                                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
-                                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                            <span>{{ $person['name'] }}</span>
-                                            <img src="assets/{{ $person['medal'] }}" alt="Медаль"
-                                                 class="w-5 h-5 ml-auto"/>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </section>
-
-                            <!-- Организаторы -->
-                            <section>
-                                <h3 class="text-lg font-semibold mb-3">Организаторы</h3>
-                                <ul class="space-y-2">
-                                    @foreach(['Спортивная федерация', 'Городская администрация'] as $index => $org)
-                                        <li class="flex items-center gap-3">
-                                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
-                                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                            <span>{{ $org }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </section>
+                            {{--                                <div class="flex-auto">--}}
+                            <a href="{{ Storage::url($attachment->url) }}" target="_blank">
+                                <strong>{{ $attachment->name ?? $attachment->filename }}</strong>
+                            </a>
                         </div>
+                {{--                            </div>--}}
+                @endforeach
+{{--            </div>--}}
+            </section>
 
-                        <!-- Колонка 2 -->
-                        <div class="space-y-8">
-                            <!-- СМИ -->
-                            <section>
-                                <h3 class="text-lg font-semibold mb-3">СМИ</h3>
-                                <ul class="space-y-2">
-                                    @foreach(['Спортивный канал', 'Городская газета', 'Онлайн-портал'] as $index => $media)
-                                        <li class="flex items-center gap-3">
-                                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
-                                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                            <span>{{ $media }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </section>
+            @if(1==2)
+                <!-- Сетки с колонками -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                            <!-- Спонсоры -->
-                            <section>
-                                <h3 class="text-lg font-semibold mb-3">Спонсоры</h3>
-                                <ul class="space-y-2">
-                                    @foreach(['Главный спонсор', 'Технический партнер'] as $index => $sponsor)
-                                        <li class="flex items-center gap-3">
-                                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
-                                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                            <span>{{ $sponsor }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </section>
-                        </div>
-
-                    </div>
-
-                    <!-- Почётные гости и судьи -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                        <!-- Почётные гости -->
+                    <!-- Колонка 1 -->
+                    <div class="space-y-8">
+                        <!-- Пьедестал -->
                         <section>
-                            <h3 class="text-lg font-semibold mb-3">Почётные гости</h3>
+                            <h3 class="text-lg font-semibold mb-3">Пьедестал</h3>
                             <ul class="space-y-2">
-                                @foreach(['Мэр города', 'Олимпийский чемпион'] as $index => $guest)
+                                @foreach([
+                                  ['name' => 'Исматов М', 'medal' => 'gold.svg'],
+                                  ['name' => 'Точиев С', 'medal' => 'gold.svg'],
+                                  ['name' => 'Казаков А', 'medal' => 'gold.svg'],
+                                  ['name' => 'Киселев В', 'medal' => 'silver.svg'],
+                                  ['name' => 'Петров С', 'medal' => 'silver.svg'],
+                                  ['name' => 'Галеев Д', 'medal' => 'bronze.svg'],
+                                  ['name' => 'Концевенко М', 'medal' => 'bronze.svg'],
+                                ] as $index => $person)
                                     <li class="flex items-center gap-3">
                                         <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
                                         <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                        <span>{{ $guest }}</span>
+                                        <span>{{ $person['name'] }}</span>
+                                        <img src="assets/{{ $person['medal'] }}" alt="Медаль"
+                                             class="w-5 h-5 ml-auto"/>
                                     </li>
                                 @endforeach
                             </ul>
                         </section>
 
-                        <!-- Судьи -->
+                        <!-- Организаторы -->
                         <section>
-                            <h3 class="text-lg font-semibold mb-3">Судьи</h3>
+                            <h3 class="text-lg font-semibold mb-3">Организаторы</h3>
                             <ul class="space-y-2">
-                                @foreach(['Главный судья', 'Судья на линии', 'Хронометрист'] as $index => $judge)
+                                @foreach(['Спортивная федерация', 'Городская администрация'] as $index => $org)
                                     <li class="flex items-center gap-3">
                                         <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
                                         <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                        <span>{{ $judge }}</span>
+                                        <span>{{ $org }}</span>
                                     </li>
                                 @endforeach
                             </ul>
                         </section>
                     </div>
 
-                    <!-- Посетители (на всю ширину) -->
-                    <section class="mt-8">
-                        <h3 class="text-lg font-semibold mb-3">Посетители</h3>
+                    <!-- Колонка 2 -->
+                    <div class="space-y-8">
+                        <!-- СМИ -->
+                        <section>
+                            <h3 class="text-lg font-semibold mb-3">СМИ</h3>
+                            <ul class="space-y-2">
+                                @foreach(['Спортивный канал', 'Городская газета', 'Онлайн-портал'] as $index => $media)
+                                    <li class="flex items-center gap-3">
+                                        <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
+                                        <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                                        <span>{{ $media }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </section>
+
+                        <!-- Спонсоры -->
+                        <section>
+                            <h3 class="text-lg font-semibold mb-3">Спонсоры</h3>
+                            <ul class="space-y-2">
+                                @foreach(['Главный спонсор', 'Технический партнер'] as $index => $sponsor)
+                                    <li class="flex items-center gap-3">
+                                        <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
+                                        <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                                        <span>{{ $sponsor }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </section>
+                    </div>
+
+                </div>
+
+                <!-- Почётные гости и судьи -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <!-- Почётные гости -->
+                    <section>
+                        <h3 class="text-lg font-semibold mb-3">Почётные гости</h3>
                         <ul class="space-y-2">
-                            @foreach([
-                              'VIP-гости (50 человек)',
-                              'Корпоративные клиенты (120 человек)',
-                              'Общие зрители (500 человек)'
-                            ] as $index => $visitor)
+                            @foreach(['Мэр города', 'Олимпийский чемпион'] as $index => $guest)
                                 <li class="flex items-center gap-3">
                                     <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
                                     <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                    <span>{{ $visitor }}</span>
+                                    <span>{{ $guest }}</span>
                                 </li>
                             @endforeach
                         </ul>
                     </section>
-                @endif
 
-            </div>
+                    <!-- Судьи -->
+                    <section>
+                        <h3 class="text-lg font-semibold mb-3">Судьи</h3>
+                        <ul class="space-y-2">
+                            @foreach(['Главный судья', 'Судья на линии', 'Хронометрист'] as $index => $judge)
+                                <li class="flex items-center gap-3">
+                                    <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
+                                    <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                                    <span>{{ $judge }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </section>
+                </div>
 
-        </div>
-
-        <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
-
-            @foreach(range(1, 5) as $index )
-                <section class="w-full md:w-1/2 lg:w-1/3 mt-8">
-                    <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>
+                <!-- Посетители (на всю ширину) -->
+                <section class="mt-8">
+                    <h3 class="text-lg font-semibold mb-3">Посетители</h3>
                     <ul class="space-y-2">
-                        @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)
+                        @foreach([
+                          'VIP-гости (50 человек)',
+                          'Корпоративные клиенты (120 человек)',
+                          'Общие зрители (500 человек)'
+                        ] as $index => $visitor)
                             <li class="flex items-center gap-3">
                                 <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
                                 <div class="w-10 h-10 rounded-full bg-gray-300"></div>
-                                <span>{{ $athlete }}</span>
+                                <span>{{ $visitor }}</span>
                             </li>
                         @endforeach
                     </ul>
                 </section>
-            @endforeach
+            @endif
+
         </div>
+
     </div>
+
+    <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
+
+        @foreach(range(1, 5) as $index )
+            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">
+                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>
+                <ul class="space-y-2">
+                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>
+                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                            <span>{{ $athlete }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+        @endforeach
+    </div>
+</div>
 </div>
 
 
