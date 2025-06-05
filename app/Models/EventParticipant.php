@@ -13,7 +13,7 @@ class EventParticipant extends Model
     protected $fillable = [
         'athlete_id',
         'event_id',
-        'is_winner',
+        'place',
     ];
 
     // Связь с участником (спортсменом)

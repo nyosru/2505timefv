@@ -130,15 +130,20 @@
             </form>
         </div>
         <div class="w-1/2">
-            <div class="bg-orange-100">
-                <livewire:event.event-attachment-manager-component :eventId="$id" :type="'image'"/>
-            </div>
-            <div class="bg-cyan-100">
-                <livewire:event.event-attachment-manager-component :eventId="$id" :type="'video'"/>
-            </div>
-            <div class="bg-red-100">
-                <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'"/>
-            </div>
+            @if(!empty($id))
+                <div class="bg-orange-100">
+                    <livewire:event.event-attachment-manager-component :eventId="$id" :type="'image'"/>
+                </div>
+                <div class="bg-cyan-100">
+                    <livewire:event.event-attachment-manager-component :eventId="$id" :type="'video'"/>
+                </div>
+                <div class="bg-red-100">
+                    <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'"/>
+                </div>
+                <div class="bg-red-100">
+                    <livewire:event.event-participiant-manager-component :eventId="$id" />
+                </div>
+            @endif
         </div>
     </div>
 </div>

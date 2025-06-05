@@ -72,6 +72,10 @@ class Event extends Model
     {
         return $this->hasMany(EventAttachment::class)->where('type', 'image');
     }
+    public function videos()
+    {
+        return $this->hasMany(EventAttachment::class)->where('type', 'video');
+    }
     public function docs()
     {
         return $this->hasMany(EventAttachment::class)->where('type', 'document');

@@ -64,6 +64,24 @@ class EventAttachmentManagerComponent extends Component
         }
     }
 
+    public function scanSaveVideoUrls()
+    {
+
+        $array_url = explode("\n", $this->urls);
+//        dd($this->getAttributes());
+//        dd($array_url);
+
+        foreach($array_url as $url) {
+            EventAttachment::create([
+                'event_id' => $this->eventId,
+//                'name' => $this->name,
+//                'filename' => $file->getClientOriginalName(),
+                'url_video' => $url,
+                'type' => $this->type,
+            ]);
+        }
+    }
+
     public function save()
     {
         $this->validate();
@@ -77,19 +95,31 @@ class EventAttachmentManagerComponent extends Component
 //            's3_url' => $path, // предполагается, что storage настроен на S3 или локально
 //            'type' => $this->type,
 //        ]);
-        foreach ($this->files as $file) {
-            $path = $file->store('event_attachments', 'public');
 
-            EventAttachment::create([
-                'event_id' => $this->eventId,
-                'name' => $this->name,
-                'filename' => $file->getClientOriginalName(),
-                'url' => $path,
-                'type' => $this->type,
-            ]);
+        if ($this->type == 'video') {
+
+            $this->scanSaveVideoUrls();
+
+        } else {
+
+            foreach ($this->files as $file) {
+                $path = $file->store('event_attachments', 'public');
+
+                EventAttachment::create([
+                    'event_id' => $this->eventId,
+                    'name' => $this->name,
+                    'filename' => $file->getClientOriginalName(),
+                    'url' => $path,
+                    'type' => $this->type,
+                ]);
+            }
         }
-
-        $this->reset(['name', 'file', 'type']);
+        $this->reset([
+            'urls'
+//            'name'
+//            , 'file'
+//            , 'type'
+        ]);
         $this->loadAttachments();
 
         session()->flash('success', 'Вложение успешно добавлено.');

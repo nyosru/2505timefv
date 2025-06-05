@@ -85,17 +85,20 @@ class AdminForm extends Component
         if ($this->athleteId) {
             $athlete = Athlete::findOrFail($this->athleteId);
             $athlete->update($data);
+            session()->flash('success', 'Спортсмен успешно отредактирован.');
         } else {
             Athlete::create($data);
+            session()->flash('success', 'Спортсмен успешно сохранен.');
+
         }
 
-        $this->emitUp('athleteSaved');
-        $this->emit('closeForm');
+//        $this->emitUp('athleteSaved');
+//        $this->emit('closeForm');
     }
 
     public function cancel()
     {
-        $this->emit('closeForm');
+//        $this->emit('closeForm');
     }
 
 

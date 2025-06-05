@@ -223,7 +223,8 @@
                 </li>
             @endif
 
-
+            <livewire:app.menuItem label="Спортсмены Админ" routeName="admin.athletes"/>
+            <livewire:app.menuItem label="Спортсмены Админ Добавить" routeName="admin.athletes.form"/>
 
 
 

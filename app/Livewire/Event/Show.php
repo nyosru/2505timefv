@@ -38,7 +38,8 @@ class Show extends Component
             },
             'photos',
             'docs',
-            'attachments'
+            'videos',
+//            'attachments'
         ])->findOrFail($id);
 
 

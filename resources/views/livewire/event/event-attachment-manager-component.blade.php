@@ -102,11 +102,23 @@
 
                         <div class="float-left p-1 m-1 rounded-md">
                             @if($attachment->type === 'image')
+
                                 <img src="{{ Storage::url($attachment->url) }}" alt="{{ $attachment->name }}"
                                      class="max-w-[100px] max-h-[100px]"/>
+
                             @elseif($attachment->type === 'video')
-                                <strong>{{ $attachment->name }}</strong>
-                                <span class="ml-2 text-sm text-gray-600">[{{ ucfirst($attachment->type) }}]</span>
+
+                                <a href="{{ $attachment->url_video }}" target="_blank">
+                                    <strong>{{ $attachment->name }}</strong>
+                                    <span class="ml-2 text-sm text-gray-600">[{{ ucfirst($attachment->type) }}]</span>
+                                </a>
+                                <Br/>
+                                <button wire:click="deleteAttachment({{ $attachment->id }})"
+                                        wire:confirm="Удалить вложение?"
+                                        class="text-red-600 hover:underline text-sm">
+                                    Удалить
+                                </button>
+
                             @elseif($attachment->type === 'document')
 
                                 @php

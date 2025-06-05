@@ -3,6 +3,13 @@
 <div class="max-w-[450px]">
     <h3 class="text-xl font-bold mb-4">{{ $athleteId ? 'Редактировать спортсмена' : 'Добавить спортсмена' }}</h3>
 
+
+    @if(session()->has('success'))
+        <div class="mb-4 p-2 bg-green-200 text-green-800 rounded">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form wire:submit.prevent="save" enctype="multipart/form-data" novalidate>
         <div class="mb-3">
             <label class="block font-semibold mb-1">Фамилия *</label>
@@ -39,7 +46,7 @@
         </div>
 
         <div class="flex justify-end space-x-2 mt-6">
-            <button type="button" wire:click="cancel" class="px-4 py-2 border rounded hover:bg-gray-100">Отмена</button>
+{{--            <button type="button" wire:click="cancel" class="px-4 py-2 border rounded hover:bg-gray-100">Отмена</button>--}}
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Сохранить</button>
         </div>
     </form>
