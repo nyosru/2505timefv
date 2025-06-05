@@ -178,11 +178,11 @@ Route::middleware('check.permission:р.Гости')->group(function () {
     ; // если нужна авторизация
 });
 
-//Route::middleware('check.permission:р.Спонсоры')->group(function () {
+Route::middleware('check.permission:р.Спонсоры')->group(function () {
     Route::get('/admin/sponsor/manager', \App\Livewire\EventAdm\SponsorManagerComponent::class)
         ->name('admin.sponsor.manager')//    ->middleware('auth')
     ; // если нужна авторизация
-//});
+});
 
 
 
