@@ -33,6 +33,12 @@
             </div>
 
             <div class="mb-3">
+                <label class="block font-semibold mb-1">Адрес (для карты)</label>
+                <input type="text" wire:model.defer="adress" class="border p-2 rounded w-full" placeholder="Адрес: улица дом" />
+                @error('adress') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mb-3">
                 <label class="block font-semibold mb-1">Фото (локальный путь)</label>
                 <input type="text" wire:model.defer="photo" class="border p-2 rounded w-full" placeholder="Путь к фото" />
                 @error('photo') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
@@ -61,6 +67,7 @@
             <th class="border border-gray-300 p-2 text-left">ID</th>
             <th class="border border-gray-300 p-2 text-left">Название</th>
             <th class="border border-gray-300 p-2 text-left">Город</th>
+            <th class="border border-gray-300 p-2 text-left">Адрес</th>
             <th class="border border-gray-300 p-2 text-left">Фото</th>
             <th class="border border-gray-300 p-2 text-left">Фото S3</th>
             <th class="border border-gray-300 p-2 text-center">Действия</th>
@@ -72,6 +79,7 @@
                 <td class="border border-gray-300 p-2">{{ $place->id }}</td>
                 <td class="border border-gray-300 p-2">{{ $place->name }}</td>
                 <td class="border border-gray-300 p-2">{{ $place->city->name ?? '-' }}</td>
+                <td class="border border-gray-300 p-2">{{ $place->adress ?? '-' }}</td>
                 <td class="border border-gray-300 p-2">
                     @if($place->photo)
                         {{ $place->photo }}

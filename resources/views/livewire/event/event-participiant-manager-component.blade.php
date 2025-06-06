@@ -63,7 +63,7 @@
 
             @if( $this->events->find($eventId)->groupsNagrada->count() > 0 )
                 <div class="mb-4">
-                    <label class="block font-semibold mb-1">Группа соревнования</label>
+                    <label class="block font-semibold mb-1">Категория</label>
 
                     {{--            <pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r(--}}
                     {{--                $this->events->find($eventId)->groupsNagrada->toArray()--}}

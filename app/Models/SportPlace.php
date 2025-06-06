@@ -13,6 +13,7 @@ class SportPlace extends Model
     protected $fillable = [
         'city_id',
         'name',
+        'adress',
         'photo',
         'photo_s3_url',
     ];

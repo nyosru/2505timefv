@@ -39,8 +39,128 @@
                         <span class="font-semibold">Место проведения:</span>
                         {{--                    <a href="#" class="text-blue-600 hover:underline ml-1">Тюмень</a>--}}
                         {{ $event->sportPlace->city->country->name  ?? '--' }}<br>
-                        {{ $event->sportPlace->city->name  ?? '--' }}<br>
+                        @if( !empty($event->sportPlace->city->name) )
+                            {{ $event->sportPlace->city->name }}<br>
+                        @endif
+                        {{--{{ $event->sportPlace->city->name  ?? '--' }}<br>--}}
                         {{ $event->sportPlace->name ?? '--' }}<br>
+                        adress:{{ $event->sportPlace->adress ?? '--' }}<br>
+
+                        <pre>{{ print_r($event->sportPlace->toArray(),1) }}</pre>
+                        adress:{{ $event->sportPlace->adress ?? '--' }}<br>
+
+{{ ( $event->sportPlace->city->country->name  ?? '' ).' '.
+                                    ( $event->sportPlace->city->name ?? '' ) .' '.
+                                    ( $event->sportPlace->adress ?? '' )  }}
+
+
+                        <div id="map" style="width: 100%; height: 400px;"></div>
+
+                        <script src="https://api-maps.yandex.ru/v3/?apikey=d459c05b-ae5a-4168-86ba-15c5487e307c&lang=ru_RU"></script>
+                        <script>
+                            async function initMap() {
+                                await ymaps3.ready;
+
+{{--                                const adress = @json($adress);--}}
+                                const adress = "{{ ( $event->sportPlace->city->country->name  ?? '' ).' '.( $event->sportPlace->city->name ?? '' ) .' '.( $event->sportPlace->adress ?? '' ) }}";
+
+                                // Импортируем необходимые классы
+                                const {YMap, YMapDefaultSchemeLayer, YPlacemark} = ymaps3;
+
+                                // Создаём карту
+                                const map = new YMap(document.getElementById('map'), {
+                                    location: {
+                                        center: [55.76, 37.64], // Москва по умолчанию
+                                        zoom: 10
+                                    }
+                                });
+
+                                // Добавляем слой карты
+                                map.addChild(new YMapDefaultSchemeLayer());
+
+                                // Геокодируем адрес через HTTP-запрос к геокодеру Яндекса
+                                const geocodeResponse = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${encodeURIComponent(adress)}`);
+                                const geocodeData = await geocodeResponse.json();
+
+                                if (geocodeData.response.GeoObjectCollection.featureMember.length === 0) {
+                                    alert('Адрес не найден');
+                                    return;
+                                }
+
+                                const posString = geocodeData.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos;
+                                const [lon, lat] = posString.split(' ').map(Number);
+
+                                // Создаём метку
+                                const placemark = new YPlacemark([lat, lon], {
+                                    balloon: {content: adress}
+                                });
+
+                                // Добавляем метку на карту
+                                map.addChild(placemark);
+
+                                // Центрируем карту на метке
+                                map.setCenter([lat, lon], 14);
+                            }
+
+                            initMap();
+                        </script>
+
+{{--                        <div id="map" style="width: 100%; height: 400px;"></div>--}}
+
+{{--                        <script src="https://api-maps.yandex.ru/2.1/?apikey=d459c05b-ae5a-4168-86ba-15c5487e307c&lang=ru_RU" type="text/javascript"></script>--}}
+{{--                        <script src="https://api-maps.yandex.ru/v3/?apikey=d459c05b-ae5a-4168-86ba-15c5487e307c&lang=ru_RU"--}}
+{{--                                type="text/javascript"></script>--}}
+{{--                        <div id="map" style="width: 600px; height: 400px"></div>--}}
+
+{{--                        <script type="text/javascript">--}}
+
+{{--                            // initMap();--}}
+{{--                            --}}{{--ymaps.ready(init);--}}
+{{--                            --}}{{--function init() {--}}
+{{--                            --}}{{--    var myMap = new ymaps.Map("map", {--}}
+{{--                            --}}{{--        center: [55.76, 37.64],--}}
+{{--                            --}}{{--        zoom: 10--}}
+{{--                            --}}{{--    });--}}
+
+{{--                            --}}{{--    ymaps.geocode('{{ ( $event->sportPlace->city->country->name  ?? '' ).' '.( $event->sportPlace->city->name ?? '' ) .' '.( $event->sportPlace->adress ?? '' ) }}').then(function (res) {--}}
+{{--                            --}}{{--        var firstGeoObject = res.geoObjects.get(0);--}}
+{{--                            --}}{{--        myMap.geoObjects.add(firstGeoObject);--}}
+{{--                            --}}{{--        myMap.setCenter(firstGeoObject.geometry.getCoordinates());--}}
+{{--                            --}}{{--    });--}}
+{{--                            --}}{{--}--}}
+
+{{--                            initMap();--}}
+
+{{--                            async function initMap() {--}}
+{{--                                // Промис `ymaps3.ready` будет зарезолвлен, когда загрузятся все компоненты основного модуля API--}}
+{{--                                await ymaps3.ready;--}}
+
+{{--                                const {YMap, YMapDefaultSchemeLayer} = ymaps3;--}}
+
+{{--                                // Иницилиазируем карту--}}
+{{--                                const map = new YMap(--}}
+{{--                                    // Передаём ссылку на HTMLElement контейнера--}}
+{{--                                    document.getElementById('map'),--}}
+
+{{--                                    // Передаём параметры инициализации карты--}}
+{{--                                    {--}}
+{{--                                        location: {--}}
+{{--                                            // Координаты центра карты--}}
+{{--                                            center: [37.588144, 55.733842],--}}
+
+{{--                                            // Уровень масштабирования--}}
+{{--                                            zoom: 10--}}
+{{--                                        }--}}
+{{--                                    }--}}
+{{--                                );--}}
+
+{{--                                // Добавляем слой для отображения схематической карты--}}
+{{--                                map.addChild(new YMapDefaultSchemeLayer());--}}
+{{--                            }--}}
+
+{{--                        </script>--}}
+
+
                     </div>
 
 
@@ -77,13 +197,13 @@
                     @php
                         // Пример: массив ссылок на фото
                         $photos = [
-    //                        asset('storage/events/photo1.jpg'),
-    //                        asset('storage/events/photo2.jpg'),
-    //                        asset('storage/events/photo3.jpg'),
+                        //                        asset('storage/events/photo1.jpg'),
+                        //                        asset('storage/events/photo2.jpg'),
+                        //                        asset('storage/events/photo3.jpg'),
                         ];
                         foreach( $event->photos as $k => $v )
                             {
-    //                            $photos[] = asset($v->url);
+                        //                            $photos[] = asset($v->url);
                                 if(!empty($v->url)){
                                 $photos[] = asset('storage/'.$v->url);
                             }
@@ -103,6 +223,7 @@
                                                 alt="Фото {{ $i+1 }}"
                                                 class="bg-gray-100 rounded-lg h-40 w-full object-cover cursor-pointer transition hover:scale-105"
                                                 @click="open = true; current = {{ $i }}"
+                                                loading="lazy"
                                         />
                                     @endforeach
                                 </div>
@@ -117,8 +238,8 @@
                                 >
                                     <div class="relative bg-white rounded-lg shadow-lg p-4
 {{--                                    max-w-2xl--}}
-                                    max-w-[75%]
-                                    w-full flex flex-col items-center">
+            max-w-[75%]
+            w-full flex flex-col items-center">
                                         <!-- Картинка -->
                                         <img
                                                 :src="photos[current]"
@@ -212,10 +333,10 @@
                                     <img src="{{ $filename }}" class="inline" alt=""/>
                                 @else
                                     <strong class="text-lg font-bold
-                                                    border-gray-800
-                                                    border border-1
-                                                    px-2 py-1 mr-1 mb-1
-                                                    rounded">{{ substr($attachment->filename, -4) }}</strong>
+                            border-gray-800
+                            border border-1
+                            px-2 py-1 mr-1 mb-1
+                            rounded">{{ substr($attachment->filename, -4) }}</strong>
                                 @endif
                             </a>
                             {{--                                </div>--}}
@@ -373,26 +494,26 @@
             @if( $event->sponsors->count() > 0 )
                 <livewire:event.informer.event-sponsor-list :list="$event->sponsors"/>
             @endif
-            {{--            <div>--}}
-            {{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
-            {{--            </div>--}}
+{{--            <div>--}}
+{{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
+{{--            </div>--}}
 
-            {{--        @foreach(range(1, 5) as $index )--}}
-            {{--            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">--}}
-            {{--                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>--}}
-            {{--                <ul class="space-y-2">--}}
-            {{--                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)--}}
-            {{--                        <li class="flex items-center gap-3">--}}
-            {{--                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>--}}
-            {{--                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>--}}
-            {{--                            <span>{{ $athlete }}</span>--}}
-            {{--                        </li>--}}
-            {{--                    @endforeach--}}
-            {{--                </ul>--}}
-            {{--            </section>--}}
-            {{--        @endforeach--}}
-        </div>
-    </div>
+{{--        @foreach(range(1, 5) as $index )--}}
+{{--            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">--}}
+{{--                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>--}}
+{{--                <ul class="space-y-2">--}}
+{{--                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)--}}
+{{--                        <li class="flex items-center gap-3">--}}
+{{--                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>--}}
+{{--                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>--}}
+{{--                            <span>{{ $athlete }}</span>--}}
+{{--                        </li>--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
+{{--            </section>--}}
+{{--        @endforeach--}}
+</div>
+</div>
 
 </div>
 

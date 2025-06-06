@@ -40,7 +40,7 @@ class Show extends Component
 
             'sportType:id,name',
             'sportPlace' => function ($query) {
-                $query->select('id', 'city_id', 'name')->with([
+                $query->select('id', 'city_id', 'name', 'adress')->with([
                     'city' => function ($query) {
                         $query->select('id', 'country_id', 'name')->with([
                             'country:id,name'

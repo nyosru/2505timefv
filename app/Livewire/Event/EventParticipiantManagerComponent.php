@@ -125,6 +125,7 @@ class EventParticipiantManagerComponent extends Component
         }
     }
 
+
     public function render()
     {
         return view('livewire.event.event-participiant-manager-component');

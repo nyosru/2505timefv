@@ -13,6 +13,8 @@ class SportPlaceCrud extends Component
 
     public $name;
     public $city_id;
+    public $adress;
+
     public $photo;         // для загрузки локального фото (если нужно)
     public $photo_s3_url;  // ссылка на S3
     public $selectedId = null;
@@ -23,6 +25,7 @@ class SportPlaceCrud extends Component
     protected $rules = [
         'name' => 'required|string|max:255',
         'city_id' => 'required|exists:cities,id',
+        'adress' => 'nullable|string|max:255',
         'photo' => 'nullable|string|max:255',
         'photo_s3_url' => 'nullable|url|max:255',
     ];
@@ -39,6 +42,7 @@ class SportPlaceCrud extends Component
     {
         $this->name = null;
         $this->city_id = null;
+        $this->adress = null;
         $this->photo = null;
         $this->photo_s3_url = null;
         $this->selectedId = null;
@@ -52,6 +56,7 @@ class SportPlaceCrud extends Component
         SportPlace::create([
             'name' => $this->name,
             'city_id' => $this->city_id,
+            'adress' => $this->adress,
             'photo' => $this->photo,
             'photo_s3_url' => $this->photo_s3_url,
         ]);
@@ -67,6 +72,7 @@ class SportPlaceCrud extends Component
         $this->selectedId = $id;
         $this->name = $sportPlace->name;
         $this->city_id = $sportPlace->city_id;
+        $this->adress = $sportPlace->adress;
         $this->photo = $sportPlace->photo;
         $this->photo_s3_url = $sportPlace->photo_s3_url;
         $this->updateMode = true;
@@ -86,6 +92,7 @@ class SportPlaceCrud extends Component
             $sportPlace->update([
                 'name' => $this->name,
                 'city_id' => $this->city_id,
+                'adress' => $this->adress,
                 'photo' => $this->photo,
                 'photo_s3_url' => $this->photo_s3_url,
             ]);
