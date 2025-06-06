@@ -8,7 +8,7 @@ use Livewire\Component;
 class EventParticipiantItem extends Component
 {
     public $participant;
-
+    public $show = true;
 
     public function removeParticipant($participantId)
     {
@@ -17,7 +17,8 @@ class EventParticipiantItem extends Component
             $participant->delete();
             session()->flash('success', 'Связь удалена.');
 //            $this->updatedEventId($this->eventId);
-            $this->dispatch('participtianRefresh');
+//            $this->dispatch('participtianRefresh');
+            $this->show = false;
         }
     }
 

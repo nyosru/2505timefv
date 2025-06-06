@@ -30,12 +30,12 @@ class EventParticipiantManagerComponent extends Component
     protected $listeners = [
         'groupsUpdated' => 'refreshGroups',
 //        'participtianRefresh' => 'LoadData',
-        'participtianRefresh' => 'refreshView',
+//        'participtianRefresh' => 'refreshView',
     ];
 
-    public function refreshView(){
-        $this->updatedEventId($this->eventId);
-    }
+//    public function refreshView(){
+//        $this->updatedEventId($this->eventId);
+//    }
     public function refreshGroups()
     {
         // Логика обновления списка групп, например, загрузка из базы
