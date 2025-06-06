@@ -27,8 +27,15 @@ class EventParticipiantManagerComponent extends Component
         'place' => 'nullable|integer|in:1,2,3',
     ];
 
-    protected $listeners = ['groupsUpdated' => 'refreshGroups'];
+    protected $listeners = [
+        'groupsUpdated' => 'refreshGroups',
+//        'participtianRefresh' => 'LoadData',
+        'participtianRefresh' => 'refreshView',
+    ];
 
+    public function refreshView(){
+        $this->updatedEventId($this->eventId);
+    }
     public function refreshGroups()
     {
         // Логика обновления списка групп, например, загрузка из базы
