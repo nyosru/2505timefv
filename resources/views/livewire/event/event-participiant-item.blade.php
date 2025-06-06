@@ -10,8 +10,8 @@ py-1">
                     @if(!empty($participant->place))
                         ({{ $participant->place ?? '-' }})
                     @endif
-                    {{ $participant->athlete->last_name }}
-                    {{ $participant->athlete->first_name }}
+                    {{ $participant->athlete->last_name ?? '' }}
+                    {{ $participant->athlete->first_name ?? ''}}
                 </span>
     <button
             wire:click="removeParticipant({{ $participant->id }})"
