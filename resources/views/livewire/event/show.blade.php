@@ -44,17 +44,23 @@
                         @endif
                         {{--{{ $event->sportPlace->city->name  ?? '--' }}<br>--}}
                         {{ $event->sportPlace->name ?? '--' }}<br>
-                        adress:{{ $event->sportPlace->adress ?? '--' }}<br>
+{{--                        adress:{{ $event->sportPlace->adress ?? '--' }}<br>--}}
 
+                        @if(1==2)
                         <pre>{{ print_r($event->sportPlace->toArray(),1) }}</pre>
                         adress:{{ $event->sportPlace->adress ?? '--' }}<br>
 
-{{ ( $event->sportPlace->city->country->name  ?? '' ).' '.
+                                {{ ( $event->sportPlace->city->country->name  ?? '' ).' '.
                                     ( $event->sportPlace->city->name ?? '' ) .' '.
                                     ( $event->sportPlace->adress ?? '' )  }}
 
 
+                        <livewire:services.map-yandex-controller />
+
+
                         <div id="map" style="width: 100%; height: 400px;"></div>
+
+
 
                         <script src="https://api-maps.yandex.ru/v3/?apikey=d459c05b-ae5a-4168-86ba-15c5487e307c&lang=ru_RU"></script>
                         <script>
@@ -159,7 +165,7 @@
 {{--                            }--}}
 
 {{--                        </script>--}}
-
+@endif
 
                     </div>
 
