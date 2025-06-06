@@ -70,7 +70,7 @@
                 <h1 class="text-3xl font-bold mt-6 mb-4">{{ $event->title ?? '-' }}</h1>
 
                 <!-- Фото с мероприятия -->
-                <section>
+                <section class="max-h-[600px] overflow-y-auto p-2">
 
 {{--                    <pre class="max-h-[200px] overflow-auto p-2 text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
 
