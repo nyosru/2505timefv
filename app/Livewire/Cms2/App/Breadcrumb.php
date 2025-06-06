@@ -17,7 +17,7 @@ class Breadcrumb extends Component
             if( !isset($this->menu[$k]['route-var']) )
                 $this->menu[$k]['route-var'] = [];
 
-            $this->menu[$k]['route-var']['board_id'] = $this->board_id ?? 0;
+//            $this->menu[$k]['route-var']['board_id'] = $this->board_id ?? 0;
 
         }
     }

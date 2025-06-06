@@ -14,6 +14,7 @@ class EventParticipant extends Model
         'athlete_id',
         'event_id',
         'place',
+        'event_group_nagrada_id',
     ];
 
     // Связь с участником (спортсменом)
@@ -27,4 +28,10 @@ class EventParticipant extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function eventGroupNagrada()
+    {
+        return $this->belongsTo(EventGroupNagrada::class, 'event_group_nagrada_id');
+    }
+
 }

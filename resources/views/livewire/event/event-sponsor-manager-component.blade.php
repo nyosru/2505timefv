@@ -1,5 +1,8 @@
 <div class="w-full p-6 ">
 
+    <!-- Список привязанных спонсоров -->
+    <h3 class="mt-8 mb-4 text-xl font-semibold">Спонсоры мероприятия</h3>
+
     @if(session()->has('success'))
         <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
             {{ session('success') }}
@@ -11,6 +14,7 @@
             {{ session('error') }}
         </div>
     @endif
+
     @if( empty($events) )
         <!-- Выбор мероприятия -->
         <div class="mb-4">
@@ -47,8 +51,6 @@
             Добавить спонсора
         </button>
 
-        <!-- Список привязанных спонсоров -->
-        <h3 class="mt-8 mb-4 text-xl font-semibold">Спонсоры мероприятия</h3>
 
         @if($eventSponsors->isEmpty())
             <p class="text-gray-600">Пока нет привязанных спонсоров.</p>

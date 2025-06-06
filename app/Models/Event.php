@@ -111,4 +111,11 @@ class Event extends Model
             ->withTimestamps();
     }
 
+
+    // Группы наград мероприятия (один ко многим)
+    public function groupsNagrada()
+    {
+        return $this->hasMany(EventGroupNagrada::class);
+    }
+
 }

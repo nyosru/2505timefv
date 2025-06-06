@@ -57,7 +57,7 @@
             @if($type === 'image' || $type === 'document')
                 <div class="mb-4">
                     <label class="block font-semibold mb-1">Файл(ы) *</label>
-                    <input type="file" wire:model="files" multiple class="w-full"/>
+                    <input type="file" wire:model.lazy="files" multiple class="w-full"/>
                     @error('files') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
 
                     {{--                @if ($file)--}}
@@ -72,7 +72,7 @@
                 <div class="mb-4">
                     <label class="block font-semibold mb-1">Ссылки на vkvideo (1 строка 1 ссылка)</label>
                     <small>Например: https://vkvideo.ru/video123456789</small>
-                    <textarea wire:model="urls" rows="4" class="w-full border rounded p-2"></textarea>
+                    <textarea wire:model.lazy="urls" rows="4" class="w-full border rounded p-2"></textarea>
                     @error('urls') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
 
                     {{--                @if ($file)--}}

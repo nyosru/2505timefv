@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto p-6 bg-white rounded shadow">
 
-    <h2 class="text-2xl font-bold mb-6">Управление гостями</h2>
+    <h2 class="text-2xl font-bold mb-6">Гости</h2>
 
     @if(session()->has('success'))
         <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">

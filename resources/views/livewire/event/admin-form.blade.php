@@ -142,17 +142,23 @@
         </div>
     </div>
     <div class="flex flex-wrap flex-row">
-        <div class="bg-red-100 w-1/2">
+
+        <div class="bg-red-100 w-full md:w-1/2 xl:w-1/3">
             <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'" :key="'atachment-'.rand()" />
         </div>
-        <div class="bg-blue-100 w-1/2">
+        <div class="bg-blue-100 w-full md:w-1/2 xl:w-1/3">
+            <livewire:event-adm.event-group-nagrada-manager-component
+                    :hideSetEvent="true" :eventId="$id" key="nagrada"/>
+        </div>
+        <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
             <livewire:event.event-participiant-manager-component :eventId="$id" key="parcipants"/>
         </div>
-        <div class="bg-orange-100 w-1/2">
+        <div class="bg-orange-100w-full md:w-1/2 xl:w-1/3">
             <livewire:event.event-guest-manager-component :eventId="$id" key="guest" />
         </div>
-        <div class="bg-green-100 w-1/2">
+        <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
             <livewire:event.event-sponsor-manager-component :eventId="$id" key="sponsor" />
         </div>
+
     </div>
 </div>

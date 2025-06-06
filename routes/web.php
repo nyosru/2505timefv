@@ -142,72 +142,74 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/events', Listing::class)->name('events.index');
 Route::get('/events/{id}', Show::class)->name('events.show');
 
-Route::get('/admin/events', Admin::class)
-    ->name('admin.events')//    ->middleware('auth')
-; // при необходимости
-Route::get('/admin/events/form/{id?}', \App\Livewire\Event\AdminForm::class)
-    ->name('admin.events.form')//    ->middleware('auth')
-; // при необходимости
-
-
 Route::get('/athletes', A_Listing::class)->name('athletes.index');
 Route::get('/athletes/{id}', A_Show::class)->name('athletes.show');
 
 
-Route::get('/admin/athletes', A_Admin::class)
-    ->name('admin.athletes')//    ->middleware('auth')
-; // при необходимости
+Route::middleware(['auth'])->group(function () {
+    Route::group(['as' => 'admin', 'prefix' => 'admin'], function () {
 
-Route::get('/admin/athletes/form/{id?}', A_AdminForm::class)
-    ->name('admin.athletes.form')//    ->middleware('auth')
-; // при необходимости
+        Route::get('events', Admin::class)
+            ->name('.events')//    ->middleware('auth')
+        ; // при необходимости
+        Route::get('events/form/{id?}', \App\Livewire\Event\AdminForm::class)
+            ->name('.events.form')//    ->middleware('auth')
+        ; // при необходимости
 
 
 
+        Route::get('athletes', A_Admin::class)
+            ->name('.athletes')//    ->middleware('auth')
+        ; // при необходимости
+
+        Route::get('athletes/form/{id?}', A_AdminForm::class)
+            ->name('.athletes.form')//    ->middleware('auth')
+        ; // при необходимости
 
 
-Route::middleware('check.permission:р.Виды спорта')->group(function () {
-    Route::get('/admin/sport-types', \App\Livewire\SportTypeCrud::class)
-        ->name('admin.sport-types')//    ->middleware('auth')
-    ; // если нужна авторизация
+        Route::middleware('check.permission:р.Виды спорта')->group(function () {
+            Route::get('sport-types', \App\Livewire\SportTypeCrud::class)
+                ->name('.sport-types')//    ->middleware('auth')
+            ; // если нужна авторизация
+        });
+
+        Route::middleware('check.permission:р.Гости')->group(function () {
+            Route::get('guest/manager', \App\Livewire\Event\GuestManagerComponent::class)
+                ->name('.guest.manager')//    ->middleware('auth')
+            ; // если нужна авторизация
+        });
+
+        Route::middleware('check.permission:р.Спонсоры')->group(function () {
+            Route::get('sponsor/manager', \App\Livewire\EventAdm\SponsorManagerComponent::class)
+                ->name('.sponsor.manager')//    ->middleware('auth')
+            ; // если нужна авторизация
+        });
+
+
+        Route::middleware('check.permission:р.Страны')->group(function () {
+            Route::get('countries', CountryCrud::class)
+                ->name('.countries')//    ->middleware('auth')
+            ; // если нужна авторизация
+        });
+
+        Route::middleware('check.permission:р.Города')->group(function () {
+            Route::get('cities', \App\Livewire\DataIn\CityCrudComponent::class)
+                ->name('.cities')//    ->middleware('auth')
+            ; // если нужна авторизация
+        });
+
+        Route::middleware('check.permission:р.Место проведения')->group(function () {
+            Route::get('sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
+                ->name('.sport-places')//    ->middleware('auth')
+            ; // если нужна авторизация
+        });
+
+        Route::get('event-participants', App\Livewire\Event\EventParticipantCrud::class)
+            ->name('.event-participants')//    ->middleware('auth')
+        ; // если нужна авторизация
+
+    });
 });
-
-Route::middleware('check.permission:р.Гости')->group(function () {
-    Route::get('/admin/guest/manager', \App\Livewire\Event\GuestManagerComponent::class)
-        ->name('admin.guest.manager')//    ->middleware('auth')
-    ; // если нужна авторизация
-});
-
-Route::middleware('check.permission:р.Спонсоры')->group(function () {
-    Route::get('/admin/sponsor/manager', \App\Livewire\EventAdm\SponsorManagerComponent::class)
-        ->name('admin.sponsor.manager')//    ->middleware('auth')
-    ; // если нужна авторизация
-});
-
-
-
-Route::middleware('check.permission:р.Страны')->group(function () {
-    Route::get('/admin/countries', CountryCrud::class)
-        ->name('admin.countries')//    ->middleware('auth')
-    ; // если нужна авторизация
-});
-
-Route::middleware('check.permission:р.Города')->group(function () {
-    Route::get('/admin/cities', \App\Livewire\DataIn\CityCrudComponent::class)
-        ->name('admin.cities')//    ->middleware('auth')
-    ; // если нужна авторизация
-});
-
-Route::middleware('check.permission:р.Место проведения')->group(function () {
-    Route::get('/admin/sport-places', \App\Livewire\DataIn\SportPlaceCrud::class)
-        ->name('admin.sport-places')//    ->middleware('auth')
-    ; // если нужна авторизация
-});
-
-
-Route::get('/admin/event-participants', App\Livewire\Event\EventParticipantCrud::class)
-    ->name('admin.event-participants')//    ->middleware('auth')
-; // если нужна авторизация
 
 
 // Маршрут для авторизованного пользователя
@@ -253,6 +255,12 @@ Route::middleware(['auth'])->group(function () {
 
 //});
 });
+
+
+
+
+
+
 
 
 if (1 == 2) {

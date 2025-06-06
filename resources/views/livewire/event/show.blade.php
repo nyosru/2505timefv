@@ -1,6 +1,21 @@
-<div>
+<div class="mt-1" >
 
-    <div id="event-details-container" class="max-w-7xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
+    <livewire:cms2.app.breadcrumb
+{{--            :board_id="$leed->column->board_id"--}}
+{{--            :board_id=""--}}
+            :menu="[
+                    ['route'=>'events.index','name'=>'Мероприятия', 'route-var' => [] ]
+                    ,
+                    ['route'=>'events.show','name'=>( strlen($event->title) > 50 ? substr($event->title, 0, 50) . '...' : ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ] ]
+{{--                    [--}}
+{{--                        'route'=>'leed',--}}
+{{--                        'name'=>( $leed->column->board->name ?? 'x' )--}}
+{{--                    ],--}}
+{{--                     [ 'link' => 'no', 'name'=> ( ($leed->name ?? '-') ) ]--}}
+                 ]"
+    />
+
+    <div id="event-details-container" class="max-w-7xl mx-auto p-6 bg-white rounded-lg shadow-lg ">
 
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Левая часть: изображение и основная информация -->

@@ -72,6 +72,17 @@ class EventAttachmentManagerComponent extends Component
 //        dd($array_url);
 
         foreach($array_url as $url) {
+
+            if(!empty($url)){
+//                https://vkvideo.ru/video-157335818_456246397
+                $vkService = new \App\Http\Services\VkVideoService(env('VK_ACCESS_TOKEN'));
+                $videoId = '-123456_78901234'; // owner_id и video_id через подчёркивание
+                $vkService->parsingVideoUrl($url);
+                $previewUrl = $vkService->getVideoPreviewUrl($videoId);
+
+                dd([$url,$previewUrl]);
+            }
+
             EventAttachment::create([
                 'event_id' => $this->eventId,
 //                'name' => $this->name,
@@ -114,12 +125,14 @@ class EventAttachmentManagerComponent extends Component
                 ]);
             }
         }
+
         $this->reset([
             'urls'
 //            'name'
 //            , 'file'
 //            , 'type'
         ]);
+
         $this->loadAttachments();
 
         session()->flash('success', 'Вложение успешно добавлено.');

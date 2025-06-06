@@ -13,20 +13,39 @@ class EventParticipiantManagerComponent extends Component
     public $eventId;
     public $athleteId;
     public $place;
+    public $event_group_nagrada_id;
 
     public $events = [];
     public $athletes = [];
     public $participants = [];
+    public $groups = [];
 
     protected $rules = [
         'eventId' => 'required|exists:events,id',
         'athleteId' => 'required|exists:athletes,id',
+        'event_group_nagrada_id' => 'nullable|exists:event_group_nagradas,id',
         'place' => 'nullable|integer|in:1,2,3',
     ];
 
+    protected $listeners = ['groupsUpdated' => 'refreshGroups'];
+
+    public function refreshGroups()
+    {
+        // Логика обновления списка групп, например, загрузка из базы
+        $this->LoadData();
+//        $this->updatedEventId();
+    }
+
     public function mount()
     {
-        $this->events = Event::orderBy('title')->get();
+       $this->LoadData();
+    }
+
+    public function loadData()
+    {
+        $this->events = Event::with([
+            'groupsNagrada'
+        ])->orderBy('title')->get();
 //        $this->athletes = collect();
         $this->athletes = Athlete::orderBy('last_name')->get();
 //        $this->participants = collect();
@@ -37,9 +56,14 @@ class EventParticipiantManagerComponent extends Component
 
     public function updatedEventId($value)
     {
+
+//        dd($this->events->find($value)->groupsNagrada->toArray());
+
         // Загрузить участников данного мероприятия
-        $this->participants = EventParticipant::with('athlete')
+        $this->participants = EventParticipant::with(['athlete', 'eventGroupNagrada'
+        ])
             ->where('event_id', $value)
+//            ->orderBy('event_group_nagrada_id', 'ASC')
             ->orderByRaw('place IS NULL, place ASC')
             ->get();
 
@@ -71,6 +95,7 @@ class EventParticipiantManagerComponent extends Component
             'event_id' => $this->eventId,
             'athlete_id' => $this->athleteId,
             'place' => $this->place ?: null,
+            'event_group_nagrada_id' => $this->event_group_nagrada_id ?: null,
         ]);
 
         session()->flash('success', 'Спортсмен успешно добавлен.');
