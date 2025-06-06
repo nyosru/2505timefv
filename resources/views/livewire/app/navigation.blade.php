@@ -5,10 +5,13 @@
      "
 >
 
-    <div class="flex flex-col sm:w-full sm:flex-row space-y-2 pb-3">
-        <div class="w-full sm:w-1/2 sm:pt-3 flex justify-center items-center py-2">
-            <a href="/" class="hover:underline text-2xl pl-4 font-bold">
-                <nobr>ВремяПобед!</nobr>
+    <div class="flex flex-col sm:w-full sm:flex-row space-y-2
+{{--    pb-3--}}
+    ">
+        <div class="w-full sm:w-1/2 flex justify-center items-center py-2">
+            <a href="/" class="">
+{{--                <nobr>ВремяПобед!</nobr>--}}
+                <img src="/img/logo1.svg" class="h-[60px]" alt="" />
             </a>
         </div>
         <div class="sm:w-1/2 flex justify-center items-center ">
