@@ -1482,6 +1482,10 @@ select {
   max-height: 500px;
 }
 
+.max-h-\[50px\] {
+  max-height: 50px;
+}
+
 .max-h-\[550px\] {
   max-height: 550px;
 }
@@ -1787,10 +1791,6 @@ select {
   max-width: 42rem;
 }
 
-.max-w-3xl {
-  max-width: 48rem;
-}
-
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -1817,6 +1817,10 @@ select {
 
 .max-w-\[600px\] {
   max-width: 600px;
+}
+
+.max-w-\[75\%\] {
+  max-width: 75%;
 }
 
 .max-w-\[877px\] {
@@ -2669,11 +2673,6 @@ select {
   background-color: rgb(244 244 245 / var(--tw-bg-opacity, 1));
 }
 
-.bg-orange-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 215 170 / var(--tw-bg-opacity, 1));
-}
-
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -3187,12 +3186,12 @@ select {
   line-height: 30px;
 }
 
-.leading-tight {
-  line-height: 1.25;
-}
-
 .leading-none {
   line-height: 1;
+}
+
+.leading-tight {
+  line-height: 1.25;
 }
 
 .tracking-\[-2\%\] {
@@ -4513,10 +4512,6 @@ select {
 @media (min-width: 1280px) {
   .xl\:w-1\/3 {
     width: 33.333333%;
-  }
-
-  .xl\:max-w-\[90\%\] {
-    max-width: 90%;
   }
 
   .xl\:grid-cols-3 {
