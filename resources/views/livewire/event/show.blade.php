@@ -94,7 +94,7 @@
                         <section x-data="{ open: false, current: 0, photos: {{ Js::from($photos) }} }">
                             <h2 class="text-xl font-semibold mb-4">Фото</h2>
 
-                            <div class="max-h-[500px] overflow-y-auto p-2 border border-2 border-gray-300 rounded-lg">
+                            <div class="max-h-[450px] overflow-y-auto p-2 border border-2 border-gray-500 rounded-lg">
 
                                 <div class="grid grid-cols-3 gap-4">
                                     @foreach($photos as $i => $photo)
