@@ -56,18 +56,22 @@
 {{--                class="space-y-2"--}}
         >
             @foreach($groups as $group)
-                <li class="flex justify-between items-center
-{{--                border rounded --}}
- hover:bg-yellow-200
- p-1
-                ">
-                    <span>{{ $group->name }}</span>
-                    <button wire:click="deleteGroup({{ $group->id }})" onclick="return confirm('Удалить группу?')"
-                            class="text-red-600 hover:underline text-sm">
-                        Удалить
-                    </button>
+                <li class="flex justify-between items-center hover:bg-yellow-200 p-1">
+                    @if($editingGroupId === $group->id)
+                        <input type="text" wire:model.defer="editingGroupName" class="border rounded p-1 flex-grow mr-2" />
+                        <button wire:click="saveGroup" class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 mr-2">Сохранить</button>
+                        <button wire:click="cancelEdit" class="px-3 py-1 bg-gray-400 text-white rounded hover:bg-gray-500">Отмена</button>
+                        @error('editingGroupName') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @else
+                        <span>{{ $group->name }}</span>
+                        <div>
+                            <button wire:click="startEditGroup({{ $group->id }})" class="text-blue-600 hover:underline text-sm mr-3">Изменить</button>
+                            <button wire:click="deleteGroup({{ $group->id }})" wire:confirm="Удалить группу?" class="text-red-600 hover:underline text-sm">Удалить</button>
+                        </div>
+                    @endif
                 </li>
             @endforeach
+
         </ul>
     @endif
     @endif

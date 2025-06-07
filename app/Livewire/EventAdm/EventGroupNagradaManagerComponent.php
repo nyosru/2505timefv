@@ -16,6 +16,9 @@ class EventGroupNagradaManagerComponent extends Component
     public $events = [];
     public $groups = [];
 
+    public $editingGroupId = null;
+    public $editingGroupName = null;
+
     protected $rules = [
         'eventId' => 'required|exists:events,id',
         'groupName' => 'required|string|max:255',
@@ -31,6 +34,47 @@ class EventGroupNagradaManagerComponent extends Component
             $this->groups = collect();
         }
     }
+
+
+    public function startEditGroup($groupId)
+    {
+        $group = EventGroupNagrada::find($groupId);
+        if ($group) {
+            $this->editingGroupId = $group->id;
+            $this->editingGroupName = $group->name;
+        }
+    }
+
+    public function saveGroup()
+    {
+        $this->validate([
+            'editingGroupName' => 'required|string|max:255',
+        ]);
+
+        if ($this->editingGroupId) {
+            $group = EventGroupNagrada::find($this->editingGroupId);
+            if ($group) {
+                $group->name = $this->editingGroupName;
+                $group->save();
+
+                session()->flash('success', 'Название группы успешно обновлено.');
+                $this->loadGroups();
+
+                // Сброс состояния редактирования
+                $this->editingGroupId = null;
+                $this->editingGroupName = null;
+
+                $this->dispatch('groupsUpdated');
+            }
+        }
+    }
+
+    public function cancelEdit()
+    {
+        $this->editingGroupId = null;
+        $this->editingGroupName = null;
+    }
+
 
     public
     function updatedEventId($value)
@@ -90,10 +134,7 @@ class EventGroupNagradaManagerComponent extends Component
     public
     function render()
     {
-        return view('livewire.event-adm.event-group-nagrada-manager-component', [
-            'events' => $this->events,
-            'groups' => $this->groups,
-        ]);
+        return view('livewire.event-adm.event-group-nagrada-manager-component');
     }
 
 //    public function render()
