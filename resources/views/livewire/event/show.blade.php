@@ -268,11 +268,13 @@
             </section>
         @endif
 
+        @if( $event->athletes->count() > 0 )
+            <livewire:event.informer.event-participiant-list :list="$event->groupsNagrada"/>
+        @endif
+
+
         <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
 
-            @if( $event->athletes->count() > 0 )
-                <livewire:event.informer.event-participiant-list :list="$event->groupsNagrada"/>
-            @endif
             @if( $event->guests->count() > 0 )
                 <livewire:event.informer.event-guests-list :list="$event->guests"/>
             @endif

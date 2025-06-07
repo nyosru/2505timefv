@@ -1,5 +1,7 @@
 <div class="w-full p-6" x-data="{ open: false }">
 
+
+
     <h2 class="text-xl font-semibold mb-4">
         <!-- Кнопка "+" справа сверху -->
         <button
@@ -154,5 +156,4 @@
         </ul>
     @endif
     @endif
-
 </div>
