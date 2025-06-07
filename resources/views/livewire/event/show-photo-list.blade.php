@@ -20,7 +20,7 @@
 
     @if( count($photos) > 0 )
         <section x-data="{ open: false, current: 0, photos: {{ Js::from($photos) }} }">
-            <h2 class="text-xl font-semibold mb-4">Фото</h2>
+            <h2 class="text-xl font-semibold mb-4 sticky top-[76px] bg-white z-10 p-4">Фото</h2>
 
             <div
                     {{--                            class="max-h-[450px] overflow-y-auto p-2 border border-2 border-gray-500 rounded-lg"--}}

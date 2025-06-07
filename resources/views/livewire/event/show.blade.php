@@ -268,7 +268,7 @@
             </section>
         @endif
 
-        @if( $event->athletes->count() > 0 )
+        @if( $event->athletes->count() > 0 && $event->groupsNagrada->count() > 0 )
             <livewire:event.informer.event-participiant-list :list="$event->groupsNagrada"/>
         @endif
 

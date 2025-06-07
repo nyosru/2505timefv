@@ -2,7 +2,8 @@
 {{--md:w-1/2 --}}
 {{--lg:w-1/3 --}}
 mt-8 px-2">
-    <h2 class="text-xl font-semibold mb-3">Победители и Участники</h2>
+    <h2 class="text-xl font-semibold mb-3
+     sticky top-[76px] bg-white z-10 p-4">Победители и Участники</h2>
     <div
             {{--            class="max-h-96 overflow-y-scroll"--}}
     >
@@ -15,9 +16,7 @@ mt-8 px-2">
                 sm:grid-cols-2
                 md:grid-cols-3
                 xl:grid-cols-4 gap-4"
-
         >
-
             @foreach($list as $group )
 
                 @if( $group->athletes->count() == 0 )
