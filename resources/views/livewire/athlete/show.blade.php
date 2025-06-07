@@ -1,4 +1,19 @@
 <div>
+
+    <livewire:cms2.app.breadcrumb
+            :menu="[
+        ['route' => 'athletes.index', 'name' => 'Спортсмены', 'route-var' => []],
+        [
+            'route' => 'athletes.show',
+            'name' => ($athlete->last_name ?? '') . ' ' . ($athlete->first_name ?? ''),
+            'link' => 'no',
+            'route-var' => ['id' => $athlete->id ?? '']
+        ],
+    ]"
+    />
+
+
+
     <h2 class="text-3xl font-bold mb-4">{{ $athlete->last_name }} {{ $athlete->first_name }} {{ $athlete->middle_name }}</h2>
 
     @if($athlete->photo)

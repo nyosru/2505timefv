@@ -1,5 +1,22 @@
 <div>
-    <h2 class="text-2xl font-bold mb-4">Список мероприятий</h2>
+
+    <livewire:cms2.app.breadcrumb
+            {{--            :board_id="$leed->column->board_id"--}}
+            {{--            :board_id=""--}}
+            :menu="[
+                    ['route'=>'events.index','name'=>'Мероприятия', 'route-var' => [] ]
+{{--                    ,--}}
+{{--                    ['route'=>'events.show','name'=>( strlen($event->title) > 50 ? substr($event->title, 0, 50) . '...' : ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ] ]--}}
+{{--                    [--}}
+{{--                        'route'=>'leed',--}}
+{{--                        'name'=>( $leed->column->board->name ?? 'x' )--}}
+{{--                    ],--}}
+{{--                     [ 'link' => 'no', 'name'=> ( ($leed->name ?? '-') ) ]--}}
+                 ]"
+    />
+
+
+    <h2 class="text-2xl font-bold mb-4">События Мероприятия</h2>
 
     <div class="my-4">
         {{ $events->links('vendor.pagination.my1tailwind') }}

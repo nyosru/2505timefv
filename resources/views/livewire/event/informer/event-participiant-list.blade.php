@@ -1,6 +1,8 @@
 <section class="w-full md:w-1/2 lg:w-1/3 mt-8">
     <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>
-    <div class="max-h-96 overflow-y-scroll">
+    <div
+{{--            class="max-h-96 overflow-y-scroll"--}}
+    >
     <ul class="space-y-2">
         @foreach($list as $k => $v )
             <li class="flex items-center gap-3
