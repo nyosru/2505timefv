@@ -16,13 +16,34 @@ class Show extends Component
 
         $this->event = Event::with([
 
+            'groupsNagrada' => function ($query) {
+                $query->with(['athletes' => function ($query) {
+                    $query->orderByRaw('place IS NULL, place ASC');
+                }]);
+            },
+
+//            'groupsNagrada' => function ($query) {
+//                $query->orderBy('name', 'asc')  // сортируем группы наград по возрастанию (например, по полю name)
+//                ->with(['eventParticipants.athlete']); // подгружаем участников и их спортсменов
+//            },
+
             'guests' => function ($query) {
 //            $query->with('guests');
             },
             'athletes' => function ($query) {
-                $query->withPivot('place')
+                $query
+                    ->withPivot(['place',
+//                        'event_group_nagrada_id'
+                    ])
+                    ->with([
+                        'eventParticipants' => function ($query) {
+                            $query->with('eventGroupNagrada');
+                        },
+//                        'eventGroupNagrada'
+                    ])
 //                    ->where('place', '!=', 0)
 //                    ->orderBy('place', 'asc')
+//                    ->orderBy('eventGroupNagrada_id', 'DESC')
                     ->orderByRaw('place IS NULL, place ASC')
                 ;
             },

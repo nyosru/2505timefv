@@ -18,4 +18,13 @@ class EventGroupNagrada extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function athletes()
+    {
+        return $this->belongsToMany(Athlete::class, 'event_participants', 'event_group_nagrada_id', 'athlete_id')
+            ->withPivot('event_id', 'place')
+            ->withTimestamps();
+    }
+
+
 }
