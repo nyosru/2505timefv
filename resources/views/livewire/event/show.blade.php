@@ -47,9 +47,9 @@
                     <div>
                         <span class="font-semibold">Место проведения:</span>
                         {{--                    <a href="#" class="text-blue-600 hover:underline ml-1">Тюмень</a>--}}
-                        {{ $event->sportPlace->city->country->name  ?? '--' }}<br>
+                        {{ $event->sportPlace->city->country->name  ?? '--' }}
                         @if( !empty($event->sportPlace->city->name) )
-                            {{ $event->sportPlace->city->name }}<br>
+                            {{ $event->sportPlace->city->name }}
                         @endif
                         {{--{{ $event->sportPlace->city->name  ?? '--' }}<br>--}}
                         {{ $event->sportPlace->name ?? '--' }}<br>

@@ -2422,6 +2422,11 @@ select {
   border-left-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
 }
 
+.border-b-black {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+}
+
 .bg-\[\#00A521\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 165 33 / var(--tw-bg-opacity, 1));
