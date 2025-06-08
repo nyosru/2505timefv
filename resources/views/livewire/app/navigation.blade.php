@@ -1,7 +1,8 @@
 <nav
         x-data="{ open: false }"
         class="bg-white border-b border-gray-100
-     @guest() sticky top-0 @endguest
+{{--     @guest() sticky top-0 @endguest--}}
+      sticky top-0
      "
 >
 

@@ -26,7 +26,7 @@
                     {{--                            class="max-h-[450px] overflow-y-auto p-2 border border-2 border-gray-500 rounded-lg"--}}
             >
 
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                     @foreach($photos as $i => $photo)
                         <img
                                 src="{{ $photo }}"

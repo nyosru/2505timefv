@@ -15,7 +15,9 @@
                  ]"
     />
 
-    <div id="event-details-container" class="max-w-7xl mx-auto p-6 bg-white rounded-lg shadow-lg ">
+    <div id="event-details-container" class="
+{{--    max-w-7xl mx-auto --}}
+    p-6 bg-white rounded-lg shadow-lg ">
 
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Левая часть: изображение и основная информация -->

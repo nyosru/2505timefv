@@ -5,7 +5,7 @@ mt-8 px-2">
     <h2 class="text-xl font-semibold mb-3
 {{--    bg-blue-200--}}
     bg-white/80
-     sticky top-[76px]  z-10 p-4">Победители и Участники</h2>
+     sticky top-[76px]  z-10 p-4">Победители и Участники (результаты по Категориям)</h2>
     <div
             {{--            class="max-h-96 overflow-y-scroll"--}}
     >
