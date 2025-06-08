@@ -19,8 +19,11 @@
             <div class="
 {{--            mb-1--}}
             ">
+
                 @php
-                    $filename = '/file-icon/48px/' . substr($attachment->filename, -3) . '.png';
+                    $ext = ( substr( strtolower($attachment->filename) , -4) == 'jpeg' ? 'jpg' : strtolower( substr( strtolower($attachment->filename) , -3) ) );
+//                    dump($ext);
+                    $filename = '/file-icon/48px/' . $ext . '.png';
                 @endphp
 
 
@@ -45,7 +48,7 @@
                             {{--                <a href="{{ Storage::url($attachment->url) }}" target="_blank">--}}
                             <strong>{{ $attachment->name ?? $attachment->filename }}</strong>
                         </div>
-                        </div>
+                    </div>
                 </a>
             </div>
             {{--                            </div>--}}
