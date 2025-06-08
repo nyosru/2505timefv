@@ -22,14 +22,16 @@ class EventAttachmentManagerComponent extends Component
     public $files = [];
     public $type;
     public $urls;
+    public $link;
 
     protected $rules = [
 //        'name' => 'required|string|max:255',
         'name' => 'nullable|string|max:255',
         'urls' => 'nullable|string',
+        'link' => 'nullable|string',
 //        'file' => 'required|file|max:10240', // max 10MB, настройте по необходимости
-        'files.*' => 'required|file|max:10240', // проверка для каждого файла
-        'type' => 'required|in:image,video,document',
+        'files.*' => 'nullable|file|max:10240', // проверка для каждого файла
+        'type' => 'required|in:image,video,document,publication',
     ];
 
     public function mount($eventId = null)
@@ -48,6 +50,7 @@ class EventAttachmentManagerComponent extends Component
         $this->reset([
             'attachments',
             'name',
+            'link',
             'file',
             'files'
 //            , 'type'
@@ -71,16 +74,16 @@ class EventAttachmentManagerComponent extends Component
 //        dd($this->getAttributes());
 //        dd($array_url);
 
-        foreach($array_url as $url) {
+        foreach ($array_url as $url) {
 
-            if(!empty($url)){
+            if (!empty($url)) {
 //                https://vkvideo.ru/video-157335818_456246397
                 $vkService = new \App\Http\Services\VkVideoService(env('VK_ACCESS_TOKEN'));
                 $videoId = '-123456_78901234'; // owner_id и video_id через подчёркивание
                 $vkService->parsingVideoUrl($url);
                 $previewUrl = $vkService->getVideoPreviewUrl($videoId);
 
-                dd([$url,$previewUrl]);
+                dd([$url, $previewUrl]);
             }
 
             EventAttachment::create([
@@ -111,6 +114,36 @@ class EventAttachmentManagerComponent extends Component
 
             $this->scanSaveVideoUrls();
 
+        } elseif ($this->type == 'publication') {
+
+//            dd(121212);
+
+            if (!empty($this->link)) {
+
+                EventAttachment::create([
+                    'event_id' => $this->eventId,
+                    'name' => $this->name,
+//                    'filename' => $file->getClientOriginalName(),
+//                    'url' => $path,
+                    'type' => $this->type,
+                    'link' => $this->link,
+                ]);
+
+            } else {
+                foreach ($this->files as $file) {
+                    $path = $file->store('event_attachments', 'public');
+
+                    EventAttachment::create([
+                        'event_id' => $this->eventId,
+                        'name' => $this->name,
+                        'filename' => $file->getClientOriginalName(),
+                        'url' => $path,
+                        'type' => $this->type,
+//                        'link' => $this->link,
+                    ]);
+                }
+            }
+
         } else {
 
             foreach ($this->files as $file) {
@@ -127,7 +160,8 @@ class EventAttachmentManagerComponent extends Component
         }
 
         $this->reset([
-            'urls'
+            'urls',
+            'files'
 //            'name'
 //            , 'file'
 //            , 'type'

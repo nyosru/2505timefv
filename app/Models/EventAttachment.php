@@ -19,6 +19,7 @@ class EventAttachment extends Model
         'url_video',
         's3_url',
         'type',
+        'link',
     ];
 
     public function event()

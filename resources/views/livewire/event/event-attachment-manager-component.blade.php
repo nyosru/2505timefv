@@ -1,6 +1,5 @@
 <div class="w-full p-6" x-data="{ open: false }">
 
-
     @if($eventId)
         <h2 class="text-xl font-bold mb-4">
             <button
@@ -17,6 +16,8 @@
                 видео (ссылки на vkvideo.ru)
             @elseif($type === 'document')
                 документы (pdf)
+            @elseif($type === 'publication')
+                Публикации (pdf или ссылка)
             @else
                 Вложения мероприятия
             @endif
@@ -46,9 +47,8 @@
                 </select>
             </div>
         @endif
-
+            $type:{{ $type ??'x' }}
         @if($eventId)
-
 
             @if($type === 'image')
             @elseif($type === 'video')
@@ -68,12 +68,16 @@
                         <option value="image">Картинка</option>
                         <option value="video">Видео</option>
                         <option value="document">Документ</option>
+                        <option value="publication">Публикация</option>
                     </select>
                     @error('type') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                 </div>
             @endif
 
-            @if($type === 'image' || $type === 'document')
+            @if($type === 'image'
+|| $type === 'document'
+|| $type === 'publication'
+)
                 <div class="mb-4">
                     <label class="block font-semibold mb-1">Файл(ы) *</label>
                     <input type="file" wire:model.lazy="files" multiple class="w-full"/>
@@ -86,6 +90,15 @@
                     {{--                @endif--}}
                 </div>
             @endif
+
+            @if($type === 'publication')
+                <div class="mb-4">
+                    <label class="block font-semibold mb-1">или Ссылка</label>
+                    <input type="text" wire:model.defer="link" class="w-full border rounded p-2"/>
+                    @error('link') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
+            @endif
+
 
             @if($type === 'video')
                 <div class="mb-4">
@@ -105,6 +118,7 @@
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                 Добавить
             </button>
+
     </form>
 
     <div>
@@ -114,6 +128,8 @@
             <div class="mb-4 max-h-[400px] overflow-auto">
 
                 @foreach($attachments as $attachment)
+
+{{--                    type: {{ $attachment->type }}--}}
 
                     @if($attachment->type != $type )
                         @continue
@@ -143,7 +159,12 @@
                                 Удалить
                             </button>
 
-                        @elseif($attachment->type === 'document')
+                        @elseif(
+//    1==1
+    $attachment->type === 'document' || $attachment->type === 'publication'
+    )
+
+
 
                             @php
                                 $filename = '/file-icon/32px/' . substr($attachment->filename, -3) . '.png';
@@ -153,6 +174,7 @@
                             <div class="flex flex-row items-center justify-center space-x-2 w-full">
 
                                 <div class="w-[40px]">
+                                    @if( empty($attachment->link) )
                                     <a href="{{ Storage::url($attachment->url) }}" target="_blank">
                                         @if(file_exists(public_path($filename)))
                                             <img src="{{ $filename }}" alt=""/>
@@ -165,10 +187,15 @@
                                                     rounded">{{ substr($attachment->filename, -4) }}</strong>
                                         @endif
                                     </a>
+                                        @else
+                                    Link
+                                        @endif
                                 </div>
 
                                 <div class="flex-auto">
-                                    <a href="{{ Storage::url($attachment->url) }}" target="_blank">
+                                    <a
+                                            href="{{ empty($attachment->link) ? Storage::url($attachment->url) : $attachment->link }}"
+                                            target="_blank">
                                         <strong>{{ $attachment->name ?? $attachment->filename }}</strong>
                                     </a>
                                 </div>

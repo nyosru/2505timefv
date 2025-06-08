@@ -32,7 +32,6 @@
                 {{--            <h1 class="text-3xl font-bold mt-6 mb-4">Кубок губернатора Тюменской области</h1>--}}
 
 
-
             </div>
 
             <!-- Правая часть: медиа и дополнительные секции -->
@@ -79,12 +78,11 @@
                 </div>
 
 
-
             </div>
 
         </div>
 
-{{--        <pre class="text-xs">{{ print_r($event->toArray(), true) }}</pre>--}}
+        {{--        <pre class="text-xs">{{ print_r($event->toArray(), true) }}</pre>--}}
 
         <!-- Фото с мероприятия -->
         <section class="my-5">
@@ -106,41 +104,45 @@
             </section>
         @endif
 
-        <section>
-            <h2 class="text-xl font-semibold mb-4">Документы</h2>
 
-            {{--                    <div class="grid grid-cols-3 gap-4">--}}
-            @foreach($event->docs as $attachment)
-                <div class="mb-1">
-                    @php
-                        $filename = '/file-icon/48px/' . substr($attachment->filename, -3) . '.png';
-                    @endphp
+        @if(1==2)
+            {{--        документы--}}
+            <section>
+                <h2 class="text-xl font-semibold mb-4">Документы</h2>
 
-                    {{--                            <div class="flex flex-col items-center justify-center space-x-2 w-full">--}}
+                {{--                    <div class="grid grid-cols-3 gap-4">--}}
+                @foreach($event->docs as $attachment)
+                    <div class="mb-1">
+                        @php
+                            $filename = '/file-icon/48px/' . substr($attachment->filename, -3) . '.png';
+                        @endphp
 
-                    {{--                                <div class="flex-1">--}}
-                    <a href="{{ Storage::url($attachment->url) }}" target="_blank">
-                        @if(file_exists(public_path($filename)))
-                            <img src="{{ $filename }}" class="inline" alt=""/>
-                        @else
-                            <strong class="text-lg font-bold
+                        {{--                            <div class="flex flex-col items-center justify-center space-x-2 w-full">--}}
+
+                        {{--                                <div class="flex-1">--}}
+                        <a href="{{ Storage::url($attachment->url) }}" target="_blank">
+                            @if(file_exists(public_path($filename)))
+                                <img src="{{ $filename }}" class="inline" alt=""/>
+                            @else
+                                <strong class="text-lg font-bold
                             border-gray-800
                             border border-1
                             px-2 py-1 mr-1 mb-1
                             rounded">{{ substr($attachment->filename, -4) }}</strong>
-                        @endif
-                    </a>
-                    {{--                                </div>--}}
+                            @endif
+                        </a>
+                        {{--                                </div>--}}
 
-                    {{--                                <div class="flex-auto">--}}
-                    <a href="{{ Storage::url($attachment->url) }}" target="_blank">
-                        <strong>{{ $attachment->name ?? $attachment->filename }}</strong>
-                    </a>
-                </div>
-                {{--                            </div>--}}
-            @endforeach
-            {{--            </div>--}}
-        </section>
+                        {{--                                <div class="flex-auto">--}}
+                        <a href="{{ Storage::url($attachment->url) }}" target="_blank">
+                            <strong>{{ $attachment->name ?? $attachment->filename }}</strong>
+                        </a>
+                    </div>
+                    {{--                            </div>--}}
+                @endforeach
+                {{--            </div>--}}
+            </section>
+        @endif
 
         @if(1==2)
             <!-- Сетки с колонками -->
@@ -270,12 +272,22 @@
             </section>
         @endif
 
+        <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
+
+
+{{--            <pre class="text-xs">{{ print_r($event->docs->toArray(), true) }}</pre>--}}
+
+@if($event->docs->count() > 0 )
+            <livewire:event.informer.event-document-list :items="$event->docs"/>
+@endif
+
+
         @if( $event->athletes->count() > 0 && $event->groupsNagrada->count() > 0 )
             <livewire:event.informer.event-participiant-list :list="$event->groupsNagrada"/>
         @endif
 
 
-        <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
+
 
             @if( $event->guests->count() > 0 )
                 <livewire:event.informer.event-guests-list :list="$event->guests"/>
@@ -283,7 +295,13 @@
             @if( $event->sponsors->count() > 0 )
                 <livewire:event.informer.event-sponsor-list :list="$event->sponsors"/>
             @endif
-{{--            <div>--}}
+
+            @if($event->publication->count() > 0 )
+                <livewire:event.informer.event-publication-list :items="$event->publication"/>
+            @endif
+
+
+            {{--            <div>--}}
 {{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
 {{--            </div>--}}
 

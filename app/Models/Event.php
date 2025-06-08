@@ -105,6 +105,11 @@ class Event extends Model
         return $this->hasMany(EventAttachment::class)->where('type', 'document');
     }
 
+    public function publication()
+    {
+        return $this->hasMany(EventAttachment::class)->where('type', 'publication');
+    }
+
     public function sponsors()
     {
         return $this->belongsToMany(Sponsor::class, 'event_sponsor')

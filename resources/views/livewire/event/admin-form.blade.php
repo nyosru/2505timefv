@@ -144,8 +144,13 @@
     <div class="flex flex-wrap flex-row">
 
         <div class="bg-red-100 w-full md:w-1/2 xl:w-1/3">
-            <livewire:event.event-attachment-manager-component :eventId="$id" :type="'document'" :key="'atachment-'.rand()" />
+            <livewire:event.event-attachment-manager-component :eventId="$id" type="document" :key="'atachment-'.rand()" />
         </div>
+        <div class="bg-orange-100 w-full md:w-1/2 xl:w-1/3">
+            publication
+            <livewire:event.event-attachment-manager-component :eventId="$id" type="publication" :key="'publication-'.rand()" />
+        </div>
+
         <div class="bg-blue-100 w-full md:w-1/2 xl:w-1/3">
             <livewire:event-adm.event-group-nagrada-manager-component
                     :hideSetEvent="true" :eventId="$id" key="nagrada"/>
