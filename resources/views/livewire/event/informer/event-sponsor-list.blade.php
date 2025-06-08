@@ -34,7 +34,7 @@
                         !empty($v->last_name) ||
                         !empty( $v->first_name )
                     )
-                        <div>
+                        <div class="ml-5">
                             {{ $v->last_name ?? '' }}
                             {{ $v->first_name ?? ''  }}
                         </div>
