@@ -3,7 +3,7 @@
 >
     <h2 class="text-xl font-semibold
 {{--    mb-4--}}
-        sticky top-[76px] bg-white/80 z-10 py-4
+        sticky top-[76px] bg-white/80 z-10 pt-4
         ">Публикации
     </h2>
 
