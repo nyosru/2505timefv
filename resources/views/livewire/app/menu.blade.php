@@ -223,21 +223,20 @@
                 </li>
             @endif
 
+
+
             <livewire:app.menuItem label="Спортсмены Админ" routeName="admin.athletes"/>
             <livewire:app.menuItem label="Спортсмены Админ Добавить" routeName="admin.athletes.form"/>
 
-     @if(Route::has('admin.guest.manager'))
-    <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager" />
-@endif
 
+            @permission('р.Гости')
+            <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager"/>
+            @endpermission
 
+            @permission('р.Спонсоры')
+            <livewire:app.menuItem label="Спонсоры Админ" routeName="admin.sponsor.manager"/>
+            @endpermission
 
-
-
-
-
-
-            <livewire:app.menuItem label="Спонсоры Админ" routeName="admin.sponsor.manager" />
 
             @if(2==3)
                 <li class="w-full">
@@ -274,8 +273,7 @@
             @endpermission
 
 
-
-        @if(2==3)
+            @if(2==3)
                 <li class="w-full">
                     <a href="{{ route('admin.countries') }}"
                        wire:navigate
