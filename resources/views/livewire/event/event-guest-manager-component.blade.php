@@ -1,10 +1,12 @@
 <div class="w-full p-6">
 
-    <div>
-        <a href="{{ route('admin.guest.manager') }}"
-           class="float-right px-2 blue-500 underline">Добавить гостя</a>
-        <h3 class="mt-8 mb-4 text-xl font-semibold">Гости мероприятия</h3>
-    </div>
+    @if(Route::has('admin.guest.manager'))
+        <div>
+            <a href="{{ route('admin.guest.manager') }}"
+               class="float-right px-2 blue-500 underline">Добавить гостя</a>
+            <h3 class="mt-8 mb-4 text-xl font-semibold">Гости мероприятия</h3>
+        </div>
+    @endif
 
     @if(session()->has('success'))
         <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
