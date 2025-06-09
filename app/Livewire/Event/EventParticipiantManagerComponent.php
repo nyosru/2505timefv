@@ -45,16 +45,49 @@ class EventParticipiantManagerComponent extends Component
 
     public function mount()
     {
-       $this->LoadData();
+        $this->LoadData();
     }
 
     public function loadData()
     {
+
         $this->events = Event::with([
-            'groupsNagrada'
-        ])->orderBy('title')->get();
+//            $this->event = Event::with([
+            'groupsNagrada' => function ($query) {
+                $query->with(['athletes' => function ($query) {
+                    $query->orderByRaw('place IS NULL, place ASC');
+                }]);
+            },
+//                'groupsNagrada'
+            'participants' => function ($query) {
+                $query->with(['athlete'
+//                    , 'eventGroupNagrada'
+                ]);
+            }
+        ])
+//            ->orderBy('title')
+            ->where('id',$this->eventId)
+            ->get();
+
 //        $this->athletes = collect();
-        $this->athletes = Athlete::orderBy('last_name')->get();
+
+//        $this->athletes = Athlete::orderBy('last_name')->get();
+        $eventId = $this->eventId;
+
+        $this->athletes = Athlete::
+//        whereHas('eventParticipants', function ($query) use ($eventId) {
+//            $query->where('event_id', $eventId)
+//                ->whereNull('event_group_nagrada_id');
+//            })
+//            ->
+//            whereDoesntHave('events', function ($query) use ($eventId) {
+//            $query->where('events.id', $eventId)
+//                ->whereNotNull('sport_place_id');
+//            })
+//            ->
+        get();
+
+
 //        $this->participants = collect();
         if (!empty($this->eventId)) {
             $this->updatedEventId($this->eventId);
@@ -76,6 +109,7 @@ class EventParticipiantManagerComponent extends Component
 
         // Загрузить спортсменов, которые еще не привязаны к этому мероприятию
         $attachedAthleteIds = $this->participants->pluck('athlete_id')->toArray();
+
         $this->athletes = Athlete::whereNotIn('id', $attachedAthleteIds)
             ->orderBy('last_name')
             ->get();

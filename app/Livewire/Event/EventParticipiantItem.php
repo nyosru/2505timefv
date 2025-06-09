@@ -8,11 +8,12 @@ use Livewire\Component;
 class EventParticipiantItem extends Component
 {
     public $participant;
+    public $eventId;
     public $show = true;
 
     public function removeParticipant($participantId)
     {
-        $participant = EventParticipant::find($participantId);
+        $participant = EventParticipant::where('athlete_id',$participantId)->where('event_id',$this->eventId)->first();
         if ($participant) {
             $participant->delete();
             session()->flash('success', 'Связь удалена.');

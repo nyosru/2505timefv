@@ -17,6 +17,7 @@ class AdminForm extends Component
 
     public $title;
     public $event_date;
+    public $event;
 
     public $country_id;
     public $city_id;
@@ -53,7 +54,14 @@ class AdminForm extends Component
         $this->id = $id;
 
         if ($id) {
-            $event = Event::findOrFail($id);
+
+            $event = Event::with([
+                'groupsNagrada' => function ($query) {
+                    $query->with(['athletes' => function ($query) {
+                        $query->orderByRaw('place IS NULL, place ASC');
+                    }]);
+                },
+            ])->findOrFail($id);
 
             $this->title = $event->title;
             $this->event_date = $event->event_date->format('Y-m-d');

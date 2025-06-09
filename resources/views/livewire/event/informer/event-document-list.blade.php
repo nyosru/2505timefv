@@ -25,8 +25,6 @@
 //                    dump($ext);
                     $filename = '/file-icon/48px/' . $ext . '.png';
                 @endphp
-
-
                 {{--                                <div class="flex-1">--}}
                 <a href="{{ Storage::url($attachment->url) }}"
                    class="block hover:bg-gray-100 p-2"

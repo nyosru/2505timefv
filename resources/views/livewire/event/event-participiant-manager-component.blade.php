@@ -1,7 +1,6 @@
 <div class="w-full p-6" x-data="{ open: false }">
 
 
-
     <h2 class="text-xl font-semibold mb-4">
         <!-- Кнопка "+" справа сверху -->
         <button
@@ -42,6 +41,10 @@
                 @error('eventId') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
         @endif
+
+{{--        <pre>{{ print_r($events[0]->participants->toArray(),1) }}</pre>--}}
+{{--        <pre class="text-xs max-h-[200px] overflow-y-auto">{{ print_r($events[0]->participants->toArray(),1) }}</pre>--}}
+{{--        <pre class="text-xs max-h-[200px] overflow-y-auto">{{ print_r($athletes->toArray(),1) }}</pre>--}}
 
         @if($eventId)
             <!-- Выбор спортсмена -->
@@ -104,7 +107,8 @@
     <!-- Список уже привязанных -->
     {{--        <h3 class="mt-8 mb-4 text-xl font-semibold">Уже привязанные спортсмены</h3>--}}
 
-    {{--    <pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($events->toArray(),1) }}</pre>--}}
+    {{--        <pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($events->toArray(),1) }}</pre>--}}
+    {{--        <pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($events[0]->groupsNagrada->toArray(),1) }}</pre>--}}
 
     @if($participants->isEmpty())
         <p class="text-gray-600">Пока нет привязанных спортсменов.</p>
@@ -115,44 +119,26 @@
         @endphp
 
         <ul class="space-y-2">
-            @foreach($participants as $participant)
+            {{--            @foreach($events[0]->groupsNagrada->athletes as $participant)--}}
+            @foreach($events[0]->groupsNagrada as $group )
 
-{{--                <li>--}}
-{{--                    <pre>{{ print_r($participant->toArray(),1) }}</pre>--}}
-{{--                </li>--}}
-
-                @if( empty($participant->eventGroupNagrada->name) )
+                @if( $group->athletes->count() == 0  )
                     @continue
                 @endif
 
-{{--            <pre>{{$participant->event_group_nagrada_id}}</pre>--}}
-
-                @if( !empty($participant->event_group_nagrada_id) && $participant->event_group_nagrada_id != $previousGroupNagrada)
-
-                    <li class="bg-gray-300">
-                        {{$participant->eventGroupNagrada->name}}
-                    </li>
-                    @php
-                        $previousGroupNagrada = $participant->event_group_nagrada_id;
-                    @endphp
-{{--                @elseif( !empty($participant->event_group_nagrada_id) && $participant->event_group_nagrada_id == $previousGroupNagrada)--}}
-                @endif
-
-                <livewire:event.event-participiant-item :participant="$participant" :key="'parcipant-'.$participant->id" />
-
-            @endforeach
-
                 <li class="bg-gray-300">
-                    без групп
+                    {{$group->name}}
                 </li>
-
-                @foreach($participants as $participant)
-
-                    @if( empty($participant->eventGroupNagrada->name) )
-                <livewire:event.event-participiant-item :participant="$participant" :key="'parcipant-'.$participant->id" />
-                    @endif
-
+                {{--            <li><pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($group->toArray(),1) }}</pre></li>--}}
+                @foreach($group->athletes as $participant )
+{{--                    <li><pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($participant->toArray(),1) }}</pre></li>--}}
+                    <livewire:event.event-participiant-item
+                        :participant="$participant"
+                        :eventId="$eventId"
+                        :key="'parcipant-'.$participant->id"/>
+                @endforeach
             @endforeach
+
         </ul>
     @endif
     @endif

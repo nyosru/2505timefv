@@ -7,11 +7,11 @@
 py-1">
     @if($show)
         <span>
-                    @if(!empty($participant->place))
-                ({{ $participant->place ?? '-' }})
+                    @if(!empty($participant->pivot->place))
+                ({{ $participant->pivot->place ?? '-' }})
             @endif
-            {{ $participant->athlete->last_name ?? '' }}
-            {{ $participant->athlete->first_name ?? ''}}
+            {{ $participant->last_name ?? '' }}
+            {{ $participant->first_name ?? ''}}
                 </span>
         <button
                 wire:click="removeParticipant({{ $participant->id }})"
