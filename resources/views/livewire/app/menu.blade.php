@@ -226,7 +226,17 @@
             <livewire:app.menuItem label="Спортсмены Админ" routeName="admin.athletes"/>
             <livewire:app.menuItem label="Спортсмены Админ Добавить" routeName="admin.athletes.form"/>
 
-            <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager" />
+     @if(Route::has('admin.guest.manager'))
+    <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager" />
+@endif
+
+
+
+
+
+
+
+
             <livewire:app.menuItem label="Спонсоры Админ" routeName="admin.sponsor.manager" />
 
             @if(2==3)
