@@ -223,20 +223,11 @@
                 </li>
             @endif
 
-
-
             <livewire:app.menuItem label="Спортсмены Админ" routeName="admin.athletes"/>
             <livewire:app.menuItem label="Спортсмены Админ Добавить" routeName="admin.athletes.form"/>
 
-
-            @permission('р.Гости')
             <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager"/>
-            @endpermission
-
-            @permission('р.Спонсоры')
             <livewire:app.menuItem label="Спонсоры Админ" routeName="admin.sponsor.manager"/>
-            @endpermission
-
 
             @if(2==3)
                 <li class="w-full">
