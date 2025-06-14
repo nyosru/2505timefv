@@ -3,7 +3,11 @@
     <h2 class="text-2xl font-bold mb-6">Гости</h2>
 
     @if(session()->has('success'))
-        <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+        <div class="mb-4 p-3 bg-green-100 text-green-800 rounded"
+             x-data="{ show3: true }"
+             x-show="show3"
+             x-init="setTimeout(() => show3 = false, 3000)"
+        >
             {{ session('success') }}
         </div>
     @endif

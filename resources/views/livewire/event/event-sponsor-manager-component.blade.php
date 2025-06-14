@@ -4,7 +4,11 @@
     <h3 class="mt-8 mb-4 text-xl font-semibold">Спонсоры мероприятия</h3>
 
     @if(session()->has('success'))
-        <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+        <div class="mb-4 p-3 bg-green-100 text-green-800 rounded"
+             x-data="{ show3: true }"
+             x-show="show3"
+             x-init="setTimeout(() => show3 = false, 3000)"
+        >
             {{ session('success') }}
         </div>
     @endif

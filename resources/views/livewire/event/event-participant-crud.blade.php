@@ -2,7 +2,11 @@
     <h2 class="text-2xl font-bold mb-4">Управление участниками мероприятий</h2>
 
     @if (session()->has('message'))
-        <div class="mb-4 p-3 bg-green-200 text-green-800 rounded">
+        <div class="mb-4 p-3 bg-green-200 text-green-800 rounded"
+             x-data="{ show: true }"
+             x-show="show"
+             x-init="setTimeout(() => show = false, 3000)"
+        >
             {{ session('message') }}
         </div>
     @endif
