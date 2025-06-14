@@ -2,7 +2,7 @@
 
     <div class=" text-lg border-b ">
         {{--                    <div class="inline float-right">1 2 3</div>--}}
-        <span class="font-bold">Файлы</span>
+        <span class="text-center md:text-left font-bold">Файлы</span>
     </div>
 
     {{--    <pre class="text-xs" >{{ print_r($files->toArray()) }}</pre>--}}
