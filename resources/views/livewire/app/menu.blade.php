@@ -4,6 +4,7 @@ md:block md:w-[200px]">
     <div class="flex flex-col space-y-1">
         {{--        <b>Норм меню</b>--}}
         <ul>
+
             <li class="w-full">
                 <a href="{{ route('news') }}"
                    wire:navigate

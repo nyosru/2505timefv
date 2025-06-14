@@ -77,10 +77,12 @@
                             </svg>
                         </button>
 
-                        @if(1==2)
+                        @if(1==1)
                         <!-- Закрыть -->
                         <button
-                                class="absolute top-2 right-2 text-gray-700 hover:text-red-600"
+                                class="absolute top-2 right-2
+                                bg-white/50
+                                text-gray-700 hover:text-red-600"
                                 @click="open = false"
                         >
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
