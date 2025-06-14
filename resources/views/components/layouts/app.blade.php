@@ -43,7 +43,7 @@
 
 {{--            <livewire:informer/>--}}
 
-            <div class="flex flex-row px-5 sm:p-0 sm:space-x-5">
+            <div class="flex flex-col md:flex-row px-5 sm:p-0 sm:space-x-5">
                 {{--                @if (Route::is('tech*')--}}
                 {{--                    || Route::is('lk*')--}}
                 {{--                    || Route::is('board*')--}}
