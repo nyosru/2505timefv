@@ -11,7 +11,10 @@
 
     @if( count($photos) > 0 )
         <section x-data="photoViewer()" x-init="init()" class="relative">
-            <h2 class="text-xl font-semibold mb-4 sticky top-[76px] bg-white/80 z-10 py-4">Фото</h2>
+
+            <h2 class="text-xl font-semibold
+            text-center md:text-left
+            mb-4 sticky top-[76px] bg-white/80 z-10 py-4">Фото</h2>
 
             <div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
@@ -37,7 +40,13 @@
                         @touchmove.prevent="touchMove($event)"
                         @touchend="touchEnd()"
                 >
-                    <div class="relative bg-white rounded-lg shadow-lg p-4 max-w-[75%] w-full flex flex-col items-center">
+                    <div class="relative
+{{--                    bg-white rounded-lg shadow-lg--}}
+{{--                    p-4--}}
+                    max-w-[100%]
+                    max-h-[100%]
+                    w-full
+                    flex flex-col items-center">
                         <!-- Картинка -->
                         <img
                                 :src="photos[current]"
@@ -68,6 +77,7 @@
                             </svg>
                         </button>
 
+                        @if(1==2)
                         <!-- Закрыть -->
                         <button
                                 class="absolute top-2 right-2 text-gray-700 hover:text-red-600"
@@ -78,6 +88,8 @@
                                       d="M6 18L18 6M6 6l12 12"/>
                             </svg>
                         </button>
+                        @endif
+
                     </div>
                 </div>
             </div>

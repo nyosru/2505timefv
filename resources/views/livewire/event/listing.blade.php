@@ -16,7 +16,9 @@
     />
 
 
-    <h2 class="text-2xl font-bold mb-4">События Мероприятия</h2>
+    <h2 class="
+    text-center md:text-left
+    text-2xl font-bold mb-4">События Мероприятия</h2>
 
     <div class="my-4">
         {{ $events->links('vendor.pagination.my1tailwind') }}

@@ -17,7 +17,8 @@
 
     <div id="event-details-container" class="
 {{--    max-w-7xl mx-auto --}}
-    p-6 bg-white rounded-lg shadow-lg ">
+    sm:p-6 bg-white sm:rounded-lg sm:shadow-lg
+    ">
 
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Левая часть: изображение и основная информация -->
@@ -37,7 +38,9 @@
             <!-- Правая часть: медиа и дополнительные секции -->
             <div class="md:w-2/3 flex flex-col gap-8">
 
-                <h1 class="text-3xl font-bold mt-6 mb-4">{{ $event->title ?? '-' }}</h1>
+                <h1 class="
+                text-center md:text-left
+                text-3xl font-bold mt-6 mb-4">{{ $event->title ?? '-' }}</h1>
 
 
                 <div class="space-y-3 text-gray-700">
