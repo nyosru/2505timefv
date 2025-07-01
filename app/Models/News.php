@@ -16,6 +16,7 @@ class News extends Model
         'full_text',
         'event_id',
         'athlete_id',
+        'user_autor_id',
         'photo'
     ];
     protected $casts = [
@@ -30,6 +31,11 @@ class News extends Model
     public function athlete()
     {
         return $this->belongsTo(Athlete::class);
+    }
+
+    public function userAutor()
+    {
+        return $this->belongsTo(User::class, 'user_autor_id');
     }
 
 }

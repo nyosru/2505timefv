@@ -114,6 +114,8 @@ class AdminForm extends Component
             'other_fields' => $this->only(['title', 'date'])
         ]);
 
+        $user = Auth()->user();
+
         $data = [
             'title' => $this->title,
             'date' => $this->date,
@@ -121,6 +123,7 @@ class AdminForm extends Component
             'full_text' => $this->full_text,
             'event_id' => $this->event_id,
             'athlete_id' => $this->athlete_id,
+            'user_autor_id' => $user->id,
         ];
 
         if ($this->photo) {

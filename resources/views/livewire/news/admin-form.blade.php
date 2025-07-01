@@ -84,7 +84,9 @@
 {{--            <input id="x" type="hidden" name="content" wire:model.defer="full_text">--}}
 {{--            <trix-editor input="x"></trix-editor>--}}
 
-            <textarea wire:model="full_text" name="full_text" ></textarea>
+            <textarea wire:model="full_text" name="full_text"
+                style="height: 300px; width: 100%;"
+                ></textarea>
 {{--            <input id="x" type="hidden" wire:model="full_text" name="full_text" >--}}
 {{--            <trix-editor--}}
 {{--                    input="x"--}}

@@ -3,6 +3,8 @@
 namespace App\Livewire\News;
 
 use App\Models\News;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -104,8 +106,26 @@ class Admin extends Component
 
     public function render()
     {
-        $news = News::when($this->search, fn($q) => $q->where('title', 'like', '%'.$this->search.'%'))
-            ->orderByDesc('date')
+        $qq = News::when($this->search, fn($q) => $q->where('title', 'like', '%'.$this->search.'%'));
+
+
+
+        $user = auth()->user();
+        $permissionName = 'р.НовостиАдмин (только свои) / в админке только свои записи';
+
+// Проверяем, есть ли у пользователя это разрешение через роли
+        if ($user->hasPermissionTo($permissionName)) {
+            // Пользователь имеет разрешение через одну из своих ролей
+//            dd(__LINE__);
+            $qq->where('user_autor_id', $user->id);
+        }
+//        else {
+//            dd(__LINE__);
+////            abort(403, 'Доступ запрещён');
+//        }
+
+
+        $news = $qq->orderByDesc('date')
             ->paginate($this->perPage);
 
         return view('livewire.news.admin', compact('news'));

@@ -3,6 +3,7 @@
 namespace App\Livewire\News;
 
 use App\Models\News;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -23,6 +24,13 @@ class Listing extends Component
 
     public function render()
     {
+
+//        $user = User::with([
+//            'roles',
+//            'roles.permissions'
+//        ])->get();
+
+
         $news = News::query()
             ->when($this->selectedEvent, fn($q) => $q->where('event_id', $this->selectedEvent))
             ->when($this->selectedAthlete, fn($q) => $q->where('athlete_id', $this->selectedAthlete))
@@ -36,6 +44,7 @@ class Listing extends Component
             'news' => $news,
             'events' => $events,
             'athletes' => $athletes,
+//            'user' => $user,
         ]);
     }
 

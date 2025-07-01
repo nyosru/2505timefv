@@ -1,5 +1,7 @@
 <div>
 
+{{--    <pre class="text-xs">{{ print_r($user->toArray(),1) }}</pre>--}}
+
     <!-- Пагинация сверху -->
     <div class="mt-4">
         {{ $news->links('vendor.pagination.my1tailwind') }}

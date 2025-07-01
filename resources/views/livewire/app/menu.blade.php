@@ -56,8 +56,10 @@ md:block md:w-[200px]">
 
         </ul>
 
+{{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
 
         @permission('р.Техничка')
+        <h2>Админ Меню</h2>
         <ul>
 
             <li class="w-full bg-gray-300 py-1 px-2">
