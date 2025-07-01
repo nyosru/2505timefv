@@ -1,9 +1,26 @@
 <div>
 
-    <button class="back-button" onclick="history.back()">
-        <i class="fa-solid fa-arrow-left"></i>
-        Назад
-    </button>
+
+    <livewire:cms2.app.breadcrumb
+            {{--            :board_id="$leed->column->board_id"--}}
+            {{--            :board_id=""--}}
+            :menu="[
+                    ['route'=>'news','name'=>'Новости', 'route-var' => [] ]
+{{--                    ,--}}
+{{--                    ['route'=>'events.show','name'=>( strlen($event->title) > 50 ? substr($event->title, 0, 50) . '...' : ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ] ]--}}
+{{--                    [--}}
+{{--                        'route'=>'leed',--}}
+{{--                        'name'=>( $leed->column->board->name ?? 'x' )--}}
+{{--                    ],--}}
+{{--                     [ 'link' => 'no', 'name'=> ( ($leed->name ?? '-') ) ]--}}
+                 ]"
+    />
+
+
+{{--    <button class="back-button" onclick="history.back()">--}}
+{{--        <i class="fa-solid fa-arrow-left"></i>--}}
+{{--        Назад--}}
+{{--    </button>--}}
 
     <div>
 

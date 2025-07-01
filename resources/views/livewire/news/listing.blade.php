@@ -2,6 +2,23 @@
 
 {{--    <pre class="text-xs">{{ print_r($user->toArray(),1) }}</pre>--}}
 
+
+    <livewire:cms2.app.breadcrumb
+            {{--            :board_id="$leed->column->board_id"--}}
+            {{--            :board_id=""--}}
+            :menu="[
+                    ['route'=>'news','name'=>'Новости', 'route-var' => [] ]
+{{--                    ,--}}
+{{--                    ['route'=>'events.show','name'=>( strlen($event->title) > 50 ? substr($event->title, 0, 50) . '...' : ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ] ]--}}
+{{--                    [--}}
+{{--                        'route'=>'leed',--}}
+{{--                        'name'=>( $leed->column->board->name ?? 'x' )--}}
+{{--                    ],--}}
+{{--                     [ 'link' => 'no', 'name'=> ( ($leed->name ?? '-') ) ]--}}
+                 ]"
+    />
+
+
     <!-- Пагинация сверху -->
     <div class="mt-4">
         {{ $news->links('vendor.pagination.my1tailwind') }}
