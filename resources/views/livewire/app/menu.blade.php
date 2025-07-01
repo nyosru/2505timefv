@@ -25,6 +25,7 @@
 {{--                md:hidden--}}
                 md:static md:flex
                 md:bg-transparent md:shadow-none
+                max-h-[70vh]
                 "
                 >
                 <li class="w-full">
