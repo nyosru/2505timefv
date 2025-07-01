@@ -76,13 +76,14 @@
                     </a>
                 </li>
 
-            </ul>
 
     {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
 
             @permission('р.Техничка')
+                <li>
             <h2>Админ Меню</h2>
-            <ul>
+                </li>
+
 
                 <li class="w-full bg-gray-300 py-1 px-2">
                     @if(1==2)
@@ -723,9 +724,12 @@
                         </li>
                     @endif
                 @endif
-            </ul>
+
 
             @endpermission
+
+
+            </ul>
 
         </div>
     </div>
