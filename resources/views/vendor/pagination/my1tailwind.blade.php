@@ -1,11 +1,19 @@
 @if ($paginator->hasPages())
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
-        <div class="flex justify-between flex-1 sm:hidden">
+        <div class="flex justify-between flex-1 sm:hidden mb-4">
 
             @if ($paginator->onFirstPage())
-                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600">
+                <span>&nbsp;</span>
+                @if(1==2)
+                <span class="relative inline-flex items-center px-4 py-2
+                text-sm font-medium text-gray-500
+                bg-white border border-gray-300 cursor-default leading-5 rounded-md
+                    dark:text-gray-600 dark:bg-gray-300
+                    dark:border-gray-300
+                    ">
                     {!! __('pagination.previous') !!}
                 </span>
+                    @endif
             @else
                 <a href="{{ $paginator->previousPageUrl() }}"
 
@@ -13,15 +21,26 @@
                    px-4 py-2 text-sm font-medium
                    text-gray-700 bg-white border border-gray-300
 
-                   leading-5 rounded-md hover:text-gray-500
+                   leading-5 rounded-md
+
+                   hover:text-gray-500
+
                    focus:outline-none focus:ring ring-gray-300
-                   focus:border-blue-300 active:bg-gray-100
+                   focus:border-blue-300
+
+                   active:bg-gray-100
                    active:text-gray-700 transition ease-in-out duration-150
 
-                   dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300
+                   dark:bg-gray-400
+                   dark:hover:bg-gray-500
 
-                   dark:focus:border-blue-700 dark:active:bg-gray-700
-                   dark:active:text-gray-300
+                   dark:border-gray-600
+                   dark:text-gray-600
+                   dark:hover:text-gray-200
+
+                   dark:focus:border-blue-700
+                   dark:active:bg-gray-600
+                   dark:active:text-gray-600
 
                    ">
                     {!! __('pagination.previous') !!}
@@ -30,17 +49,73 @@
 
             @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() }}"
-                   class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
+                   class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white
+                   border border-gray-300 leading-5 rounded-md
+                   hover:text-gray-500 focus:outline-none focus:ring ring-gray-300
+                   focus:border-blue-300 active:bg-gray-100 active:text-gray-700
+                   transition ease-in-out duration-150
+{{--                   dark:bg-gray-800 --}}
+{{--                   dark:border-gray-600 dark:text-gray-300 --}}
+{{--                   dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300--}}
+
+
+                   hover:text-gray-500
+
+                   focus:outline-none focus:ring ring-gray-300
+                   focus:border-blue-300
+
+                   active:bg-gray-100
+                   active:text-gray-700 transition ease-in-out duration-150
+
+                   dark:bg-gray-400
+                   dark:hover:bg-gray-500
+
+                   dark:border-gray-600
+                   dark:text-gray-600
+                   dark:hover:text-gray-200
+
+                   dark:focus:border-blue-700
+                   dark:active:bg-gray-600
+                   dark:active:text-gray-600
+
+                   ">
                     {!! __('pagination.next') !!}
                 </a>
             @else
-                <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600">
+                @if(1==2)
+                <span class="hidden relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium
+                text-gray-500
+                bg-white border border-gray-300 cursor-default leading-5 rounded-md
+{{--                dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600--}}
+
+
+                   hover:text-gray-500
+
+                   focus:outline-none focus:ring ring-gray-300
+                   focus:border-blue-300
+
+                   active:bg-gray-100
+                   active:text-gray-700 transition ease-in-out duration-150
+
+                   dark:bg-gray-400
+                   dark:hover:bg-gray-500
+
+                   dark:border-gray-600
+                   dark:text-gray-600
+                   dark:hover:text-gray-200
+
+                   dark:focus:border-blue-700
+                   dark:active:bg-gray-600
+                   dark:active:text-gray-600
+
+                ">
                     {!! __('pagination.next') !!}
                 </span>
             @endif
+            @endif
         </div>
 
-        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between my-2">
             <div>
                 <p class="text-sm text-gray-700 leading-5 dark:text-gray-400">
                     {{--                    {!! __('Showing') !!}--}}

@@ -1,3 +1,4 @@
 import './bootstrap';
 
-import "trix";
+// import "trix";
+

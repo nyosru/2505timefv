@@ -29,6 +29,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+
+
 </head>
 <body class="antialiased font-sans bg-gray-100 min-h-screen">
 <div class=" ">
