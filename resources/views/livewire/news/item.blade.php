@@ -6,13 +6,14 @@
             {{--            :board_id=""--}}
             :menu="[
                     ['route'=>'news','name'=>'Новости', 'route-var' => [] ]
-{{--                    ,--}}
+                    ,
 {{--                    ['route'=>'events.show','name'=>( strlen($event->title) > 50 ? substr($event->title, 0, 50) . '...' : ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ] ]--}}
 {{--                    [--}}
 {{--                        'route'=>'leed',--}}
 {{--                        'name'=>( $leed->column->board->name ?? 'x' )--}}
+
 {{--                    ],--}}
-{{--                     [ 'link' => 'no', 'name'=> ( ($leed->name ?? '-') ) ]--}}
+                     [ 'link' => 'no', 'name'=> ( ($news->title ?? '-') ) ]
                  ]"
     />
 
@@ -45,6 +46,14 @@
             <a href="{{ route('news') }}" class="text-blue-600 hover:underline">&larr; К списку новостей</a>
         </div>
     </div>
+
+
+
+
+
+
+
+
 @if(1==2)
     <div class="container" id="newsDetailContainer">
 

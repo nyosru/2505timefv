@@ -27,7 +27,18 @@
     <!-- Фильтры -->
     <div class="">
 
-        <div class="mb-6 flex gap-4 items-center">
+        <div class="mb-6 flex flex-wrap gap-4 items-center">
+
+
+            <select wire:model="sortDirection"
+                    wire:change="resetPage"  class="
+                    border-none
+{{--                    border p-2 rounded--}}
+                    ">
+                <option value="desc">&#9650; сначала новые</option>
+                <option value="asc">&#9660; сначала старые</option>
+            </select>
+
 
             <select wire:model.live="selectedEvent" class="border p-2 rounded">
                 <option value="">Все события</option>
@@ -41,12 +52,6 @@
                 @foreach($athletes as $athleteId)
                     <option value="{{ $athleteId }}">Спортсмен #{{ $athleteId }}</option>
                 @endforeach
-            </select>
-
-            <select wire:model="sortDirection"
-                    wire:change="resetPage"  class="border p-2 rounded">
-                <option value="desc">сначала новые</option>
-                <option value="asc">сначала старые</option>
             </select>
 
         </div>
