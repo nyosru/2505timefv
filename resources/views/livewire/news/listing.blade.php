@@ -19,11 +19,6 @@
     />
 
 
-    <!-- Пагинация сверху -->
-    <div class="mt-4">
-        {{ $news->links('vendor.pagination.my1tailwind') }}
-    </div>
-
     <!-- Фильтры -->
     <div class="">
 
@@ -40,14 +35,22 @@
             </select>
 
 
-            <select wire:model.live="selectedEvent" class="border p-2 rounded">
+            <select
+                    {{--                    wire:model.live="selectedEvent" --}}
+                    wire:model="selectedEvent"
+                    wire:change="resetPage"
+                    class="border p-2 rounded">
                 <option value="">Все события</option>
                 @foreach($events as $eventId)
                     <option value="{{ $eventId }}">Событие #{{ $eventId }}</option>
                 @endforeach
             </select>
 
-            <select wire:model.live="selectedAthlete" class="border p-2 rounded">
+            <select
+                    {{--                    wire:model.live="selectedAthlete" --}}
+                    wire:model="selectedAthlete"
+                    wire:change="resetPage"
+                    class="border p-2 rounded">
                 <option value="">Все спортсмены</option>
                 @foreach($athletes as $athleteId)
                     <option value="{{ $athleteId }}">Спортсмен #{{ $athleteId }}</option>
@@ -55,6 +58,20 @@
             </select>
 
         </div>
+    </div>
+
+
+
+    <!-- Пагинация сверху -->
+    <div class="mt-4">
+        {{ $news->links('vendor.pagination.my1tailwind'
+//, [
+//        'sortDirection' => $sortDirection,
+//        'selectedEvent' => $selectedEvent,
+//        'selectedAthlete' => $selectedAthlete,
+//]
+)
+}}
     </div>
 
     <!-- Список новостей -->

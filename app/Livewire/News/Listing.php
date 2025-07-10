@@ -35,7 +35,9 @@ class Listing extends Component
             ->when($this->selectedEvent, fn($q) => $q->where('event_id', $this->selectedEvent))
             ->when($this->selectedAthlete, fn($q) => $q->where('athlete_id', $this->selectedAthlete))
             ->orderBy('date', $this->sortDirection)
-            ->paginate($this->perPage);
+            ->paginate($this->perPage)
+            ->withQueryString()
+        ;
 
         $events = News::distinct()->whereNotNull('event_id')->pluck('event_id');
         $athletes = News::distinct()->whereNotNull('athlete_id')->pluck('athlete_id');
@@ -52,15 +54,30 @@ class Listing extends Component
     {
         $this->sortDirection = $this->sortDirection === 'desc' ? 'asc' : 'desc';
         $this->resetPage();
+//        $this->goToNewsList();
     }
 
     public function updatedSelectedEvent()
     {
         $this->resetPage();
+//        $this->goToNewsList();
     }
 
     public function updatedSelectedAthlete()
     {
         $this->resetPage();
+//        $this->goToNewsList();
     }
+
+//    public function goToNewsList()
+//    {
+//        return redirect()->route('news', [
+//            'page' => 1,
+//            'sortDirection' => $this->sortDirection,
+//            'selectedEvent' => $this->selectedEvent,
+////    public $selectedEvent = '';
+//            'selectedAthlete' => $this->selectedAthlete,
+////    public $selectedAthlete = '';
+//        ]);
+//    }
 }
