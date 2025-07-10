@@ -6,8 +6,8 @@
     ">
         <!-- Кнопка-гамбургер -->
         <button id="menu-toggle"
-{{--                class="md:hidden flex flex-col justify-center items-center w-10 h-10"--}}
-            class="fixed top-2 left-2 z-50 md:hidden flex flex-col justify-center items-center w-10 h-10 bg-white rounded shadow"
+                {{--                class="md:hidden flex flex-col justify-center items-center w-10 h-10"--}}
+                class="fixed top-2 left-2 z-50 md:hidden flex flex-col justify-center items-center w-10 h-10 bg-white rounded shadow"
                 aria-label="Открыть меню">
             <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
@@ -20,14 +20,15 @@
     text-gray-600 md:block md:w-[200px]">
         <div class="flex flex-col space-y-1">
             <ul id="mobile-menu"
-{{--                class="hidden w-full bg-white shadow-md flex-col md:static md:flex md:flex-col md:shadow-none"--}}
-                class="hidden fixed top-14 left-2 right-2 bg-white shadow-lg rounded z-40 flex flex-col space-y-2 p-4
+                {{--                class="hidden w-full bg-white shadow-md flex-col md:static md:flex md:flex-col md:shadow-none"--}}
+                class="hidden fixed top-14 left-2 right-2 bg-white shadow-lg rounded z-40 flex flex-col space-y-0 p-2
 {{--                md:hidden--}}
                 md:static md:flex
                 md:bg-transparent md:shadow-none
                 max-h-[70vh] overflow-y-auto
+                md:max-h-[100vh] md:overflow-none
                 "
-                >
+            >
                 <li class="w-full">
                     <a href="{{ route('news') }}"
                        wire:navigate
@@ -78,11 +79,13 @@
                 </li>
 
 
-    {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
+                {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
 
-            @permission('р.Техничка')
+
+                @permission('р.Техничка')
+
                 <li>
-            <h2>Админ Меню</h2>
+                    <h2>Админ Меню</h2>
                 </li>
 
 
@@ -296,9 +299,9 @@
                 <livewire:app.menuItem label="Города" routeName="admin.cities"/>
                 @endpermission
 
-{{--                @permission('р.Место проведения')--}}
+                @permission('р.Место проведения')
                 <livewire:app.menuItem label="Место проведения" routeName="admin.sport-places"/>
-{{--                @endpermission--}}
+                @endpermission
 
 
                 @if(2==3)
@@ -727,7 +730,7 @@
                 @endif
 
 
-            @endpermission
+                @endpermission
 
 
             </ul>
