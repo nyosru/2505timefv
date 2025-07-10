@@ -296,9 +296,9 @@
                 <livewire:app.menuItem label="Города" routeName="admin.cities"/>
                 @endpermission
 
-                @permission('р.Место проведения')
+{{--                @permission('р.Место проведения')--}}
                 <livewire:app.menuItem label="Место проведения" routeName="admin.sport-places"/>
-                @endpermission
+{{--                @endpermission--}}
 
 
                 @if(2==3)
