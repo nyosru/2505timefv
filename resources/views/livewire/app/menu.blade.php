@@ -26,7 +26,7 @@
                 md:static md:flex
                 md:bg-transparent md:shadow-none
                 max-h-[70vh] overflow-y-auto
-                md:max-h-[100vh] md:overflow-none
+                md:max-h-[9999px] md:overflow-none
                 "
             >
                 <li class="w-full">
