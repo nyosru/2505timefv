@@ -19,8 +19,6 @@ class Event extends Model
         'description',
         'photo',
 
-        'sport_type_id',
-
         'country_id',
         'city_id',
         'sport_place_id',
@@ -32,11 +30,6 @@ class Event extends Model
         'events_date_finished' => 'date',
     ];
 
-    // Связь с видом спорта
-    public function sportType()
-    {
-        return $this->belongsTo(SportType::class);
-    }
 
     /**
      * Связь с моделью SportPlace (спортивное место)
@@ -129,6 +122,13 @@ class Event extends Model
     public function news()
     {
         return $this->hasMany(News::class);
+    }
+    /**
+     * Виды спорта, связанные с мероприятием
+     */
+    public function sportTypes()
+    {
+        return $this->belongsToMany(SportType::class, 'event_sport_type');
     }
 
 }

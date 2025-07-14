@@ -32,6 +32,8 @@ class AdminForm extends Component
     public $cities = [];
     public $venues = [];
 
+    public $sport_type_ids = [];
+
     protected function rules()
     {
         return [
@@ -40,7 +42,10 @@ class AdminForm extends Component
 
             'country_id' => 'required|exists:countries,id',
             'city_id' => 'required|exists:cities,id',
-            'sport_place_id' => 'required|exists:sport_places,id',
+//            'sport_place_id' => 'required|exists:sport_places,id',
+
+            'sport_type_ids' => 'nullable|array',
+            'sport_type_ids.*' => 'integer|exists:sport_types,id',
 
             'description' => 'nullable|string',
 //            'photo' => 'nullable|image|max:2048',
@@ -55,13 +60,18 @@ class AdminForm extends Component
 
         if ($id) {
 
-            $event = Event::with([
-                'groupsNagrada' => function ($query) {
-                    $query->with(['athletes' => function ($query) {
-                        $query->orderByRaw('place IS NULL, place ASC');
-                    }]);
-                },
-            ])->findOrFail($id);
+            $event = Event::
+//            with([
+//                'groupsNagrada' => function ($query) {
+//                    $query->with(['athletes' => function ($query) {
+//                        $query->orderByRaw('place IS NULL, place ASC');
+//                    }]);
+//                },
+//            ])
+            with(['groupsNagrada.athletes', 'sportTypes'])
+                ->findOrFail($id);
+
+            $this->sport_type_ids = $event->sportTypes->pluck('id')->toArray();
 
             $this->title = $event->title;
             $this->event_date = $event->event_date->format('Y-m-d');
@@ -155,8 +165,10 @@ class AdminForm extends Component
         if ($this->id) {
             $event = Event::findOrFail($this->id);
             $event->update($data);
+            $event->sportTypes()->sync($this->sport_type_ids);
         } else {
-            Event::create($data);
+            $event = Event::create($data);
+            $event->sportTypes()->sync($this->sport_type_ids);
         }
 
         session()->flash('success', 'Мероприятие успешно сохранено.');

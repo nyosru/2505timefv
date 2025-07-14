@@ -114,6 +114,19 @@
                     @endif
                 </div>
 
+
+
+
+
+
+                <!-- Кнопки -->
+
+
+
+
+
+
+
                 <!-- Кнопки -->
                 <div class="flex justify-between items-center mt-6">
                     <a href="{{ route('admin.events') }}"
@@ -139,6 +152,32 @@
                 </div>
 
             @endif
+
+
+                <!-- Виды спорта -->
+                <div class="my-4 w-full">
+                    <label class="block font-semibold mb-1">Виды спорта *</label>
+                    <div class="flex flex-wrap
+{{--                        gap-4 --}}
+{{--                        gap-1--}}
+                        max-h-[138px] overflow-auto
+                        border border-blue-300 border-1
+                        rounded p-2
+                        ">
+                        @foreach(\App\Models\SportType::orderBy('name')->get() as $sportType)
+                            <label class="inline-flex items-center space-x-2 bg-blue-100 p-1 mr-1 mb-1">
+                                <input type="checkbox" wire:model="sport_type_ids" value="{{ $sportType->id }}" class="form-checkbox" />
+                                <span>{{ $sportType->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('sport_type_ids') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
+
+
+
+
+
         </div>
     </div>
     <div class="flex flex-wrap flex-row">
