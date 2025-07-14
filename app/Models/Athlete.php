@@ -43,4 +43,12 @@ class Athlete extends Model
             ->withTimestamps();
     }
 
+    /**
+     * Новости, связанные с этим спортсменом
+     */
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
 }

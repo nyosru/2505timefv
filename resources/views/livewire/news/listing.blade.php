@@ -1,6 +1,6 @@
 <div>
 
-{{--    <pre class="text-xs">{{ print_r($user->toArray(),1) }}</pre>--}}
+    {{--    <pre class="text-xs">{{ print_r($user->toArray(),1) }}</pre>--}}
 
 
     <livewire:cms2.app.breadcrumb
@@ -26,7 +26,7 @@
 
 
             <select wire:model="sortDirection"
-                    wire:change="resetPage"  class="
+                    wire:change="resetPage" class="
                     border-none
 {{--                    border p-2 rounded--}}
                     ">
@@ -34,32 +34,43 @@
                 <option value="asc">&#9660; сначала старые</option>
             </select>
 
-
-            <select
-                    {{--                    wire:model.live="selectedEvent" --}}
-                    wire:model="selectedEvent"
-                    wire:change="resetPage"
-                    class="border p-2 rounded">
-                <option value="">Все события</option>
-                @foreach($events as $eventId)
-                    <option value="{{ $eventId }}">Событие #{{ $eventId }}</option>
-                @endforeach
-            </select>
-
-            <select
-                    {{--                    wire:model.live="selectedAthlete" --}}
-                    wire:model="selectedAthlete"
-                    wire:change="resetPage"
-                    class="border p-2 rounded">
-                <option value="">Все спортсмены</option>
-                @foreach($athletes as $athleteId)
-                    <option value="{{ $athleteId }}">Спортсмен #{{ $athleteId }}</option>
-                @endforeach
-            </select>
+            @if($events->count())
+                <select
+                        {{--                    wire:model.live="selectedEvent" --}}
+                        wire:model.live="selectedEvent"
+{{--                        wire:change="resetPage"--}}
+                        class="border p-2 rounded">
+                    <option value="">События</option>
+                    @foreach($events as $id => $name)
+                        <option value="{{ $id }}">Событие {{ $name }}</option>
+                    @endforeach
+                </select>
+            @endif
+            @if($athletes->count())
+                <select
+                        {{--                    wire:model.live="selectedAthlete" --}}
+                        wire:model.live="selectedAthlete"
+{{--                        wire:change="resetPage"--}}
+                        class="border p-2 rounded">
+                    <option value="">Спортсмены</option>
+                    @foreach($athletes as $id => $name)
+                        <option value="{{ $id }}">атлет {{ $name }}</option>
+                    @endforeach
+                </select>
+            @endif
+            @if($sport_types->count())
+                <select wire:model.live="selectedSportType"
+{{--                        wire:change="resetPage"--}}
+                        class="border p-2 rounded">
+                    <option value="">Все виды спорта</option>
+                    @foreach($sport_types as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            @endif
 
         </div>
     </div>
-
 
 
     <!-- Пагинация сверху -->

@@ -123,4 +123,12 @@ class Event extends Model
         return $this->hasMany(EventGroupNagrada::class);
     }
 
+    /**
+     * Новости, связанные с этим спортсменом
+     */
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
 }

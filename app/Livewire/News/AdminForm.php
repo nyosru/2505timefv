@@ -63,7 +63,6 @@ class AdminForm extends Component
             $this->editMode = false;
         }
 
-
     }
 
     protected function rules()
@@ -82,10 +81,7 @@ class AdminForm extends Component
 
             'photo' => 'nullable|image',
         ];
-
-
     }
-
 
     public function create()
     {

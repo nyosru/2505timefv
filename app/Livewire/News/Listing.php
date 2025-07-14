@@ -15,11 +15,19 @@ class Listing extends Component
     public $sortDirection = 'desc'; // 'desc' — сначала новые, 'asc' — сначала старые
     public $selectedEvent = '';
     public $selectedAthlete = '';
+    public $selectedSportType = '';
 
     protected $queryString = [
         'sortDirection' => ['except' => 'desc'],
-        'selectedEvent' => ['except' => ''],
-        'selectedAthlete' => ['except' => ''],
+        'selectedEvent' => [
+//            'except' => ''
+        ],
+        'selectedAthlete' => [
+//            'except' => ''
+        ],
+        'selectedSportType' => [
+//            'except' => ''
+        ],
     ];
 
     public function render()
@@ -31,21 +39,83 @@ class Listing extends Component
 //        ])->get();
 
 
-        $news = News::query()
+//        $news = News::query()
+        $news = News::with(['event', 'athlete', 'sportTypes', 'userAutor'])
             ->when($this->selectedEvent, fn($q) => $q->where('event_id', $this->selectedEvent))
             ->when($this->selectedAthlete, fn($q) => $q->where('athlete_id', $this->selectedAthlete))
+//            ->when($this->selectedSportType, function ($q) {
+//                $q->whereHas('sportTypes', $this->selectedSportType);
+//            })
+            ->when($this->selectedSportType, function ($q) {
+                $q->whereHas('sportTypes', function ($query) {
+                    $query->where('sport_types.id', $this->selectedSportType);
+                });
+            })
             ->orderBy('date', $this->sortDirection)
             ->paginate($this->perPage)
-            ->withQueryString()
-        ;
+            ->withQueryString();
 
-        $events = News::distinct()->whereNotNull('event_id')->pluck('event_id');
-        $athletes = News::distinct()->whereNotNull('athlete_id')->pluck('athlete_id');
+        //        $events = News::distinct()->whereNotNull('event_id')->pluck('event_id');
+        //        $athletes = News::distinct()->whereNotNull('athlete_id')->pluck('athlete_id');
+
+//        $events = \App\Models\Event::whereHas('news')
+//            ->orderBy('title')->pluck('title', 'id');
+//        $athletes = \App\Models\Athlete::whereHas('news')
+//            ->orderBy('last_name')->pluck('last_name', 'id');
+
+// Список событий, связанных с новостями выбранного вида спорта
+        $events = \App\Models\Event::whereHas('news')
+            ->when($this->selectedSportType, function ($query) {
+                $query->whereHas('news', function ($q) {
+                    $q->whereHas('sportTypes', function ($qq) {
+                        $qq->where('sport_types.id', $this->selectedSportType);
+                    });
+                });
+            })
+            ->when($this->selectedAthlete, function ($query) {
+                $query->whereHas('news', function ($q) {
+                    $q->where('athlete_id', $this->selectedAthlete);
+                });
+            })
+            ->orderBy('title')
+            ->pluck('title', 'id');
+
+// Список атлетов, связанных с новостями выбранного вида спорта
+        $athletes = \App\Models\Athlete::whereHas('news')
+            ->when($this->selectedSportType, function ($query) {
+                $query->whereHas('news', function ($q) {
+                    $q->whereHas('sportTypes', function ($qq) {
+                        $qq->where('sport_types.id', $this->selectedSportType);
+                    });
+                });
+            })
+            ->when($this->selectedEvent, function ($query) {
+                $query->whereHas('news', function ($q) {
+                    $q->where('event_id', $this->selectedEvent);
+                });
+            })
+            ->orderBy('last_name')
+            ->pluck('last_name', 'id');
+
+        $sport_types = \App\Models\SportType::whereHas('news')
+            ->when($this->selectedAthlete, function ($query) {
+                $query->whereHas('news', function ($q) {
+                    $q->where('athlete_id', $this->selectedAthlete);
+                });
+            })
+            ->when($this->selectedEvent, function ($query) {
+                $query->whereHas('news', function ($q) {
+                    $q->where('event_id', $this->selectedEvent);
+                });
+            })
+            ->orderBy('name')->pluck('name', 'id');
+
 
         return view('livewire.news.listing', [
             'news' => $news,
             'events' => $events,
             'athletes' => $athletes,
+            'sport_types' => $sport_types,
 //            'user' => $user,
         ]);
     }
@@ -56,6 +126,7 @@ class Listing extends Component
         $this->resetPage();
 //        $this->goToNewsList();
     }
+
 
     public function updatedSelectedEvent()
     {
@@ -68,6 +139,11 @@ class Listing extends Component
         $this->resetPage();
 //        $this->goToNewsList();
     }
+    public function updatedSelectedSportType()
+    {
+        $this->resetPage();
+    }
+
 
 //    public function goToNewsList()
 //    {
