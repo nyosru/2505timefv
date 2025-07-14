@@ -61,12 +61,31 @@ class Listing extends Component
                     $q->where('sport_types.id', $this->selectedSportType);
                 });
             })
+
             ->when($this->dateFilter === 'past', function ($query) use ($now) {
                 // Прошедшие: дата старта и финиша меньше текущей
-                $query
-//                    ->where('event_date', '<', $now)
-                    ->where('events_date_finished', '<', $now);
+//                $query
+////                    ->where('event_date', '<', $now)
+//                    ->where('events_date_finished', '<', $now);
+
+                $query->where(function ($q) use ($now) {
+                    $q
+                        ->where(function ($q2) use ($now) {
+                            // Стандартное условие: дата старта <= сейчас и дата финиша >= сейчас
+                            $q2
+//                                ->where('event_date', '<=', $now)
+                                ->where('events_date_finished', '<', $now);
+                        })
+                        ->orWhere(function ($q3) use ($now) {
+                            // Дополнительное условие: дата старта равна текущей дате и нет даты завершения
+                            $q3->whereDate('event_date', '<', $now->toDateString())
+                                ->whereNull('events_date_finished');
+                        });
+                });
+
+
             })
+
             ->when($this->dateFilter === 'current', function ($query) use ($now) {
                 $query->where(function ($q) use ($now) {
                     $q
