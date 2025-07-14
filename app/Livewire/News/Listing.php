@@ -120,29 +120,57 @@ class Listing extends Component
         ]);
     }
 
-    public function toggleSort()
-    {
-        $this->sortDirection = $this->sortDirection === 'desc' ? 'asc' : 'desc';
-        $this->resetPage();
-//        $this->goToNewsList();
-    }
+
+
+
+//
+//    public function toggleSort()
+//    {
+//        $this->sortDirection = $this->sortDirection === 'desc' ? 'asc' : 'desc';
+//        $this->resetPage();
+////        $this->goToNewsList();
+//    }
+//
+//
+//    public function updatedSelectedEvent()
+//    {
+//        $this->resetPage();
+////        $this->goToNewsList();
+//    }
+//
+//    public function updatedSelectedAthlete()
+//    {
+//        $this->resetPage();
+////        $this->goToNewsList();
+//    }
+//    public function updatedSelectedSportType()
+//    {
+//        $this->resetPage();
+//    }
 
 
     public function updatedSelectedEvent()
     {
         $this->resetPage();
-//        $this->goToNewsList();
     }
 
     public function updatedSelectedAthlete()
     {
         $this->resetPage();
-//        $this->goToNewsList();
     }
+
     public function updatedSelectedSportType()
     {
         $this->resetPage();
     }
+
+    public function updatedSortDirection()
+    {
+        $this->resetPage();
+    }
+
+
+
 
 
 //    public function goToNewsList()
