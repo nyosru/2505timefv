@@ -17,7 +17,8 @@ class News extends Model
         'event_id',
         'athlete_id',
         'user_autor_id',
-        'photo'
+        'photo',
+        'sport_type_id',
     ];
     protected $casts = [
         'date' => 'date',
@@ -36,6 +37,11 @@ class News extends Model
     public function userAutor()
     {
         return $this->belongsTo(User::class, 'user_autor_id');
+    }
+
+    public function sportTypes()
+    {
+        return $this->belongsToMany(SportType::class, 'news_sport_type');
     }
 
 }

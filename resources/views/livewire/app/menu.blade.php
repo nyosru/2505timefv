@@ -20,12 +20,6 @@
     text-gray-600 md:block md:w-[200px]">
         <div class="flex flex-col space-y-1">
             <ul id="mobile-menu"
-                {{--                class="hidden w-full bg-white shadow-md flex-col md:static md:flex md:flex-col md:shadow-none"--}}
-                class="hidden fixed top-14 left-2 right-2 bg-white shadow-lg rounded z-40 flex flex-col space-y-0 p-2
-{{--                md:hidden--}}
-                md:static md:flex
-                md:bg-transparent md:shadow-none
-                max-h-[70vh] overflow-y-auto
                 md:max-h-[9999px] md:overflow-none
                 "
             >
@@ -34,6 +28,12 @@
                        wire:navigate
                        class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
+                {{--                class="hidden w-full bg-white shadow-md flex-col md:static md:flex md:flex-col md:shadow-none"--}}
+                class="hidden fixed top-14 left-2 right-2 bg-white shadow-lg rounded z-40 flex flex-col space-y-0 p-2
+                       {{--                md:hidden--}}
+                       md:static md:flex
+                       md:bg-transparent md:shadow-none
+                       max-h-[70vh] overflow-y-auto
                 {{ Request::is('news*') ? ' bg-orange-300 text-gray-700 ' : '' }}
                 {{ Request::routeIs('login') ? ' bg-orange-300 text-gray-700 ' : '' }}
                 "

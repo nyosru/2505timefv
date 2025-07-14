@@ -17,4 +17,12 @@ class SportType extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    // Новости данного вида спорта
+    public function news()
+    {
+        return $this->belongsToMany(News::class, 'news_sport_type');
+    }
+
+
 }

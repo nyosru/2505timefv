@@ -18,6 +18,8 @@ class AdminForm extends Component
     public $full_text;
     public $event_id;
     public $athlete_id;
+    public $sport_type_ids = []; // массив для нескольких видов спорта
+
     public $photo;
 
     public $currentNews = null;
@@ -29,6 +31,7 @@ class AdminForm extends Component
     // В компоненте добавьте:
     public $events;
     public $athletes;
+    public $sport_types;
 
     public $newsId;
 
@@ -37,11 +40,9 @@ class AdminForm extends Component
     {
         $this->events = \App\Models\Event::pluck('title', 'id');
         $this->athletes = \App\Models\Athlete::pluck('last_name', 'id');
-
-
+        $this->sport_types = \App\Models\SportType::pluck('name', 'id');
 
         if ($news) {
-
             $news = News::find($news);
 
             $this->currentNews = $news;
@@ -52,6 +53,11 @@ class AdminForm extends Component
             $this->full_text = $news->full_text;
             $this->event_id = $news->event_id;
             $this->athlete_id = $news->athlete_id;
+
+            // Важно: загружаем связанные виды спорта как массив ID
+//            $this->sport_type_ids = $news->sportTypes()->pluck('id')->toArray();
+            $this->sport_type_ids = $news->sportTypes()->pluck('sport_types.id')->toArray();
+
             $this->editMode = true;
         } else {
             $this->editMode = false;
@@ -66,11 +72,14 @@ class AdminForm extends Component
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'short_text' => 'nullable|string|max:500',
-//            'full_text' => 'required|string',
+
             'full_text' => 'nullable|string',
             'event_id' => 'nullable|integer',
             'athlete_id' => 'nullable|integer',
-//            'photo' => 'nullable|image|max:2048',
+
+            'sport_type_ids' => 'nullable|array',
+            'sport_type_ids.*' => 'integer|exists:sport_types,id',
+
             'photo' => 'nullable|image',
         ];
 
@@ -100,6 +109,10 @@ class AdminForm extends Component
         $this->full_text = $news->full_text;
         $this->event_id = $news->event_id;
         $this->athlete_id = $news->athlete_id;
+
+//        $this->sport_type_ids = $news->sportTypes()->pluck('id')->toArray();
+        $this->sport_type_ids = $news->sportTypes()->pluck('sport_types.id')->toArray();
+
         $this->editMode = true;
         $this->dispatch('show-edit-modal');
     }
@@ -133,9 +146,11 @@ class AdminForm extends Component
 
         if ($this->editMode) {
             $this->currentNews->update($data);
+            $this->currentNews->sportTypes()->sync($this->sport_type_ids);
             session()->flash('success', 'Новость обновлена');
         } else {
-            News::create($data);
+            $news = News::create($data);
+            $news->sportTypes()->sync($this->sport_type_ids);
             session()->flash('success', 'Новость создана');
         }
 
@@ -152,7 +167,10 @@ class AdminForm extends Component
 
     private function resetForm()
     {
-        $this->reset(['title', 'date', 'short_text', 'photo', 'full_text', 'event_id', 'athlete_id', 'currentNews', 'editMode']);
+        $this->reset([
+            'title', 'date', 'short_text', 'photo', 'full_text',
+            'event_id', 'athlete_id', 'sport_type_ids', 'currentNews', 'editMode'
+        ]);
         $this->resetErrorBag();
     }
 

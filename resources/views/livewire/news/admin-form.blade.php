@@ -155,6 +155,36 @@
 
         </div>
 
+{{--        вид спорта--}}
+{{--        <div class="mb-4">--}}
+{{--            <label class="block text-sm font-medium mb-1">Виды спорта</label>--}}
+{{--            <div class="flex flex-wrap gap-2 max-h-48 overflow-auto border rounded p-2">--}}
+{{--                @foreach($sport_types as $id => $name)--}}
+{{--                    <label class="inline-flex items-center space-x-2 bg-blue-100 p-1 rounded mr-1 mb-1">--}}
+{{--                        <input type="checkbox" wire:model="sport_type_ids" value="{{ $id }}" class="form-checkbox" />--}}
+{{--                        <span>{{ $name }}</span>--}}
+{{--                    </label>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--            @error('sport_type_ids') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror--}}
+{{--        </div>--}}
+
+
+        <div class="mb-4 w-full">
+            <label class="block text-sm font-medium mb-1">Виды спорта</label>
+            <div class="flex flex-wrap xgap-1 max-h-48 overflow-auto border rounded ">
+                @foreach($sport_types as $id => $name)
+                    <label class="inline-flex items-center space-x-2 bg-blue-100 px-2 py-1 rounded mr-1 mb-1">
+                        <input type="checkbox" wire:model="sport_type_ids" value="{{ $id }}" class="form-checkbox" />
+                        <span>{{ $name }}</span>
+                    </label>
+                @endforeach
+            </div>
+            @error('sport_type_ids') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+
+
         <!-- IDs -->
         <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
@@ -187,6 +217,8 @@
                 </select>
                 @error('athlete_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
+
+
         </div>
 
         <!-- Buttons -->
