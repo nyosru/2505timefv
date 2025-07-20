@@ -11,4 +11,10 @@ class Country extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name'];
+
+    public function city()
+    {
+        return $this->hasMany(City::class);
+    }
+
 }

@@ -25,22 +25,42 @@
                 </div>
 
                 <!-- Дата проведения -->
-                <div class="mb-4">
-                    <label for="event_date" class="block font-semibold mb-1">Дата проведения *</label>
-                    <input
-                            id="event_date"
-                            type="date"
-                            wire:model.defer="event_date"
-                            class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
-                            required
-                    >
-                    @error('event_date') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                <div class="mb-4 flex flex-row">
+
+                    <div class="w-1/2">
+                        <label for="event_date" class="block font-semibold mb-1">Дата проведения *</label>
+                        <input
+                                id="event_date"
+                                type="date"
+                                wire:model.defer="event_date"
+                                class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                required
+                        >
+                        @error('event_date') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="w-1/2">
+                        <label for="events_date_finished" class="block font-semibold mb-1">до Даты</label>
+                        <input
+                                id="events_date_finished"
+                                type="date"
+                                wire:model.defer="events_date_finished"
+                                class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                required
+                        >
+                        @error('events_date_finished') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
                 </div>
 
-
+@if(1==1)
                 <!-- Страна -->
                 <div class="mb-4">
-                    <label for="country_id" class="block font-semibold mb-1">Страна *</label>
+
+                    <label for="sport_place_id" class="block font-semibold mb-1">Место проведения *</label>
+{{--                    <br/>--}}
+
+{{--                    <label for="country_id" class="block font-semibold mb-1">Страна *</label>--}}
                     <select id="country_id" wire:model.live="country_id"
                             class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
                             required>
@@ -50,11 +70,11 @@
                         @endforeach
                     </select>
                     @error('country_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-                </div>
+{{--                </div>--}}
 
                 <!-- Город -->
-                <div class="mb-4">
-                    <label for="city_id" class="block font-semibold mb-1">Город *</label>
+{{--                <div class="mb-4">--}}
+{{--                    <label for="city_id" class="block font-semibold mb-1">Город *</label>--}}
                     <select id="city_id" wire:model.live="city_id"
                             class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
                             required>
@@ -64,17 +84,23 @@
                         @endforeach
                     </select>
                     @error('city_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-                </div>
+{{--                </div>--}}
+@endif
+
+{{--                <pre class="text-xs p-2">{{ print_r($venues->toArray()) }}</pre>--}}
 
                 <!-- Место проведения -->
-                <div class="mb-4">
-                    <label for="sport_place_id" class="block font-semibold mb-1">Место проведения *</label>
+{{--                <div class="mb-4">--}}
+{{--                    <label for="sport_place_id" class="block font-semibold mb-1">Место проведения *</label>--}}
                     <select id="sport_place_id" wire:model.live="sport_place_id"
                             class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
                             required>
                         <option value="">Выберите место</option>
                         @foreach($venues as $venue)
-                            <option value="{{ $venue->id }}">{{ $venue->name }}</option>
+                            <option value="{{ $venue->id }}">
+                                {{ $venue->city->country->name }} /
+{{--                                {{ $venue->cities.name }} /--}}
+                                {{ $venue->city->name }} / {{ $venue->name }}</option>
                         @endforeach
                     </select>
                     @error('sport_place_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
@@ -115,16 +141,7 @@
                 </div>
 
 
-
-
-
-
                 <!-- Кнопки -->
-
-
-
-
-
 
 
                 <!-- Кнопки -->
@@ -142,7 +159,9 @@
                 </div>
             </form>
         </div>
+
         <div class="w-1/2">
+
             @if(!empty($id))
                 <div class="bg-orange-100">
                     <livewire:event.event-attachment-manager-component :eventId="$id" :type="'image'"/>
@@ -153,47 +172,52 @@
 
             @endif
 
-
-                <!-- Виды спорта -->
-                <div class="my-4 w-full">
-                    <label class="block font-semibold mb-1">Виды спорта *</label>
-                    <div class="flex flex-wrap
+            <!-- Виды спорта -->
+            <div class="my-4 w-full">
+                <label class="block font-semibold mb-1">Виды спорта *</label>
+                <div class="flex flex-wrap
 {{--                        gap-4 --}}
 {{--                        gap-1--}}
                         max-h-[138px] overflow-auto
                         border border-blue-300 border-1
                         rounded p-2
                         ">
-                        @foreach(\App\Models\SportType::orderBy('name')->get() as $sportType)
-                            <label class="inline-flex items-center space-x-2 bg-blue-100 p-1 mr-1 mb-1">
-                                <input type="checkbox" wire:model="sport_type_ids" value="{{ $sportType->id }}" class="form-checkbox" />
-                                <span>{{ $sportType->name }}</span>
-                            </label>
-                        @endforeach
-                    </div>
-                    @error('sport_type_ids') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                    @foreach(\App\Models\SportType::orderBy('name')->get() as $sportType)
+                        <label class="inline-flex items-center space-x-2 bg-blue-100 p-1 mr-1 mb-1">
+                            <input type="checkbox" wire:model="sport_type_ids" value="{{ $sportType->id }}"
+                                   class="form-checkbox"/>
+                            <span>{{ $sportType->name }}</span>
+                        </label>
+                    @endforeach
                 </div>
-
-
-
+                @error('sport_type_ids') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            </div>
 
 
         </div>
     </div>
-    <div class="flex flex-wrap flex-row">
+
+
+
+
+
+
+    <div class="flex flex-wrap flex-row mt-8">
 
         <div class="bg-red-100 w-full md:w-1/2 xl:w-1/3">
-            <livewire:event.event-attachment-manager-component :eventId="$id" type="document" :key="'atachment-'.rand()" />
+            <livewire:event.event-attachment-manager-component :eventId="$id" type="document"
+                                                               :key="'atachment-'.rand()"/>
         </div>
         <div class="bg-orange-100 w-full md:w-1/2 xl:w-1/3">
             publication
-            <livewire:event.event-attachment-manager-component :eventId="$id" type="publication" :key="'publication-'.rand()" />
+            <livewire:event.event-attachment-manager-component :eventId="$id" type="publication"
+                                                               :key="'publication-'.rand()"/>
         </div>
 
         <div class="bg-blue-100 w-full md:w-1/2 xl:w-1/3">
 
-{{--            <pre>{{ print_r($event->groupsNagrada->toArray() ) }}</pre>--}}
-{{--            <pre>{{ print_r($event,1 ) }}</pre>--}}
+            {{--            <pre>{{ print_r($event->groupsNagrada->toArray() ) }}</pre>--}}
+            {{--            <pre>{{ print_r($event,1 ) }}</pre>--}}
 
             <livewire:event-adm.event-group-nagrada-manager-component
                     :hideSetEvent="true" :eventId="$id" key="nagrada"/>
@@ -204,10 +228,10 @@
         </div>
 
         <div class="bg-orange-100w-full md:w-1/2 xl:w-1/3">
-            <livewire:event.event-guest-manager-component :eventId="$id" key="guest" />
+            <livewire:event.event-guest-manager-component :eventId="$id" key="guest"/>
         </div>
         <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
-            <livewire:event.event-sponsor-manager-component :eventId="$id" key="sponsor" />
+            <livewire:event.event-sponsor-manager-component :eventId="$id" key="sponsor"/>
         </div>
 
     </div>

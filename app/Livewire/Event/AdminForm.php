@@ -16,7 +16,10 @@ class AdminForm extends Component
     public ?int $id = null; // id из маршрута
 
     public $title;
+
     public $event_date;
+    public $events_date_finished;
+
     public $event;
 
     public $country_id;
@@ -39,6 +42,7 @@ class AdminForm extends Component
         return [
             'title' => 'required|string|max:255',
             'event_date' => 'required|date',
+            'events_date_finished' => 'nullable|date',
 
             'country_id' => 'required|exists:countries,id',
             'city_id' => 'required|exists:cities,id',
@@ -76,6 +80,8 @@ class AdminForm extends Component
             $this->title = $event->title;
             $this->event_date = $event->event_date->format('Y-m-d');
 
+            $this->events_date_finished = !empty($event->events_date_finished) ? $event->events_date_finished->format('Y-m-d') : null;
+
 //            $this->country = $event->country;
 //            $this->city = $event->city;
 //            $this->venue = $event->venue;
@@ -88,12 +94,41 @@ class AdminForm extends Component
             $this->photoPreview = $event->photo ? asset('storage/' . $event->photo) : null;
 
 
-            $this->loadCities();
+//            $this->loadCities();
             $this->loadVenues();
         } else {
             $this->cities = [];
-            $this->venues = [];
+//            $this->venues = [];
+//            $this->loadVenues();
+            $this->loadingStartData();
 
+        }
+    }
+
+    public function loadingStartData()
+    {
+        $e1 = Country::with(['city'])
+            ->get();
+        echo '<pre class="max-h-[200px] overflow-auto text-xs">', print_r($e1->toArray()), '</pre>';
+
+        try {
+            $e1 = Country::where('name', 'Россия')
+                ->select('id')
+                ->firstOrFail();
+            $this->country_id = $e1->id;
+
+            $this->loadCities();
+
+            try {
+                $e2 = City::where('name', 'Тюмень')
+                    ->where('country_id', $e1->id)
+                    ->select('id')
+                    ->firstOrFail();
+                $this->city_id = $e2->id;
+
+            } catch (\Exception $e) {
+            }
+        } catch (\Exception $e) {
         }
     }
 
@@ -124,13 +159,27 @@ class AdminForm extends Component
 
     protected function loadVenues()
     {
-        if ($this->city_id) {
-            $this->venues = SportPlace::where('city_id', $this->city_id)
-                ->orderBy('name')
-                ->get();
-        } else {
-            $this->venues = [];
-        }
+        $this->venues = [];
+        $this->venues = SportPlace::
+        where('city_id', $this->city_id)
+//        with([
+//            'city' => function ($query) {
+////                $query->select(['id','name', 'country_id']);
+//            },
+//            'city.country' => function ($query) {
+////                    $query->select(['id','name']);
+//            }
+////            ,'country'
+//        ])
+//            ->
+//            join('cities', 'sport_places.city_id', '=', 'cities.id')
+//            ->join('countries', 'cities.country_id', '=', 'countries.id')
+////            ->
+//        orderByRaw('countries.name')          // Сортировка по country.name
+//            ->orderByRaw('cities.name')             // Затем по city.name
+//            ->orderByRaw('sport_places.name')             // Затем по city.name
+            ->orderBy('name')
+            ->get();
     }
 
     public function updatedPhoto()
@@ -151,11 +200,15 @@ class AdminForm extends Component
 //            'venue' => $this->venue,
 
             'country_id' => $this->country_id,
-            'city_id' =>  $this->city_id,
+            'city_id' => $this->city_id,
             'sport_place_id' => $this->sport_place_id,
 
             'description' => $this->description,
         ];
+
+        if (!empty($this->events_date_finished)) {
+            $data['events_date_finished'] = $this->events_date_finished->format('Y-m-d');
+        }
 
         if ($this->photo) {
             $path = $this->photo->store('events', 'public');
