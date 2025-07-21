@@ -21,4 +21,10 @@ class City extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function place()
+    {
+        return $this->hasMany(SportPlace::class);
+    }
+
 }

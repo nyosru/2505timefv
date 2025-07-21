@@ -33,20 +33,22 @@ class AdminForm extends Component
 
     public $countries = [];
     public $cities = [];
-    public $venues = [];
+    public $sport_places = [];
 
     public $sport_type_ids = [];
 
     protected function rules()
     {
         return [
+
             'title' => 'required|string|max:255',
+
             'event_date' => 'required|date',
             'events_date_finished' => 'nullable|date',
 
-            'country_id' => 'required|exists:countries,id',
-            'city_id' => 'required|exists:cities,id',
-//            'sport_place_id' => 'required|exists:sport_places,id',
+//            'country_id' => 'required|exists:countries,id',
+//            'city_id' => 'required|exists:cities,id',
+            'sport_place_id' => 'required|exists:sport_places,id',
 
             'sport_type_ids' => 'nullable|array',
             'sport_type_ids.*' => 'integer|exists:sport_types,id',
@@ -54,6 +56,7 @@ class AdminForm extends Component
             'description' => 'nullable|string',
 //            'photo' => 'nullable|image|max:2048',
             'photo' => 'nullable|image',
+
         ];
     }
 
@@ -95,19 +98,18 @@ class AdminForm extends Component
 
 
 //            $this->loadCities();
-            $this->loadVenues();
+            $this->loadSportPlace();
         } else {
-            $this->cities = [];
-//            $this->venues = [];
-//            $this->loadVenues();
-            $this->loadingStartData();
+//            $this->cities = [];
+//            $this->loadingStartData();
+            $this->loadSportPlace();
 
         }
     }
 
     public function loadingStartData()
     {
-        $e1 = Country::with(['city'])
+        $e1 = Country::with(['city', 'city.place'])
             ->get();
         echo '<pre class="max-h-[200px] overflow-auto text-xs">', print_r($e1->toArray()), '</pre>';
 
@@ -137,13 +139,14 @@ class AdminForm extends Component
         $this->city_id = null;
         $this->sport_place_id = null;
         $this->loadCities();
-        $this->venues = [];
+        $this->sport_places = [];
     }
 
     public function updatedCityId()
     {
+        \Debugbar::addMessage('Запрос на спортзалы выполнен', 'info');
         $this->sport_place_id = null;
-        $this->loadVenues();
+        $this->loadSportPlace();
     }
 
     protected function loadCities()
@@ -157,29 +160,34 @@ class AdminForm extends Component
         }
     }
 
-    protected function loadVenues()
+    protected function loadSportPlace()
     {
-        $this->venues = [];
-        $this->venues = SportPlace::
-        where('city_id', $this->city_id)
-//        with([
-//            'city' => function ($query) {
-////                $query->select(['id','name', 'country_id']);
-//            },
-//            'city.country' => function ($query) {
-////                    $query->select(['id','name']);
-//            }
-////            ,'country'
-//        ])
-//            ->
-//            join('cities', 'sport_places.city_id', '=', 'cities.id')
-//            ->join('countries', 'cities.country_id', '=', 'countries.id')
-////            ->
-//        orderByRaw('countries.name')          // Сортировка по country.name
-//            ->orderByRaw('cities.name')             // Затем по city.name
-//            ->orderByRaw('sport_places.name')             // Затем по city.name
-            ->orderBy('name')
+        $this->sport_places = SportPlace::query()
+            ->join('cities', 'sport_places.city_id', '=', 'cities.id')
+            ->join('countries', 'cities.country_id', '=', 'countries.id')
+            ->with([
+                'city' => function ($query) {
+                    $query->select(['id', 'name', 'country_id']);
+                },
+                'city.country' => function ($query) {
+                    $query->select(['id', 'name']);
+                }
+            ])
+            ->orderBy('countries.name')          // Сначала по стране
+            ->orderBy('cities.name')             // Потом по городу
+            ->orderBy('sport_places.name')       // И, наконец, по имени
+            ->select('sport_places.*')           // Чтобы не выбирать поля из других таблиц
             ->get();
+
+//        $e = $this->sport_places->toArray();
+//        usort( $e, function ($a, $b) {
+//            $keyA = $a['city']['country']['name'] . '/' . $a['city']['name'] . '/' . $a['name'];
+//            $keyB = $b['city']['country']['name'] . '/' . $b['city']['name'] . '/' . $b['name'];
+//
+//            return strcmp($keyA, $keyB);
+//        });
+//        $this->sport_places = $e;
+
     }
 
     public function updatedPhoto()
@@ -207,7 +215,7 @@ class AdminForm extends Component
         ];
 
         if (!empty($this->events_date_finished)) {
-            $data['events_date_finished'] = $this->events_date_finished->format('Y-m-d');
+            $data['events_date_finished'] = $this->events_date_finished;
         }
 
         if ($this->photo) {
