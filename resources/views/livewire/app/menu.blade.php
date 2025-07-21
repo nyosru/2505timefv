@@ -23,7 +23,15 @@
                 md:max-h-[9999px] md:overflow-none
                 "
             >
-                <li class="w-full">
+
+            @if(1==2)
+
+{{--            @permission('р.Доски')--}}
+            <livewire:app.menuItem label="Новости" routeName="news"  :active="( Request::routeIs('news') || Request::is('news*')   || Request::is('/')  )" />
+{{--            @endpermission--}}
+
+@if(1==2)
+            <li class="w-full">
                     <a href="{{ route('news') }}"
                        wire:navigate
                        class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
@@ -44,6 +52,8 @@
                         <span>Новости</span>
                     </a>
                 </li>
+@endif
+
 
                 <li class="w-full">
                     <a href="{{ route('events.index') }}"
@@ -78,7 +88,7 @@
                     </a>
                 </li>
 
-
+            @endif
                 {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
 
 

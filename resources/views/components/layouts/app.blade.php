@@ -22,18 +22,18 @@
     {{--    @livewireStyles--}}
 
     <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
-{{--    @stack('styles')--}}
+    {{--    @stack('styles')--}}
 
-{{--    <link rel="stylesheet" href="https://unpkg.com/trix@2.0.0/dist/trix.css">--}}
-{{--    <script src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>--}}
+    {{--    <link rel="stylesheet" href="https://unpkg.com/trix@2.0.0/dist/trix.css">--}}
+    {{--    <script src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>--}}
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-
-
 </head>
-<body class="antialiased font-sans bg-gray-100 min-h-screen">
+<body class="antialiased font-sans
+{{--bg-gray-100 --}}
+min-h-screen">
 <div class=" ">
     <div class="min-h-screen flex flex-col relative">
         <div class="
@@ -44,25 +44,19 @@
             {{--        <livewire:app.header/>--}}
             <livewire:app.navigation/>
 
-{{--            <livewire:informer/>--}}
+            {{--            <livewire:informer/>--}}
 
-            <div class="flex flex-col md:flex-row px-5 sm:p-0 sm:space-x-5">
-                {{--                @if (Route::is('tech*')--}}
-                {{--                    || Route::is('lk*')--}}
-                {{--                    || Route::is('board*')--}}
-                {{--                    || Route::is('leed*')--}}
-                {{--                    || Route::is('clients*')--}}
-                {{--                    || Route::is('order*')--}}
-                {{--                    )--}}
-                {{--            <div class="w-[200px] bg-orange-500">--}}
-                {{--                меню--}}
-                {{--            </div>--}}
 
-                <livewire:app.menu/>
+            <div class="container mx-auto">
+                <div class="flex flex-col md:flex-row px-5 sm:p-0 sm:space-x-5">
 
-                {{--                @endif--}}
-                <div class="flex-1 min-h-[400px]">
-                    {{ $slot }}
+                    @permission('р.Техничка')
+                    <livewire:app.menu/>
+                    @endpermission
+
+                    <div class="flex-1 min-h-[400px]">
+                        {{ $slot }}
+                    </div>
                 </div>
             </div>
 

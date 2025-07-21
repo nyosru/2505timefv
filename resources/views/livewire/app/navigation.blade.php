@@ -1,8 +1,10 @@
+<div>
 <nav
         x-data="{ open: false }"
-        class="bg-white border-b border-gray-100
+        class="
+{{--        bg-white border-b border-gray-100--}}
 {{--     @guest() sticky top-0 @endguest--}}
-      sticky top-0
+{{--      sticky top-0--}}
      "
 >
 
@@ -10,9 +12,9 @@
 {{--    pb-3--}}
     ">
         <div class="w-full sm:w-1/2 flex justify-center items-center py-2">
-            <a href="/" class="">
-{{--                <nobr>ВремяПобед!</nobr>--}}
-                <img src="/img/logo1.svg" class="h-[60px]" alt="" />
+            <a href="/" class="text-[2.5rem] font-bold text-red-600">
+                <nobr>ВремяПобед<span class="text-[1.5rem]">.рус</span></nobr>
+{{--                <img src="/img/logo1.svg" class="h-[60px]" alt="" />--}}
             </a>
         </div>
         <div class="sm:w-1/2 flex justify-center items-center ">
@@ -31,8 +33,11 @@
                     <div x-show="open" @click.away="open = false" class="absolute
                             {{--                        bg-white--}}
                             {{--                         bg-orange-300--}}
-                             border-2 border-gray-500 rounded
-                             rounded shadow-lg z-10">
+                             border-2 border-gray-500
+{{--                             rounded--}}
+                             rounded-xl
+{{--                             shadow-lg --}}
+                             z-10">
                         <div class="flex flex-col w-[150px] ">
                             <div class="">
                                 <a href="{{ route('lk.profile') }}"
@@ -267,3 +272,5 @@
     @endif
 
 </nav>
+    <livewire:app.menu-app />
+</div>

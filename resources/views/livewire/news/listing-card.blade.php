@@ -4,7 +4,7 @@
 
     {{--    <pre>{{ print_r($item->toArray()) }}</pre>--}}
 
-    <div class="card w-full p-4 bg-white rounded-[10px] mb-6 border-1 border-[#E9E9E9]"
+    <div class="card w-full p-0 bg-white rounded-[10px] mb-6 border-1 border-[#E9E9E9]"
          style="opacity: 1; transform: translateY(0px); transition: opacity 1s, transform 0.4s;">
 
         <div class="min-h-[165px] justify-between items-baseline rounded-t-[10px] w-full relative flex gap-[10px]"
@@ -32,16 +32,24 @@
             {{--            </div>--}}
         </div>
 
-        <div class="relative flex justify-between items-start mt-3">
-            <h3 class="font-[Oswald] text-[18px] w-[90%] font-medium uppercase pb-1 text-[#252525]">
+        <div class="p-3">
+
+        <div class="relative flex justify-between items-start
+{{--        mt-3--}}
+        ">
+            <h3 class="
+{{--            font-[Oswald] --}}
+            text-[18px] w-[90%] font-medium uppercase pb-1 text-[#252525]">
                 {{ $item->title }}
             </h3>
             {{--            <img class="w-fit pt-[5px]" src="/assets/copy.svg" alt="copy">--}}
         </div>
 
         @if($item->short_text)
-            <div class="flex flex-col mt-[5px]">
-                <h4 class="leading-[30px] font-bold">Описание</h4>
+            <div class="flex flex-col
+{{--            mt-[5px]--}}
+            ">
+{{--                <h4 class="leading-[30px] font-bold">Описание</h4>--}}
                 <p class="text-[14px] leading-[25px] pb-[10px] text-[#003493]">
                     {{ $item->short_text }}
                 </p>
@@ -59,6 +67,6 @@
         {{--                <span>856</span>--}}
         {{--            </div>--}}
         {{--        </div>--}}
-
+        </div>
     </div>
 </a>

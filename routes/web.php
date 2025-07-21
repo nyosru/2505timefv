@@ -117,7 +117,16 @@ Route::get('news/{id}', \App\Livewire\News\Item::class)->name('news.show');
 //Route::get('/news/{id}', Item::class)->name('news.show');
 
 
+Route::get('/events', Listing::class)->name('events.index');
+Route::get('/events/{id}', Show::class)->name('events.show');
+
+Route::get('/athletes', A_Listing::class)->name('athletes.index');
+Route::get('/athletes/{id}', A_Show::class)->name('athletes.show');
+
+
+// Маршрут для авторизованного пользователя
 Route::middleware(['auth'])->group(function () {
+
     Route::group(['as' => 'admin', 'prefix' => 'admin'], function () {
 
         Route::get('news', \App\Livewire\News\Admin::class)
@@ -136,17 +145,7 @@ Route::middleware(['auth'])->group(function () {
 //        ; // Добавьте защиту по необходимости
 
     });
-});
 
-
-Route::get('/events', Listing::class)->name('events.index');
-Route::get('/events/{id}', Show::class)->name('events.show');
-
-Route::get('/athletes', A_Listing::class)->name('athletes.index');
-Route::get('/athletes/{id}', A_Show::class)->name('athletes.show');
-
-
-Route::middleware(['auth'])->group(function () {
     Route::group(['as' => 'admin', 'prefix' => 'admin'], function () {
 
         Route::get('events', Admin::class)
@@ -155,7 +154,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('events/form/{id?}', \App\Livewire\Event\AdminForm::class)
             ->name('.events.form')//    ->middleware('auth')
         ; // при необходимости
-
 
 
         Route::get('athletes', A_Admin::class)
@@ -209,11 +207,7 @@ Route::middleware(['auth'])->group(function () {
         ; // если нужна авторизация
 
     });
-});
 
-
-// Маршрут для авторизованного пользователя
-Route::middleware(['auth'])->group(function () {
 
 //Route::middleware('check.permission:р.Техничка')->group(function () {
     Route::prefix('tech')->name('tech.')->
@@ -255,12 +249,6 @@ Route::middleware(['auth'])->group(function () {
 
 //});
 });
-
-
-
-
-
-
 
 
 if (1 == 2) {

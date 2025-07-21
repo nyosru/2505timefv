@@ -9,6 +9,7 @@ class MenuItem extends Component
     public $routeName;
     public $label;
     public $icon;
+    public $active = false;
 
     public function render()
     {
