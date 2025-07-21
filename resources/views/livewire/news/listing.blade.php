@@ -88,7 +88,7 @@
     <!-- Список новостей -->
     <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2
 {{--    md:grid-cols-2 --}}
-    xl:grid-cols-4 gap-[20px] w-full">
+    xl:grid-cols-3 дпЖgrid-cols-4 gap-[20px] w-full">
         @forelse($news as $item)
             <livewire:news.listing-card :item="$item" :key="$item->id"/>
         @empty
