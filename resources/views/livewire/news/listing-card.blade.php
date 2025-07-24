@@ -19,21 +19,15 @@
             background-size: cover;
             background-position: center;
           ">
-
             {{--            <img class="p-[10px] w-[60px] h-[60px] rounded-full" src="assets/avatar.png" alt="" />--}}
-
             {{--            <img class="p-[10px] w-[60px] h-[60px] rounded-full" src="c" alt="" />--}}
-
             {{--            <div class="buttons2 absolute top-[10px] right-[20px] flex gap-[7px] items-center">--}}
-
             {{--                <button class="bg-[#00A521] px-[12px] py-[1px] rounded-full tracking-[-2%] leading-[24px] text-white text-[12px]">--}}
             {{--                    Добавить--}}
             {{--                </button>--}}
-
             {{--                <button class="bg-[#3579F4] px-[12px] py-[1px] rounded-full tracking-[-2%] leading-[24px] text-white text-[12px]">--}}
             {{--                    Изменить--}}
             {{--                </button>--}}
-
             {{--            </div>--}}
         </div>
         @endif
