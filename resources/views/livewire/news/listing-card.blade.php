@@ -7,10 +7,15 @@
     <div class="card w-full p-0 bg-white rounded-[10px] mb-6 border-1 border-[#E9E9E9]"
          style="opacity: 1; transform: translateY(0px); transition: opacity 1s, transform 0.4s;">
 
+        @if(!empty($item->photo))
         <div class="min-h-[165px] justify-between items-baseline rounded-t-[10px] w-full relative flex gap-[10px]"
              style="
             /*background-image: url('https://static.1tv.ru/uploads/video/material/splash/2022/10/22/750806/big/750806_big_2079786d17.jpg');*/
+            @if(!empty($item->photo))
             background-image: url('{{ asset('storage/' . $item->photo) }}');
+            @else
+            background-image: url('/img/news.png');
+            @endif
             background-size: cover;
             background-position: center;
           ">
@@ -31,6 +36,7 @@
 
             {{--            </div>--}}
         </div>
+        @endif
 
         <div class="p-3">
 

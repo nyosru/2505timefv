@@ -152,6 +152,7 @@ class AdminForm extends Component
 
         $this->resetForm();
 //        $this->dispatch('hide-edit-modal');
+//        return redirect(route('admin.news'));
         return redirect(route('admin.news'));
     }
 

@@ -227,15 +227,15 @@ class AdminForm extends Component
             $event = Event::findOrFail($this->id);
             $event->update($data);
             $event->sportTypes()->sync($this->sport_type_ids);
+            session()->flash('success', 'Мероприятие успешно сохранено.');
+            return redirect()->route('admin.events');
         } else {
             $event = Event::create($data);
             $event->sportTypes()->sync($this->sport_type_ids);
+            session()->flash('success', 'Мероприятие успешно сохранено, добавьте фото и видео');
+            return redirect()->route('admin.events.form', ['id' => $event->id]);
         }
 
-        session()->flash('success', 'Мероприятие успешно сохранено.');
-
-        // Перенаправление после сохранения (например, к списку)
-        return redirect()->route('admin.events');
     }
 
     public function render()
