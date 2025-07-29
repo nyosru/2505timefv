@@ -137,10 +137,11 @@
 
                 @if(!empty($id))
                     <div class="bg-orange-100">
-                        <livewire:event.event-attachment-manager-component :eventId="$id" :type="'image'"/>
+                        <livewire:event.admin.img-form-add :event-id="$id" :key="'dop_img_'.$id"/>
+                        <livewire:event.admin.img-list :event-id="$id" :key="'dop_img_'.$id"/>
                     </div>
                     <div class="bg-cyan-100">
-                        <livewire:event.event-attachment-manager-component :eventId="$id" :type="'video'"/>
+                        <livewire:event.event-attachment-manager-component :eventId="$id" :type="'video'" :key="'dop_video_'.$id"/>
                     </div>
 
                 @endif
