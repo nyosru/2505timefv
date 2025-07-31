@@ -1,4 +1,23 @@
-<div class="p-6">
+<div class="px-6">
+
+
+
+    <div class="mb-5">
+        <livewire:Cms2.App.Breadcrumb
+                :menu="[
+                            [ 'route'=>'tech.index','name'=>'Техничка' ],
+        {{--                                ['route' => 'admin.organization.managment','name'=>'Организации'],--}}
+{{--                            [ 'route' => 'admin.events','name'=>'Мероприятия' ]--}}
+                            [ 'route' => 'admin.news','name'=>'Новости' ]
+                            ,
+                            [ 'route' => 'admin.news.create','name'=> ( ( $editMode ? 'Редактирование' : 'Создание' ) . ' новости' ), 'link'=>'no' ]
+{{--                            ,--}}
+{{--                            [ 'route' => 'admin.events.form', 'name'=> ( $id ? 'Редактирование мероприятия' : 'Добавление нового мероприятия' ), 'link'=>'no' ]--}}
+{{--                        [ 'link'=>'no', 'name'=>'Счета']--}}
+                ]"/>
+
+    </div>
+
 
     <h3 class="text-xl font-bold mb-4">
         {{ ( $editMode ? 'Редактирование' : 'Создание' ) }} новости

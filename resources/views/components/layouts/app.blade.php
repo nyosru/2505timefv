@@ -50,9 +50,12 @@ min-h-screen">
             <div class="container mx-auto">
                 <div class="flex flex-col md:flex-row px-5 sm:p-0 sm:space-x-5">
 
-                    @permission('р.Техничка')
-                    <livewire:app.menu/>
-                    @endpermission
+{{--                    выключил левое админ меню, теперь всё в техничке--}}
+                    @if(1==2)
+                        @permission('р.Техничка')
+                        <livewire:app.menu/>
+                        @endpermission
+                    @endif
 
                     <div class="flex-1 min-h-[400px]">
                         {{ $slot }}

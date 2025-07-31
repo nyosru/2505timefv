@@ -1,4 +1,19 @@
 <div>
+
+
+    <div class="mb-5">
+        <livewire:Cms2.App.Breadcrumb
+                :menu="[
+                            [ 'route'=>'tech.index','name'=>'Техничка' ],
+        {{--                                ['route' => 'admin.organization.managment','name'=>'Организации'],--}}
+                            [ 'route' => 'admin.events','name'=>'Мероприятия' ]
+{{--                            ,--}}
+{{--                            [ 'route' => 'admin.events.form', 'name'=> ( $id ? 'Редактирование мероприятия' : 'Добавление нового мероприятия' ), 'link'=>'no' ]--}}
+{{--                        [ 'link'=>'no', 'name'=>'Счета']--}}
+                ]"/>
+
+    </div>
+
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-2xl font-bold">Управление мероприятиями</h2>
         <a href="{{ route('admin.events.form') }}"

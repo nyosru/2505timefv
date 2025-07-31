@@ -1,4 +1,22 @@
-<div class="container mx-auto p-4">
+<div class="container mx-auto">
+
+
+    <div class="mb-5">
+        <livewire:Cms2.App.Breadcrumb
+                :menu="[
+                            [ 'route'=>'tech.index','name'=>'Техничка' ],
+        {{--                                ['route' => 'admin.organization.managment','name'=>'Организации'],--}}
+{{--                            [ 'route' => 'admin.events','name'=>'Мероприятия' ]--}}
+                            [ 'route' => 'admin.cities','name'=>'Города' ]
+{{--                            ,--}}
+{{--                            [ 'route' => 'admin.news.create','name'=> ( ( $editMode ? 'Редактирование' : 'Создание' ) . ' новости' ), 'link'=>'no' ]--}}
+{{--                            ,--}}
+{{--                            [ 'route' => 'admin.events.form', 'name'=> ( $id ? 'Редактирование мероприятия' : 'Добавление нового мероприятия' ), 'link'=>'no' ]--}}
+{{--                        [ 'link'=>'no', 'name'=>'Счета']--}}
+                ]"/>
+
+    </div>
+
     <h2 class="text-2xl font-bold mb-4">Управление городами</h2>
 
     @if (session()->has('message'))
