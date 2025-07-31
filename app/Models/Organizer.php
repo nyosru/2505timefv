@@ -9,5 +9,10 @@ class Organizer extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'city_id', 'address', 'logo', 'website'];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

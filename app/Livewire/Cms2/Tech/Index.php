@@ -40,6 +40,12 @@ class Index extends Component
 //        'Логи' => ['route' => 'tech.logs',
 //            'permission' => 'тех.логи'
 //        ],
+
+        'Организации' => ['route' => 'admin.organization.managment'
+//            ,'permission' => 'р.Пользователи'
+        ],
+
+
     ];
 
     public function render()

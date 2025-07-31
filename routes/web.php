@@ -206,6 +206,14 @@ Route::middleware(['auth'])->group(function () {
             ->name('.event-participants')//    ->middleware('auth')
         ; // если нужна авторизация
 
+        Route::prefix('organization')
+            ->name('.organization')->
+            //middleware('check.permission:р.Техничка')->
+            group(function () {
+                Route::get('', App\Livewire\Organization\Management::class)
+                    ->name('.managment');
+            });
+
     });
 
 
@@ -218,7 +226,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/roles', \App\Livewire\RolePermissions::class)
             ->name('role_permission');
-
 
         // пользователи
 //        Route::middleware('check.permission:р.Пользователи')->group(function () {
