@@ -232,7 +232,7 @@ class AdminForm extends Component
         } else {
             $event = Event::create($data);
             $event->sportTypes()->sync($this->sport_type_ids);
-            session()->flash('success', 'Мероприятие успешно сохранено, добавьте фото и видео');
+            session()->flash('successEvent', 'Мероприятие успешно сохранено, добавьте фото и видео');
             return redirect()->route('admin.events.form', ['id' => $event->id]);
         }
 
