@@ -89,6 +89,7 @@
                 </li>
 
             @endif
+
                 {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
 
 

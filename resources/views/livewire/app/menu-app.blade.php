@@ -17,5 +17,11 @@ text-lg
             <livewire:app.menuItem label="Спортсмены" routeName="athletes.index"
                                    :active="( Request::routeIs('athletes*')  )"/>
         </div>
+        @permission('р.Техничка')
+        <div>
+            <livewire:app.menuItem label="Техничка" routeName="tech.index"
+                                   :active="( Request::routeIs('tec*') || Request::routeIs('admi*')  )"/>
+        </div>
+        @endpermission
     </div>
 </div>
