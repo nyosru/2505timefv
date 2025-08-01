@@ -203,48 +203,83 @@
 
     </form>
 
-{{--доп параметры видим при редактировании--}}
+    {{--доп параметры видим при редактировании--}}
 
     @if( $id )
-    @if(1==1)
-        <div class="flex flex-wrap flex-row mt-8">
+        @if(1==1)
+{{--            <div class="flex flex-wrap flex-row mt-8">--}}
 
-            <div class="bg-red-100 w-full md:w-1/2 xl:w-1/3">
-                <livewire:event.event-attachment-manager-component :eventId="$id" type="document"
-                                                                   :key="'atachment-'.rand()"/>
+
+{{--            </div>--}}
+
+            <div class="bg-gray-300 p-3 rounded-md mt-2">
+                <b>Участники и победители</b> Категория - это группы победителей со своими 123 местами -
+                малый/средний/большой вес, возраст, пол
+            </div>
+            <div class="flex flex-wrap flex-row ">
+
+                <div class="bg-blue-100 w-full md:w-1/2 xl:w-1/3">
+
+                    {{--            <pre>{{ print_r($event->groupsNagrada->toArray() ) }}</pre>--}}
+                    {{--            <pre>{{ print_r($event,1 ) }}</pre>--}}
+
+                    <livewire:event-adm.event-group-nagrada-manager-component
+                            :hideSetEvent="true" :eventId="$id" key="nagrada"/>
+                </div>
+                @if(1==1)
+                    <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
+                        <livewire:event.event-participiant-manager-component :eventId="$id" key="parcipants"/>
+                    </div>
+                @endif
             </div>
 
-            <div class="bg-orange-100 w-full md:w-1/2 xl:w-1/3">
-                publication
-                <livewire:event.event-attachment-manager-component :eventId="$id" type="publication"
-                                                                   :key="'publication-'.rand()"/>
+            <div class="bg-gray-300 p-3 rounded-md mt-2">
+                <b>Компании участники</b> если компания 1 то ставте организатор и не трогайте компании участники, если
+                компаний несколько то расставьте кто где
+            </div>
+            <div class="flex flex-wrap flex-row ">
+
+                @if(1==1)
+                    <div class="bg-yellow-100 w-full md:w-1/2 xl:w-1/3">
+                        <livewire:event.company-organizer-manager :eventId="$id" key="company-organizer"/>
+                    </div>
+                @endif
+                @if(1==1)
+                    <div class="bg-gradient-to-bl from-red-100 to-yellow-300 w-full md:w-1/2 xl:w-1/3">
+                        <livewire:event.company-participantes-manager :eventId="$id" key="company-uchastnik"/>
+                    </div>
+                @endif
+
             </div>
 
-            <div class="bg-blue-100 w-full md:w-1/2 xl:w-1/3">
-
-                {{--            <pre>{{ print_r($event->groupsNagrada->toArray() ) }}</pre>--}}
-                {{--            <pre>{{ print_r($event,1 ) }}</pre>--}}
-
-                <livewire:event-adm.event-group-nagrada-manager-component
-                        :hideSetEvent="true" :eventId="$id" key="nagrada"/>
+            <div class="bg-gray-300 p-3 rounded-md mt-2">
+                <b>Дополнительные данные</b>
             </div>
-            @if(1==1)
-                <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
-                    <livewire:event.event-participiant-manager-component :eventId="$id" key="parcipants"/>
+            <div class="flex flex-wrap flex-row ">
+
+                <div class="bg-red-100 w-full md:w-1/2 xl:w-1/3">
+                    <livewire:event.event-attachment-manager-component :eventId="$id" type="document"
+                                                                       :key="'atachment-'.rand()"/>
                 </div>
-            @endif
-            @if(1==1)
-                <div class="bg-orange-100w-full md:w-1/2 xl:w-1/3">
-                    <livewire:event.event-guest-manager-component :eventId="$id" key="guest"/>
+
+                <div class="bg-orange-100 w-full md:w-1/2 xl:w-1/3">
+                    publication
+                    <livewire:event.event-attachment-manager-component :eventId="$id" type="publication"
+                                                                       :key="'publication-'.rand()"/>
                 </div>
-            @endif
-            @if(1==1)
-                <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
-                    <livewire:event.event-sponsor-manager-component :eventId="$id" key="sponsor"/>
-                </div>
-            @endif
-        </div>
-    @endif
+
+                @if(1==1)
+                    <div class="bg-orange-100w-full md:w-1/2 xl:w-1/3">
+                        <livewire:event.event-guest-manager-component :eventId="$id" key="guest"/>
+                    </div>
+                @endif
+                @if(1==1)
+                    <div class="bg-green-100 w-full md:w-1/2 xl:w-1/3">
+                        <livewire:event.event-sponsor-manager-component :eventId="$id" key="sponsor"/>
+                    </div>
+                @endif
+            </div>
+        @endif
     @endif
 
 

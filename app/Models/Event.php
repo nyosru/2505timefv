@@ -131,4 +131,18 @@ class Event extends Model
         return $this->belongsToMany(SportType::class, 'event_sport_type');
     }
 
+    public function companyOrganizators()
+    {
+        return $this->belongsToMany(Organizer::class, 'event_organizer')
+//            ->withTimestamps()
+            ;
+    }
+
+    public function companyParticipantes()
+    {
+        return $this->belongsToMany(Organizer::class, 'event_participantes')
+//            ->withTimestamps()
+            ;
+    }
+
 }

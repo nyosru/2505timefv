@@ -278,23 +278,21 @@
         <div class="flex flex-col md:flex-row xgap-8 flex-wrap">
 
 
-{{--            <pre class="text-xs">{{ print_r($event->docs->toArray(), true) }}</pre>--}}
+            {{--            <pre class="text-xs">{{ print_r($event->docs->toArray(), true) }}</pre>--}}
 
-@if($event->docs->count() > 0 )
-            <livewire:event.informer.event-document-list :items="$event->docs"/>
-@endif
-
-
-        @if( $event->athletes->count() > 0 && $event->groupsNagrada->count() > 0 )
-            <livewire:event.informer.event-participiant-list :list="$event->groupsNagrada"/>
-        @endif
+            @if($event->docs->count() > 0 )
+                <livewire:event.informer.event-document-list :items="$event->docs"/>
+            @endif
 
 
-
+            @if( $event->athletes->count() > 0 && $event->groupsNagrada->count() > 0 )
+                <livewire:event.informer.event-participiant-list :list="$event->groupsNagrada"/>
+            @endif
 
             @if( $event->guests->count() > 0 )
                 <livewire:event.informer.event-guests-list :list="$event->guests"/>
             @endif
+
             @if( $event->sponsors->count() > 0 )
                 <livewire:event.informer.event-sponsor-list :list="$event->sponsors"/>
             @endif
@@ -305,25 +303,25 @@
 
 
             {{--            <div>--}}
-{{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
-{{--            </div>--}}
+            {{--                <pre class="text-xs">{{ print_r($event->toArray(),1) }}</pre>--}}
+            {{--            </div>--}}
 
-{{--        @foreach(range(1, 5) as $index )--}}
-{{--            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">--}}
-{{--                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>--}}
-{{--                <ul class="space-y-2">--}}
-{{--                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)--}}
-{{--                        <li class="flex items-center gap-3">--}}
-{{--                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>--}}
-{{--                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>--}}
-{{--                            <span>{{ $athlete }}</span>--}}
-{{--                        </li>--}}
-{{--                    @endforeach--}}
-{{--                </ul>--}}
-{{--            </section>--}}
-{{--        @endforeach--}}
-</div>
-</div>
+            {{--        @foreach(range(1, 5) as $index )--}}
+            {{--            <section class="w-full md:w-1/2 lg:w-1/3 mt-8">--}}
+            {{--                <h2 class="text-xl font-semibold mb-3">Спортсмены</h2>--}}
+            {{--                <ul class="space-y-2">--}}
+            {{--                    @foreach(['Исматов М', 'Точиев С', 'Казаков А', 'Киселев В', 'Петров С', 'Галеев Д', 'Концевенко М'] as $index => $athlete)--}}
+            {{--                        <li class="flex items-center gap-3">--}}
+            {{--                            <div class="w-6 font-semibold text-gray-600">{{ $index + 1 }}.</div>--}}
+            {{--                            <div class="w-10 h-10 rounded-full bg-gray-300"></div>--}}
+            {{--                            <span>{{ $athlete }}</span>--}}
+            {{--                        </li>--}}
+            {{--                    @endforeach--}}
+            {{--                </ul>--}}
+            {{--            </section>--}}
+            {{--        @endforeach--}}
+        </div>
+    </div>
 
 </div>
 
