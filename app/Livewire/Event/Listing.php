@@ -3,8 +3,11 @@
 namespace App\Livewire\Event;
 
 use App\Models\Event;
+use App\Models\Organizer;
 use App\Models\SportType;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,7 +17,12 @@ class Listing extends Component
     use WithPagination;
 
     public $perPage = 10;
+
+    #[Url()]
     public $selectedSportType = null;
+    #[Url()]
+    public $selectedOrganizations = null;
+
     protected $queryString = [
         'selectedSportType' => ['except' => null],
         'dateFilter' => ['except' => null],
@@ -61,7 +69,11 @@ class Listing extends Component
                     $q->where('sport_types.id', $this->selectedSportType);
                 });
             })
-
+            ->when($this->selectedOrganizations, function ($query) {
+                $query->whereHas('companyOrganizators', function ($q) {
+                    $q->where('organizer_id', $this->selectedOrganizations);
+                });
+            })
             ->when($this->dateFilter === 'past', function ($query) use ($now) {
                 // Прошедшие: дата старта и финиша меньше текущей
 //                $query
@@ -85,7 +97,6 @@ class Listing extends Component
 
 
             })
-
             ->when($this->dateFilter === 'current', function ($query) use ($now) {
                 $query->where(function ($q) use ($now) {
                     $q
@@ -108,16 +119,32 @@ class Listing extends Component
             })
 //            ->orderByDesc('event_date')
             ->orderBy('event_date')
-            ->paginate($this->perPage)
-        ;
+            ->paginate($this->perPage);
 
         $sport_types = SportType::whereHas('events')
 //            ->get()
             ->orderBy('name')->pluck('name', 'id');
 
+//        $allOrganizations = $events->with(['companyOrganizators'])->merge($events->with(['companyParticipantes'])->get())->unique('id')->values();
+//        $allOrganizations = $events->all();
+        $organizerIds = DB::table('event_organizer')
+//            ->where('event_id', $eventId)
+            ->pluck('organizer_id');
+        $participantIds = DB::table('event_participantes')
+//            ->where('event_id', $eventId)
+            ->pluck('organizer_id');
+
+        $allUniqueIds = $organizerIds->merge($participantIds)->unique()->values();
+        $allOrganizations = Organizer::whereIn('id', $allUniqueIds)
+            ->with(['city', 'city.country'])
+//            ->addSelect('id','name')
+            ->orderBy('name')
+            ->get();
+
         return view('livewire.event.listing', [
             'events' => $events,
             'sport_types' => $sport_types,
+            'allOrganizations' => $allOrganizations,
         ]);
     }
 
