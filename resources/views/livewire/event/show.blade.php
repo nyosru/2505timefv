@@ -6,7 +6,11 @@
             :menu="[
                     ['route'=>'events.index','name'=>'Мероприятия', 'route-var' => [] ]
                     ,
-                    ['route'=>'events.show','name'=>( strlen($event->title) > 50 ? substr($event->title, 0, 50) . '...' : ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ] ]
+                    [
+                        'route'=>'events.show','name'=>( strlen($event->title) > 50 ?
+                        mb_substr($event->title, 0, 50, 'UTF-8') . '...' :
+                        ( $event->title  ?? '-') ), 'route-var' => [ 'id' => $event->id ]
+                    ]
 {{--                    [--}}
 {{--                        'route'=>'leed',--}}
 {{--                        'name'=>( $leed->column->board->name ?? 'x' )--}}
