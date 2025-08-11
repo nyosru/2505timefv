@@ -3,7 +3,10 @@
 namespace App\Livewire\News;
 
 use App\Models\News;
+use App\Models\Organizer;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,10 +15,22 @@ class Listing extends Component
     use WithPagination;
 
     public $perPage = 10;
+    #[Url()]
     public $sortDirection = 'desc'; // 'desc' — сначала новые, 'asc' — сначала старые
+    #[Url()]
     public $selectedEvent = '';
+    #[Url()]
     public $selectedAthlete = '';
+    #[Url()]
     public $selectedSportType = '';
+    #[Url()]
+    public $selectedOrganizations = null;
+
+
+    public $organizerIds;
+    public $participantIds;
+    public $allUniqueIds;
+    public $allOrganizations;
 
     protected $queryString = [
         'sortDirection' => ['except' => 'desc'],
@@ -30,30 +45,52 @@ class Listing extends Component
         ],
     ];
 
-    public function render()
+    public function mount(){
+        $this->loadOrganizers();
+    }
+
+    public function loadOrganizers()
     {
 
-//        $user = User::with([
-//            'roles',
-//            'roles.permissions'
-//        ])->get();
+        $this->organizerIds = DB::table('news_organizer')
+            ->pluck('organizer_id');
+        $this->participantIds = DB::table('news_participantes')
+            ->pluck('organizer_id');
+        $this->allUniqueIds = $this->organizerIds->merge($this->participantIds)->unique()->values();
+        $this->allOrganizations = Organizer::whereIn('id', $this->allUniqueIds)
+            ->with(['city', 'city.country'])
+            ->orderBy('name')
+            ->get();
 
+    }
 
-//        $news = News::query()
+    public function render()
+    {
         $news = News::with(['event', 'athlete', 'sportTypes', 'userAutor'])
             ->when($this->selectedEvent, fn($q) => $q->where('event_id', $this->selectedEvent))
             ->when($this->selectedAthlete, fn($q) => $q->where('athlete_id', $this->selectedAthlete))
-//            ->when($this->selectedSportType, function ($q) {
-//                $q->whereHas('sportTypes', $this->selectedSportType);
-//            })
             ->when($this->selectedSportType, function ($q) {
                 $q->whereHas('sportTypes', function ($query) {
                     $query->where('sport_types.id', $this->selectedSportType);
                 });
             })
+            ->when($this->selectedOrganizations, function ($q) {
+                $companyIds = is_array($this->selectedOrganizations) ? $this->selectedOrganizations : [$this->selectedOrganizations];
+
+                // Фильтр по companyAutors или companyParticipantes для любого из указанных id
+                $q->where(function ($query) use ($companyIds) {
+                    $query->whereHas('companyAutors', function ($q2) use ($companyIds) {
+                        $q2->whereIn('organizer_id', $companyIds);
+                    })
+                        ->orWhereHas('companyParticipantes', function ($q2) use ($companyIds) {
+                            $q2->whereIn('organizer_id', $companyIds);
+                        });
+                });
+            })
             ->orderBy('date', $this->sortDirection)
             ->paginate($this->perPage)
             ->withQueryString();
+
 
         //        $events = News::distinct()->whereNotNull('event_id')->pluck('event_id');
         //        $athletes = News::distinct()->whereNotNull('athlete_id')->pluck('athlete_id');

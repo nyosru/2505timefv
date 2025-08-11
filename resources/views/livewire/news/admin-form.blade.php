@@ -1,6 +1,5 @@
-<div class="px-6">
-
-
+<div class="px-6 flex xl:flex-row flex-col ">
+<div class="flex-1">
 
     <div class="mb-5">
         <livewire:Cms2.App.Breadcrumb
@@ -258,4 +257,26 @@
         </div>
 
     </form>
+</div>
+    @if($editMode)
+        <div class="flex flex-wrap flex-row xl:flex-col xl:w-[300px]">
+
+            @if(1==1)
+                <div class="bg-yellow-100 w-full md:w-1/2 xl:w-1/3 xl:w-full">
+                    <livewire:news.company-organizer-manager
+                            :newsId="$id"
+                            key="company-organizer"/>
+                </div>
+            @endif
+            @if(1==1)
+                <div class="bg-gradient-to-bl from-red-100 to-yellow-300 w-full md:w-1/2 xl:w-1/3 xl:w-full">
+                    <livewire:news.company-participantes-manager
+                            :newsId="$id" key="company-uchastnik"/>
+                </div>
+            @endif
+
+        </div>
+
+    @endif
+
 </div>

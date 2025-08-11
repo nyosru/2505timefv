@@ -67,23 +67,6 @@
                     <td class="px-6 py-4">{{ $item->title }}</td>
                     <td class="px-6 py-4">{{ $item->date->format('d.m.Y') }}</td>
                     <td class="px-6 py-4 text-right space-x-2">
-                        @permission('р.НовостиАдмин (только свои) / изменить удалить')
-                        <a
-                                href="{{ route('admin.news.edit', ['news' => $item->id]) }}"
-                                class="text-blue-600 hover:text-blue-800"
-                                {{--                                wire:click="edit({{ $item->id }})"--}}
-                        >
-                            ✏️
-                        </a>
-                        <button
-                                class="text-red-600 hover:text-red-800"
-                                wire:click="delete({{ $item->id }})"
-                                wire:confirm(
-                        'Удалить новость?')
-                        >
-                        🗑️
-                        </button>
-                        @endpermission
                         @permission('р.НовостиАдмин / редактировать, удалить')
                         <a
                                 href="{{ route('admin.news.edit', ['news' => $item->id]) }}"
@@ -100,6 +83,26 @@
                         >
                         🗑️
                         </button>
+                        @else
+
+                            @permission('р.НовостиАдмин (только свои) / изменить удалить')
+
+                            <a
+                                href="{{ route('admin.news.edit', ['news' => $item->id]) }}"
+                                class="text-blue-600 hover:text-blue-800"
+                                {{--                                wire:click="edit({{ $item->id }})"--}}
+                        >
+                            ✏️
+                        </a>
+                        <button
+                                class="text-red-600 hover:text-red-800"
+                                wire:click="delete({{ $item->id }})"
+                                wire:confirm(
+                        'Удалить новость?')
+                        >
+                        🗑️
+                        </button>
+                        @endpermission
                         @endpermission
                     </td>
                 </tr>

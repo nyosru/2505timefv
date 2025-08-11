@@ -44,4 +44,20 @@ class News extends Model
         return $this->belongsToMany(SportType::class, 'news_sport_type');
     }
 
+
+    public function companyAutors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Organizer::class, 'news_organizer')
+//            ->withTimestamps()
+            ;
+    }
+
+    public function companyParticipantes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Organizer::class, 'news_participantes')
+//            ->withTimestamps()
+            ;
+    }
+
+
 }

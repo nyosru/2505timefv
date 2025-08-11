@@ -1,10 +1,11 @@
-<div class="flex justify-center
+<div class="
+{{--flex justify-center--}}
 my-2
 text-lg
 {{--items-center--}}
 ">
 
-    <div class="flex flex-row space-x-3">
+    <div class="flex flex-wrap flex-row space-x-3 justify-center">
         <div>
             <livewire:app.menuItem label="Новости" routeName="news"
                                    :active="( Request::routeIs('news') || Request::is('news*')   || Request::is('/')  )"/>

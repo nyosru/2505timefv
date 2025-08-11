@@ -69,6 +69,16 @@
                 </select>
             @endif
 
+
+            @if($allOrganizations->count())
+                <select id="organizationsFilter" wire:model.live="selectedOrganizations" class="border p-2 rounded w-full max-w-xs">
+                    <option value="">Организации</option>
+                    @foreach($allOrganizations as $org )
+                        <option value="{{ $org->id }}">{{ $org->name }} ({{ $org->city->country->name ?? '.' }} {{ $org->city->name ?? '.' }} {{ $org->address ?? '.' }})</option>
+                    @endforeach
+                </select>
+            @endif
+
         </div>
     </div>
 
