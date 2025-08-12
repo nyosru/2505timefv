@@ -132,11 +132,11 @@ Route::middleware(['auth'])->group(function () {
         ; // Добавьте защиту по необходимости
 
         Route::get('news/{news}/edit', \App\Livewire\News\AdminForm::class)
-            ->middleware('р.НовостиАдмин / добавить новость')
+            ->middleware('check.permission:р.НовостиАдмин / добавить новость')
             ->name('.news.edit');
 
         Route::get('news/{news}/my_edit', \App\Livewire\News\AdminForm::class)
-            ->middleware('р.НовостиАдмин / добавить новость')
+            ->middleware('check.permission:р.НовостиАдмин / добавить новость')
             ->name('.news.my_edit');
 
 //
