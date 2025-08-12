@@ -133,13 +133,33 @@ Route::middleware(['auth'])->group(function () {
             ->name('.news')//    ->middleware(['auth'])
         ; // Добавьте защиту по необходимости
 
+//        Route::get('news/create', \App\Livewire\News\AdminForm::class)
+//            ->name('.news.create')//    ->middleware(['auth'])
+//        ; // Добавьте защиту по необходимости
+//
+//        Route::get('news/{news}/edit', \App\Livewire\News\AdminForm::class)
+//            ->name('.news.edit');
+
+
+
         Route::get('news/create', \App\Livewire\News\AdminForm::class)
+            ->middleware('р.НовостиАдмин / добавить новость')
+//            ->middleware(['or' => ['р.НовостиАдмин / добавить новость', 'р.НовостиАдмин / редактировать новость']])
+//            ->middleware(new OrMiddleware(['р.НовостиАдмин / добавить новость', 'р.НовостиАдмин / редактировать новость']))
+//            ->middleware(new OrMiddleware(['add-news', 'edit-news']))
             ->name('.news.create')//    ->middleware(['auth'])
         ; // Добавьте защиту по необходимости
 
         Route::get('news/{news}/edit', \App\Livewire\News\AdminForm::class)
+            ->middleware('check.permission:р.НовостиАдмин / добавить новость')
             ->name('.news.edit');
-//
+
+        Route::get('news/{news}/my_edit', \App\Livewire\News\AdminForm::class)
+            ->middleware('check.permission:р.НовостиАдмин / добавить новость')
+            ->name('.news.my_edit');
+
+
+
 //        Route::get('events', \App\Livewire\News\AdminForm::class)
 //            ->name('.events')//    ->middleware(['auth'])
 //        ; // Добавьте защиту по необходимости
