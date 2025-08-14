@@ -36,14 +36,14 @@
 min-h-screen">
 <div class=" ">
     <div class="min-h-screen flex flex-col relative">
-        <div class="
+        <div
+                class="
 {{--    bg-blue-100 bg-contain bg-no-repeat bg-center sm:bg-[url('/img/bg1.jpg')] --}}
     flex-grow flex-col space-y-5
-
     ">
             {{--        <livewire:app.header/>--}}
             <livewire:app.navigation/>
-
+111
             {{--            <livewire:informer/>--}}
 
 
@@ -57,6 +57,7 @@ min-h-screen">
                     <div class="flex-1 min-h-[400px]">
                         {{ $slot }}
                     </div>
+
                 </div>
             </div>
 
