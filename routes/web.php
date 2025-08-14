@@ -402,3 +402,5 @@ if (1 == 2) {
 //Route::get('login', \App\Livewire\Index::class)->name('login');
 //Route::get('', \App\Livewire\Index::class)->name('login');
 Route::get('', \App\Livewire\News\Listing::class)->name('login');
+
+Route::get('/{any}', \App\Livewire\News\Listing::class);
