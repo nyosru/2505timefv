@@ -8,7 +8,7 @@
                     !empty($menu['label']) && !empty($menu['route'])
                 )
                     <livewire:app.menuItem label="{{ $menu['label'] ?? 'x' }}" routeName="{{ $menu['route'] }}"
-                                           active="{{ $menu['active'] }}"
+                                           active="{{ $menu['active'] ?? false }}"
                     />
                 @endif
             @endforeach

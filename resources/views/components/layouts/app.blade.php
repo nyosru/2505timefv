@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'Время побед!') }}</title>
     {{--    <script src="https://cdn.tailwindcss.com"></script>--}}
-    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">--}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link href="/css/output.css?v=2{{ filemtime(public_path('/css/output.css')) }}" rel="stylesheet"/>
-    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+    <link href="/css/output.css?v={{ filemtime(public_path('/css/output.css')) }}" rel="stylesheet"/>
+{{--    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">--}}
 
     {{--    <script>--}}
     {{--        tailwind.config = {--}}
@@ -27,6 +27,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="bg-gray-100 text-dark">
+
 <!-- Шапка сайта -->
 <livewire:app.header/>
 <livewire:app.navigation/>

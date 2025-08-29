@@ -3,6 +3,7 @@
 namespace App\Livewire\App;
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 
@@ -717,6 +718,15 @@ class MenuApp extends Component
 
         if (!empty($this->menus)) {
             foreach ($this->menus as $k => $menu) {
+
+                if (!empty($menu['permissions'])) {
+                    $user = Auth::user();
+                    if( !$user->hasPermissionTo($menu['permissions']) ){
+                        continue;
+                    }
+                }
+
+
                 if (empty($menu['active'])) {
                     $this->menus[$k]['active'] = (Request::routeIs($menu['route']) || Request::is($menu['route'] . '*'));
                 }

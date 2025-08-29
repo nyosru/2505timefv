@@ -2,7 +2,7 @@
 
     <div>
         <livewire:Cms2.App.Breadcrumb
-            :menu="[
+                :menu="[
                                 ['route'=>'tech.index','name'=>'Техничка'],
                                 ['route'=>'tech.role_permission','name'=>'Управление разрешениями для ролей'],
 {{--                                [ 'link'=>'no', 'name'=>'Счета']--}}
@@ -10,7 +10,7 @@
 
     </div>
 
-{{--    <h2 class="text-xl font-bold mb-4">Управление разрешениями для ролей</h2>--}}
+    {{--    <h2 class="text-xl font-bold mb-4">Управление разрешениями для ролей</h2>--}}
 
     <!-- Сообщение об успехе -->
     @if (session()->has('message'))
@@ -31,13 +31,19 @@
 
 
     <div class="relative">
-        <div class="max-w-full">
+        <div class="w-full overflow-x-auto">
             <div class="flex flex-col">
                 <!-- Заголовок таблицы -->
                 <div class="flex bg-gray-200 sticky top-0">
-                    <div class="bg-gray-200 z-20 border border-gray-300 px-4 py-2 font-bold w-48">
-                        Роль
+                    <div class="bg-gray-200 z-20 border border-gray-300 px-4 py-2 font-bold
+                        w-[250px]
+                        min-w-[250px]
+                        ">
+
+                            Роль
+
                     </div>
+
                     @foreach ($permissions as $permission)
                         <div class="z-20
                          @if( strpos($permission->name,' /') || strpos($permission->name,' //') )
@@ -49,26 +55,34 @@
                          border border-gray-300
                          border-t-[5px]
 
-                        px-4 py-2 text-center
-                        чw-48
-                        w-20
-                        box_rotate">
+{{--                        px-4 py-2 --}}
+                        text-center
+{{--                        чw-48--}}
+{{--                        w-20--}}
+                        w-[60px]
+                        min-w-[60px]
+{{--                        inline-block--}}
+{{--                        block--}}
+{{--                        h-[60px]--}}
+                        box_rotate"
+                                {{--                        style="width: 70px;"--}}
+                        >
 
 
                             {{-- разработка--}}
                             @permission('разработка')
                             <button
-                                x-data
-                                x-on:click="
+                                    x-data
+                                    x-on:click="
                                     const textToCopy = $el.getAttribute('to-copy');
                                     navigator.clipboard.writeText(textToCopy)
                                     //    .then(() => $dispatch('notify', 'Текст скопирован: ' + textToCopy))
                                         .catch(err => console.error('Ошибка при копировании:', err));
                                     "
-                                to-copy="{{ $permission->name }}"
-                                class="text-gray"
-                                style="float:right;"
-                                title="sort {{ $permission->sort }}"
+                                    to-copy="{{ $permission->name }}"
+                                    class="text-gray"
+                                    style="float:right;"
+                                    title="sort {{ $permission->sort }}"
                             >
                                 <img src="/icon/copy.svg" alt="" border="" class="w-[20px]"/>
                             </button>
@@ -101,35 +115,62 @@
                     <div class="flex {{ $index % 2 == 0 ? 'bg-white' : 'bg-cyan-100' }}">
                         <!-- Левый столбец -->
                         <div
-                            class="sticky left-0 xbg-white z-10 border border-gray-300 px-4 py-2 font-bold w-48   {{ $index % 2 == 0 ? 'bg-white' : 'bg-cyan-100' }}">
-                            <div class="flex justify-between items-center"
-                                {{--                                 style="z-index: 500;"--}}
+                                class="sticky left-0
+                                    z-10
+                                    border border-gray-300
+                                    px-4 py-2
+                                    font-bold
+                                    {{ $index % 2 == 0 ? 'bg-white' : 'bg-cyan-100' }}
+                                    min-w-[250px]
+                                    "
+{{--                                style="width: 250px;"--}}
+                        >
+                            <div class="
+{{--                            flex justify-between items-center --}}
+{{--                            w-[300px]--}}
+{{--border-1 border-red-300--}}
+                            "
+
+                                 style="
+                                                                     /*z-index: 500;*/
+                                                                     width: 250px;
+                                                                     "
                             >
-{{--                                <pre>{{ print_r( $role->toArray() ) }}</pre>--}}
-                                <span>{{ $role->name }} <sup title="доска: {{ $role->board_id }}">д:{{ $role->board_id }}</sup></span>
+                                {{--                                <pre>{{ print_r( $role->toArray() ) }}</pre>--}}
+
+                                <span>{{ $role->name }} <sup
+                                            title="доска: {{ $role->board_id }}">д:{{ $role->board_id }}</sup></span>
                                 @can('р.Права доступа / CRUD роли')
                                     <button
-                                        wire:click="confirmDelete({{ $role->id }})"
-                                        {{--                                    wire:confirm="1111"--}}
-                                        class="text-gray-300 hover:text-red-700"
-                                        title="Удалить роль"
+                                            wire:click="confirmDelete({{ $role->id }})"
+                                            {{--                                    wire:confirm="1111"--}}
+                                            class="text-gray-300 hover:text-red-700"
+                                            title="Удалить роль"
                                     >
                                         &times;
                                     </button>
+
                                 @endcan
+
                             </div>
                         </div>
 
                         <!-- Остальные ячейки -->
                         @foreach ($permissions as $permission)
-                            <div class="border border-gray-300 px-4 py-2 text-center w-20">
+                            <div class="border border-gray-300
+                            px-4 py-2
+                            text-center
+                                                    w-[60px]
+                        min-w-[60px]
+
+                            ">
                                 {{--                                @can('р.Права доступа / CRUD роли')--}}
                                 @permission('р.Права доступа / CRUD роли')
                                 <input
-                                    type="checkbox"
+                                        type="checkbox"
 
-                                    wire:click="togglePermission({{ $role->id }}, {{ $permission->id }})"
-                                    @if (in_array($permission->id, $rolePermissions[$role->id] ?? [])) checked @endif
+                                        wire:click="togglePermission({{ $role->id }}, {{ $permission->id }})"
+                                        @if (in_array($permission->id, $rolePermissions[$role->id] ?? [])) checked @endif
                                 >
                                 @else
                                     @if (in_array($permission->id, $rolePermissions[$role->id] ?? []))
@@ -148,11 +189,11 @@
         </div>
     </div>
 
-{{--    @can('р.Права доступа / CRUD роли')--}}
-        <livewire:role-permissions-manager
-{{--            :board_id="$board_id" --}}
-        />
-{{--    @endcan--}}
+    {{--    @can('р.Права доступа / CRUD роли')--}}
+    <livewire:role-permissions-manager
+            {{--            :board_id="$board_id" --}}
+    />
+    {{--    @endcan--}}
 
     <!-- Добавляем компонент подтверждения -->
     @if ($confirmingDelete)
