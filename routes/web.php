@@ -103,6 +103,11 @@ Route::get('/auth/telegram/callback', function () {
 });
 
 
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/');
+} )->name('logout');
+
 //use App\Http\Controllers\Service\TrixUploadController;
 //Route::post('/trix-upload', [TrixUploadController::class, 'upload'])->name('trix.upload');
 

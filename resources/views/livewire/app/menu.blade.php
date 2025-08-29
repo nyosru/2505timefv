@@ -1,13 +1,20 @@
 <div>
 
-
     <nav class="
 {{--    bg-green-200 flex items-center justify-between px-4 py-2 relative--}}
     ">
         <!-- Кнопка-гамбургер -->
         <button id="menu-toggle"
                 {{--                class="md:hidden flex flex-col justify-center items-center w-10 h-10"--}}
-                class="fixed top-2 left-2 z-50 md:hidden flex flex-col justify-center items-center w-10 h-10 bg-white rounded shadow"
+                class="
+                fixed top-2 left-2
+                z-50
+                md:hidden
+                flex flex-col
+                justify-center items-center
+                w-10 h-10
+                bg-white
+                rounded shadow"
                 aria-label="Открыть меню">
             <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
@@ -15,763 +22,783 @@
         </button>
     </nav>
 
+{{--    <div class="flex flex-row flex-wrap space-y-1">--}}
+{{--        @foreach( $menus as $menu )--}}
+{{--            <livewire:app.menuItem label="Тех. отдел" routeName="tech.index"--}}
+{{--                   :active="( Request::routeIs('tech') || Request::is('tech*') )"--}}
+{{--            />--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
+
     <div class="
 {{--    px-1 pt-5 --}}
-    text-gray-600 md:block md:w-[200px]">
-        <div class="flex flex-col space-y-1">
-            <ul id="mobile-menu"
-                md:max-h-[9999px] md:overflow-none
-                "
-            >
+    text-gray-600
+{{--    md:block md:w-[200px]--}}
+    ">
+        <div class="flex flex-row flex-wrap space-y-1">
 
             @if(1==2)
 
-{{--            @permission('р.Доски')--}}
-            <livewire:app.menuItem label="Новости" routeName="news"  :active="( Request::routeIs('news') || Request::is('news*')   || Request::is('/')  )" />
-{{--            @endpermission--}}
+                {{--            @permission('р.Доски')--}}
+                <livewire:app.menuItem label="Новости" routeName="news"
+                                       :active="( Request::routeIs('news') || Request::is('news*')   || Request::is('/')  )"/>
+                {{--            @endpermission--}}
 
-@if(1==2)
-            <li class="w-full">
-                    <a href="{{ route('news') }}"
-                       wire:navigate
-                       class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+                @if(1==2)
+                    <li
+                            {{--                    class="w-full"--}}
+                    >
+                        <a href="{{ route('news') }}"
+                           wire:navigate
+                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{--                class="hidden w-full bg-white shadow-md flex-col md:static md:flex md:flex-col md:shadow-none"--}}
-                class="hidden fixed top-14 left-2 right-2 bg-white shadow-lg rounded z-40 flex flex-col space-y-0 p-2
-                       {{--                md:hidden--}}
-                       md:static md:flex
-                       md:bg-transparent md:shadow-none
-                       max-h-[70vh] overflow-y-auto
-                {{ Request::is('news*') ? ' bg-orange-300 text-gray-700 ' : '' }}
-                {{ Request::routeIs('login') ? ' bg-orange-300 text-gray-700 ' : '' }}
-                "
-                    >
+                class=" hidden fixed top-14 left-2 right-2 bg-white shadow-lg rounded z-40 flex flex-col space-y-0 p-2
+                           {{--                md:hidden--}}
+                           md:static md:flex
+                           md:bg-transparent md:shadow-none
+                           max-h-[70vh] overflow-y-auto
+                        {{ Request::is('news*') ? ' bg-orange-300 text-gray-700 ' : '' }}
+                        {{ Request::routeIs('login') ? ' bg-orange-300 text-gray-700 ' : '' }}
+                        "
+                        >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
                         </svg>
                         <span>Новости</span>
-                    </a>
-                </li>
-@endif
+                        </a>
+        </div>
+        @endif
 
 
-                <li class="w-full">
-                    <a href="{{ route('events.index') }}"
-                       wire:navigate
-                       class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        <div class="w-full">
+            <a href="{{ route('events.index') }}"
+               wire:navigate
+               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('events*') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                        </svg>
-                        <span>Мероприятия</span>
-                    </a>
-                </li>
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                </svg>
+                <span>Мероприятия</span>
+            </a>
+        </div>
 
 
-                <li class="w-full">
-                    <a href="{{ route('athletes.index') }}"
-                       wire:navigate
-                       class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        <div class="w-full">
+            <a href="{{ route('athletes.index') }}"
+               wire:navigate
+               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('athletes.index') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                        </svg>
-                        <span>Спортсмены</span>
-                    </a>
-                </li>
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                </svg>
+                <span>Спортсмены</span>
+            </a>
+        </div>
 
-            @endif
-                {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
-
-
-                @permission('р.Техничка')
-
-                <li>
-                    <h2>Админ Меню</h2>
-                </li>
+        @endif
+        {{--<pre class="text-xs">{{ print_r(Auth::user()->roles()->toArray(),1)  }}</pre>--}}
 
 
-                <li class="w-full bg-gray-300 py-1 px-2">
-                    @if(1==2)
-                        <a href="{{ route('tech.index') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @permission('р.Техничка')
+
+        {{--                <li>--}}
+        {{--                    <h2>Админ Меню</h2>--}}
+        {{--               </div>--}}
+
+
+        <div class="
+            {{--                w-full bg-gray-300 --}}
+            text-center
+            py-1 px-2">
+
+            @if(1==2)
+
+                <a href="{{ route('tech.index') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('tech*') ? 'bg-orange-300 text-gray-700 ' : '' }}"
-                        >
-                            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                            {{--                </svg>--}}
-                            <img src="/icon/gear.svg" class="w-[18px]"/>
-                            <span>Тех. отдел</span>
-                        </a>
-                    @endif
-                </li>
+                >
+                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+                    {{--                </svg>--}}
+                    <img src="/icon/gear.svg" class="w-[18px]"/>
+                    <span>Тех. отдел</span>
+                </a>
+            @endif
 
-                <livewire:app.menuItem label="Тех. отдел" routeName="tech.index"/>
+        </div>
 
-                @if(1==2)
-                    <li class="w-full">
-                        <a href="{{ route('tech.role_permission') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+
+        <livewire:app.menuItem label="Тех. отдел" routeName="tech.index"
+{{--                               :active="( Request::routeIs('tech') || Request::is('tech*')   || Request::is('/')  )" --}}
+                               :active="( Request::routeIs('tech') || Request::is('tech*') )"
+        />
+
+        @if(1==2)
+            <div class="w-full">
+                <a href="{{ route('tech.role_permission') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
 {{--                {{ Request::routeIs ('tech.role_permission') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Управление ролями</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Управление ролями</span>
+                </a>
+            </div>
+        @endif
 
-                @if(2==3)
-                    <livewire:app.menuItem label="Управление ролями" routeName="tech.role_permission"/>
-                @endif
-                {{--            <livewire:app.menuItem :label="'Управление пользователями'" routeName="tech.user_list"/>--}}
+        @if(2==3)
+            <livewire:app.menuItem label="Управление ролями" routeName="tech.role_permission"/>
+        @endif
+        {{--            <livewire:app.menuItem :label="'Управление пользователями'" routeName="tech.user_list"/>--}}
 
+        @permission('р.Доски')
+        <livewire:app.menuItem :label="'Доски'" routeName="board"
+                               :active="( Request::routeIs('board') || Request::is('board*') )"
+        />
+        @endpermission
 
-                @permission('р.Доски')
-                <livewire:app.menuItem :label="'Доски'" routeName="board"/>
-                @endpermission
-
-                @if(1==2)
-                    <li class="w-full">
-                        <a href="{{ route('tech.user_list') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(1==2)
+            <div class="w-full">
+                <a href="{{ route('tech.user_list') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
 {{--                {{ Request::routeIs ('tech.role_permission') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Управление ролями</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Управление ролями</span>
+                </a>
+            </div>
+        @endif
 
-                @permission('р.НовостиАдмин')
-                @if(1==2)
-                    <li class="w-full">
-                        <a href="{{ route('admin.news') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @permission('р.НовостиАдмин')
+        @if(1==2)
+            <div class="w-full">
+                <a href="{{ route('admin.news') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.news') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Новости Админ</span>
-                        </a>
-                    </li>
-                @endif
-                <livewire:app.menuItem :label="'Новости Админ'" routeName="admin.news"/>
-                @endpermission
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Новости Админ</span>
+                </a>
+            </div>
+        @endif
+        <livewire:app.menuItem :label="'Новости Админ'" routeName="admin.news"/>
+        @endpermission
 
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.events') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.events') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.events') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Мероприятия Админ</span>
-                        </a>
-                    </li>
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Мероприятия Админ</span>
+                </a>
+            </div>
 
-                    <li class="w-full">
-                        <a href="{{ route('admin.events.form') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            <div class="w-full">
+                <a href="{{ route('admin.events.form') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.events') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Мероприятия Админ Добавить</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Мероприятия Админ Добавить</span>
+                </a>
+            </div>
+        @endif
 
-                @permission('р.Мероприятия')
-                <livewire:app.menuItem label="Мероприятия Админ" routeName="admin.events"/>
-                @endpermission
+        @permission('р.Мероприятия')
+        <livewire:app.menuItem label="Мероприятия Админ" routeName="admin.events"/>
+        @endpermission
 
-                @permission('р.Мероприятия / добавить')
-                <livewire:app.menuItem label="Мероприятия Добавить" routeName="admin.events.form"/>
-                @endpermission
+        @permission('р.Мероприятия / добавить')
+        <livewire:app.menuItem label="Мероприятия Добавить" routeName="admin.events.form"/>
+        @endpermission
 
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.athletes') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.athletes') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.athletes') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Спортсмены Админ</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Спортсмены Админ</span>
+                </a>
+            </div>
+        @endif
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.athletes.form') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.athletes.form') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.athletes.form') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Спортсмены Админ Добавить</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Спортсмены Админ Добавить</span>
+                </a>
+            </div>
+        @endif
 
-                <livewire:app.menuItem label="Спортсмены Админ" routeName="admin.athletes"/>
-                <livewire:app.menuItem label="Спортсмены Админ Добавить" routeName="admin.athletes.form"/>
+        <livewire:app.menuItem label="Спортсмены Админ" routeName="admin.athletes"/>
+        <livewire:app.menuItem label="Спортсмены Админ Добавить" routeName="admin.athletes.form"/>
 
-                <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager"/>
-                <livewire:app.menuItem label="Спонсоры Админ" routeName="admin.sponsor.manager"/>
+        <livewire:app.menuItem label="Гости Админ" routeName="admin.guest.manager"/>
+        <livewire:app.menuItem label="Спонсоры Админ" routeName="admin.sponsor.manager"/>
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.sport-types') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.sport-types') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.sport-types') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Виды спорта Админ</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Виды спорта Админ</span>
+                </a>
+            </div>
+        @endif
 
-                @permission('р.Виды спорта')
-                <livewire:app.menuItem label="Виды спорта" routeName="admin.sport-types"/>
-                @endpermission
+        @permission('р.Виды спорта')
+        <livewire:app.menuItem label="Виды спорта" routeName="admin.sport-types"/>
+        @endpermission
 
-                @permission('р.Страны')
-                <livewire:app.menuItem label="Страны" routeName="admin.countries"/>
-                @endpermission
+        @permission('р.Страны')
+        <livewire:app.menuItem label="Страны" routeName="admin.countries"/>
+        @endpermission
 
-                @permission('р.Города')
-                <livewire:app.menuItem label="Города" routeName="admin.cities"/>
-                @endpermission
+        @permission('р.Города')
+        <livewire:app.menuItem label="Города" routeName="admin.cities"/>
+        @endpermission
 
-                @permission('р.Место проведения')
-                <livewire:app.menuItem label="Место проведения" routeName="admin.sport-places"/>
-                @endpermission
+        @permission('р.Место проведения')
+        <livewire:app.menuItem label="Место проведения" routeName="admin.sport-places"/>
+        @endpermission
 
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.countries') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.countries') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.countries') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Страны Админ</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Страны Админ</span>
+                </a>
+            </div>
+        @endif
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.cities') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.cities') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.cities') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Города Админ</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Города Админ</span>
+                </a>
+            </div>
+        @endif
 
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.sport-places') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.sport-places') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.sport-places') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>СпортМеста Админ</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>СпортМеста Админ</span>
+                </a>
+            </div>
+        @endif
 
-                @if(2==3)
-                    <li class="w-full">
-                        <a href="{{ route('admin.event-participants') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+        @if(2==3)
+            <div class="w-full">
+                <a href="{{ route('admin.event-participants') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
 {{--                {{ Request::is('admin.news*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
                 {{ Request::routeIs('admin.event-participants') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Кто в каких мероприятиях участвовал (победил) Админ</span>
-                        </a>
-                    </li>
-                @endif
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Кто в каких мероприятиях участвовал (победил) Админ</span>
+                </a>
+            </div>
+        @endif
 
-                @if(1==2)
+        @if(1==2)
 
-                    {{--        первая--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('cms2.index') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700 --}}
-                    {{--                {{ Request::routeIs('cms2.index') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Навигатор</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
+            {{--        первая--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('cms2.index') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700 --}}
+            {{--                {{ Request::routeIs('cms2.index') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Навигатор</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
 
 
-                    <!-- Лиды -->
-                    @permission('р.Лиды')
-                    <li class="w-full">
-                        <a href="{{ route('leed.list') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            <!-- Лиды -->
+            @permission('р.Лиды')
+            <div class="w-full">
+                <a href="{{ route('leed.list') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('leed*') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Рабочие доски</span>
-                        </a>
-                    </li>
-                    @endpermission
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Рабочие доски</span>
+                </a>
+            </div>
+            @endpermission
 
-                    <!-- Клиенты -->
-                    {{--        @can('р.Клиенты')--}}
-                    @permission('р.Клиенты')
-                    <li class="w-full">
-                        <a href="{{ route('clients') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            <!-- Клиенты -->
+            {{--        @can('р.Клиенты')--}}
+            @permission('р.Клиенты')
+            <div class="w-full">
+                <a href="{{ route('clients') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('clients*') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                 fill="currentColor">
-                                <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
-                            </svg>
-                            <span>Клиенты</span>
-                        </a>
-                    </li>
-                    @endpermission
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path d="M13 7a4 4 0 11-8 0 4 4 0 018 0zm-3 8a7 7 0 00-5.4 2.6A8 8 0 1016 9a7 7 0 00-6 6z"/>
+                    </svg>
+                    <span>Клиенты</span>
+                </a>
+            </div>
+            @endpermission
 
-                    @if(1==2)
-                        <!-- Усдуги -->
-                        @permission('р.Заказы')
-                        <li class="w-full">
-                            <a href="{{ route('order.index') }}"
-                               wire:navigate
-                               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            @if(1==2)
+                <!-- Усдуги -->
+                @permission('р.Заказы')
+                <div class="w-full">
+                    <a href="{{ route('order.index') }}"
+                       wire:navigate
+                       class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::routeIs('order.index') ? 'bg-orange-300 text-gray-700 ' : '' }}"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                     fill="currentColor">
-                                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>
-                                </svg>
-                                <span>Заказы</span>
-                            </a>
-                        </li>
-                        @endpermission
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>
+                        </svg>
+                        <span>Заказы</span>
+                    </a>
+                </div>
+                @endpermission
 
-                    @endif
+            @endif
 
-                    <!-- Усдуги -->
-                    {{--        @permission('р.Услуги')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('uslugi.index') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700--}}
-                    {{--                {{ Request::routeIs('uslugi.index') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Услуги</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
+            <!-- Усдуги -->
+            {{--        @permission('р.Услуги')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('uslugi.index') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700--}}
+            {{--                {{ Request::routeIs('uslugi.index') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Услуги</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
 
-                    <!-- Сотрудники -->
-                    {{--        @can('р.Сотрудники')--}}
-                    {{--        @permission('р.Сотрудники')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('staff.index') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700--}}
-                    {{--                {{ Request::is('staff*') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Сотрудники</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
-
-
-                    <!-- Договора -->
-                    {{--        @permission('р.Договора')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('dogovor.index') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700--}}
-                    {{--                {{ Request::is('dogovor*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
-                    {{--                "--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 2h8v8H6V6z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Договора</span>--}}
-                    {{--            </a>--}}
+            <!-- Сотрудники -->
+            {{--        @can('р.Сотрудники')--}}
+            {{--        @permission('р.Сотрудники')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('staff.index') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700--}}
+            {{--                {{ Request::is('staff*') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Сотрудники</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
 
 
-                    {{--            @permission('р.Договора / Шаблоны')--}}
-                    {{--            <ul class="ml-[20px] nav nav-treeview w-100">--}}
+            <!-- Договора -->
+            {{--        @permission('р.Договора')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('dogovor.index') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700--}}
+            {{--                {{ Request::is('dogovor*') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
+            {{--                "--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 2h8v8H6V6z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Договора</span>--}}
+            {{--            </a>--}}
 
-                    {{--                <li class="nav-item w-100 ">--}}
-                    {{--                    <a href="{{ route('dogovor.template') }}"--}}
-                    {{--                       wire:navigate--}}
-                    {{--                       --}}{{--                       class="nav-link {{ request()->routeIs('buh.zakazs') ? 'active' : '' }}"--}}
-                    {{--                       class="flex items-center--}}
-                    {{--                        m-1 px-4 py-1 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700--}}
-                    {{--                {{ Request::routeIs('dogovor.template') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
-                    {{--                "--}}
-                    {{--                    >--}}
-                    {{--                        --}}{{--                    <i class="nav-icon bi bi-circle"></i>--}}
-                    {{--                        Шаблоны--}}
-                    {{--                    </a>--}}
-                    {{--                </li>--}}
-                    {{--            </ul>--}}
-                    {{--            @endpermission--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
 
-                    <!-- Бухгалтерия -->
-                    @if(1==2)
-                        @anyPermission('р.Бух.Заказы','р.Бух.Услуги','р.Бух.Счета')
-                        <li class="w-full">
-                            <div
-                                    {{--            <a href="{{ route('buh.zakazs') }}"--}}
-                                    class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            {{--            @permission('р.Договора / Шаблоны')--}}
+            {{--            <ul class="ml-[20px] nav nav-treeview w-100">--}}
+
+            {{--               <div class="nav-item w-100 ">--}}
+            {{--                    <a href="{{ route('dogovor.template') }}"--}}
+            {{--                       wire:navigate--}}
+            {{--                       --}}{{--                       class="nav-link {{ request()->routeIs('buh.zakazs') ? 'active' : '' }}"--}}
+            {{--                       class="flex items-center--}}
+            {{--                        m-1 px-4 py-1 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700--}}
+            {{--                {{ Request::routeIs('dogovor.template') ? 'bg-orange-300 text-gray-700 ' : '' }}--}}
+            {{--                "--}}
+            {{--                    >--}}
+            {{--                        --}}{{--                    <i class="nav-icon bi bi-circle"></i>--}}
+            {{--                        Шаблоны--}}
+            {{--                    </a>--}}
+            {{--               </div>--}}
+            {{--            </ul>--}}
+            {{--            @endpermission--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
+
+            <!-- Бухгалтерия -->
+            @if(1==2)
+                @anyPermission('р.Бух.Заказы','р.Бух.Услуги','р.Бух.Счета')
+                <div class="w-full">
+                    <div
+                            {{--            <a href="{{ route('buh.zakazs') }}"--}}
+                            class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('buh*') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 ">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                     fill="currentColor">
-                                    <path
-                                            d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm4 6h6a1 1 0 110 2H9a1 1 0 110-2z"/>
-                                </svg>
-                                <span>Бухгалтерия</span>
-                                {{--            </a>--}}
-                            </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path
+                                    d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm4 6h6a1 1 0 110 2H9a1 1 0 110-2z"/>
+                        </svg>
+                        <span>Бухгалтерия</span>
+                        {{--            </a>--}}
+                    </div>
 
 
-                            <ul class="ml-[20px] nav nav-treeview w-100">
+                    <ul class="ml-[20px] nav nav-treeview w-100">
 
-                                @permission('р.Бух.Заказы')
-                                <li class="nav-item w-100 ">
-                                    <a href="{{ route('buh.zakazs') }}"
-                                       wire:navigate
-                                       {{--                       class="nav-link {{ request()->routeIs('buh.zakazs') ? 'active' : '' }}"--}}
-                                       class="flex items-center
+                        @permission('р.Бух.Заказы')
+                        <div class="nav-item w-100 ">
+                            <a href="{{ route('buh.zakazs') }}"
+                               wire:navigate
+                               {{--                       class="nav-link {{ request()->routeIs('buh.zakazs') ? 'active' : '' }}"--}}
+                               class="flex items-center
                         m-1 px-4 py-1 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::routeIs('buh.zakazs') ? 'bg-orange-300 text-gray-700 ' : '' }}
                 "
-                                    >
-                                        {{--                    <i class="nav-icon bi bi-circle"></i>--}}
-                                        Заказы
-                                    </a>
-                                </li>
-                                @endpermission
+                            >
+                                {{--                    <i class="nav-icon bi bi-circle"></i>--}}
+                                Заказы
+                            </a>
+                        </div>
+                        @endpermission
 
-                                @permission('р.Бух.Услуги')
-                                <li class="nav-item w-100">
-                                    <a href="{{ route('buh.uslugi') }}"
-                                       wire:navigate
-                                       class="flex items-center m-1 px-4 py-1 xtext-gray-700 rounded
+                        @permission('р.Бух.Услуги')
+                        <div class="nav-item w-100">
+                            <a href="{{ route('buh.uslugi') }}"
+                               wire:navigate
+                               class="flex items-center m-1 px-4 py-1 xtext-gray-700 rounded
                             hover:bg-orange-200 hover:text-gray-700
                             {{ Request::routeIs('buh.uslugi') ? 'bg-orange-300 text-gray-700 ' : '' }}
                         "
 
-                                    >
-                                        {{--                    <i class="nav-icon bi bi-circle"></i>--}}
-                                        Услуги
-                                    </a>
-                                </li>
-                                @endpermission
+                            >
+                                {{--                    <i class="nav-icon bi bi-circle"></i>--}}
+                                Услуги
+                            </a>
+                        </div>
+                        @endpermission
 
-                                @permission('р.Бух.Счета')
-                                <li class="nav-item w-100">
-                                    <a href="{{ route('buh.sheta') }}"
-                                       wire:navigate
-                                       {{--                       class="nav-link {{ request()->routeIs('buh.sheta') ? 'active' : '' }}"--}}
-                                       class="flex items-center
+                        @permission('р.Бух.Счета')
+                        <div class="nav-item w-100">
+                            <a href="{{ route('buh.sheta') }}"
+                               wire:navigate
+                               {{--                       class="nav-link {{ request()->routeIs('buh.sheta') ? 'active' : '' }}"--}}
+                               class="flex items-center
                         m-1 px-4 py-1 xtext-gray-700 rounded
                         hover:bg-orange-200 hover:text-gray-700
                         {{ Request::routeIs('buh.sheta') ? 'bg-orange-300 text-gray-700 ' : '' }}
                         "
 
-                                    >
-                                        {{--                    <i class="nav-icon bi bi-circle"></i>--}}
-                                        Счета
-                                    </a>
-                                </li>
-                                @endpermission
-                            </ul>
-                        </li>
-                        @endanyPermission
-                    @endif
+                            >
+                                {{--                    <i class="nav-icon bi bi-circle"></i>--}}
+                                Счета
+                            </a>
+                        </div>
+                        @endpermission
+                    </ul>
+                </div>
+                @endanyPermission
+            @endif
 
-                    {{--        user list--}}
-                    {{--        @permission('р.Пользователи')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('user_list') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700 --}}
-                    {{--                {{ Request::routeIs('user_list') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Пользователи</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
+            {{--        user list--}}
+            {{--        @permission('р.Пользователи')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('user_list') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700 --}}
+            {{--                {{ Request::routeIs('user_list') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Пользователи</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
 
-                    {{--        @permission('р.Права доступа')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('role_permission') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700 --}}
-                    {{--                {{ Request::routeIs('role_permission') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Права доступа</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
+            {{--        @permission('р.Права доступа')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('role_permission') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700 --}}
+            {{--                {{ Request::routeIs('role_permission') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Права доступа</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
 
 
-                    {{--        @permission('р.Поставщики лидов')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('ClientSupplierManager') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 text-gray-600 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700 --}}
-                    {{--                {{ Request::routeIs('ClientSupplierManager') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Источники лидов</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
+            {{--        @permission('р.Поставщики лидов')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('ClientSupplierManager') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 text-gray-600 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700 --}}
+            {{--                {{ Request::routeIs('ClientSupplierManager') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Источники лидов</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
 
-                    {{--        @permission('тех.Управление столбцами')--}}
-                    {{--        <li class="w-full">--}}
-                    {{--            <a href="{{ route('adm_role_column') }}"--}}
-                    {{--               wire:navigate--}}
-                    {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
-                    {{--                hover:bg-orange-200 hover:text-gray-700 --}}
-                    {{--                {{ Request::routeIs('adm_role_column') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
-                    {{--            >--}}
-                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                    {{--                </svg>--}}
-                    {{--                <span>Путь заказа, доступы</span>--}}
-                    {{--            </a>--}}
-                    {{--        </li>--}}
-                    {{--        @endpermission--}}
+            {{--        @permission('тех.Управление столбцами')--}}
+            {{--       <div class="w-full">--}}
+            {{--            <a href="{{ route('adm_role_column') }}"--}}
+            {{--               wire:navigate--}}
+            {{--               class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded--}}
+            {{--                hover:bg-orange-200 hover:text-gray-700 --}}
+            {{--                {{ Request::routeIs('adm_role_column') ? 'bg-orange-300 text-gray-700 ' : '' }}"--}}
+            {{--            >--}}
+            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+            {{--                </svg>--}}
+            {{--                <span>Путь заказа, доступы</span>--}}
+            {{--            </a>--}}
+            {{--       </div>--}}
+            {{--        @endpermission--}}
 
-                    @permission('р.Доски')
-                    <li class="w-full">
-                        <a href="{{ route('board') }}"
-                           wire:navigate
-                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
+            @permission('р.Доски')
+            <div class="w-full">
+                <a href="{{ route('board') }}"
+                   wire:navigate
+                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded
                 hover:bg-orange-200 hover:text-gray-700
                 {{ Request::is('board*') ? 'bg-orange-300 text-gray-700 ' : '' }}"
+                >
+                    {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
+                    {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
+                    {{--                </svg>--}}
+                    <img src="/icon/gear.svg" class="w-[18px]"/>
+                    <span>Доски</span>
+                </a>
+            </div>
+            @endpermission
+
+
+            <!-- CRM -->
+            @if(1==2)
+                <div class="w-full">
+
+
+                    @if (App::environment('local'))
+                        <a href="https://crm.marudi.store"
+                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded hover:bg-orange-200 hover:text-gray-700                "
+                           target="_blank"
                         >
-                            {{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">--}}
-                            {{--                    <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 1114 0H3z"/>--}}
-                            {{--                </svg>--}}
-                            <img src="/icon/gear.svg" class="w-[18px]"/>
-                            <span>Доски</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path
+                                        d="M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l4.546 8.09c.717 1.277-.17 2.81-1.742 2.81H5.453c-1.573 0-2.46-1.533-1.742-2.81l4.546-8.09zM11 13a1 1 0 11-2 0 1 1 0 012 0z"/>
+                            </svg>
+                            <span>Перейти на crm.marudi.store</span>
                         </a>
-                    </li>
-                    @endpermission
-
-
-                    <!-- CRM -->
-                    @if(1==2)
-                        <li class="w-full">
-
-
-                            @if (App::environment('local'))
-                                <a href="https://crm.marudi.store"
-                                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded hover:bg-orange-200 hover:text-gray-700                "
-                                   target="_blank"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path
-                                                d="M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l4.546 8.09c.717 1.277-.17 2.81-1.742 2.81H5.453c-1.573 0-2.46-1.533-1.742-2.81l4.546-8.09zM11 13a1 1 0 11-2 0 1 1 0 012 0z"/>
-                                    </svg>
-                                    <span>Перейти на crm.marudi.store</span>
-                                </a>
-                            @else
-                                <a href="https://marudi.store"
-                                   class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded hover:bg-orange-200 hover:text-gray-700                "
-                                   target="_blank"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                         fill="currentColor">
-                                        <path
-                                                d="M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l4.546 8.09c.717 1.277-.17 2.81-1.742 2.81H5.453c-1.573 0-2.46-1.533-1.742-2.81l4.546-8.09zM11 13a1 1 0 11-2 0 1 1 0 012 0z"/>
-                                    </svg>
-                                    <span>marudi.store</span>
-                                </a>
-                            @endif
-                        </li>
+                    @else
+                        <a href="https://marudi.store"
+                           class="flex items-center space-x-2 px-4 py-2 xtext-gray-700 rounded hover:bg-orange-200 hover:text-gray-700                "
+                           target="_blank"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path
+                                        d="M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l4.546 8.09c.717 1.277-.17 2.81-1.742 2.81H5.453c-1.573 0-2.46-1.533-1.742-2.81l4.546-8.09zM11 13a1 1 0 11-2 0 1 1 0 012 0z"/>
+                            </svg>
+                            <span>marudi.store</span>
+                        </a>
                     @endif
-                @endif
+                </div>
+            @endif
+        @endif
 
 
-                @endpermission
+        @endpermission
 
 
-            </ul>
+        </ul>
 
-        </div>
     </div>
+</div>
 
-    <script>
-        function initMenuToggle() {
-            const btn = document.getElementById('menu-toggle');
-            const menu = document.getElementById('mobile-menu');
+{{--    <script>--}}
+{{--        function initMenuToggle() {--}}
+{{--            const btn = document.getElementById('menu-toggle');--}}
+{{--            const menu = document.getElementById('mobile-menu');--}}
 
-            if (!btn || !menu) return;
+{{--            if (!btn || !menu) return;--}}
 
-            // Удаляем старый обработчик, чтобы не навешивать несколько раз
-            btn.replaceWith(btn.cloneNode(true));
-            const newBtn = document.getElementById('menu-toggle');
+{{--            // Удаляем старый обработчик, чтобы не навешивать несколько раз--}}
+{{--            btn.replaceWith(btn.cloneNode(true));--}}
+{{--            const newBtn = document.getElementById('menu-toggle');--}}
 
-            newBtn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-        }
+{{--            newBtn.addEventListener('click', () => {--}}
+{{--                menu.classList.toggle('hidden');--}}
+{{--            });--}}
+{{--        }--}}
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initMenuToggle();
-        });
+{{--        document.addEventListener('DOMContentLoaded', () => {--}}
+{{--            initMenuToggle();--}}
+{{--        });--}}
 
-        // Livewire 3 событие после навигации
-        document.addEventListener('livewire:navigated', () => {
-            initMenuToggle();
-        });
-    </script>
+{{--        // Livewire 3 событие после навигации--}}
+{{--        document.addEventListener('livewire:navigated', () => {--}}
+{{--            initMenuToggle();--}}
+{{--        });--}}
+{{--    </script>--}}
 
 </div>
