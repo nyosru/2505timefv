@@ -18,9 +18,7 @@
     <table class="min-w-full border border-gray-300 rounded">
         <thead class="bg-gray-100">
         <tr>
-            <th class="p-2 border-b">Фамилия</th>
-            <th class="p-2 border-b">Имя</th>
-            <th class="p-2 border-b">Отчество</th>
+            <th class="p-2 border-b">ФИО</th>
             <th class="p-2 border-b">Дата рождения</th>
             <th class="p-2 border-b">Действия</th>
         </tr>
@@ -28,14 +26,23 @@
         <tbody>
         @forelse($athletes as $athlete)
             <tr class="hover:bg-gray-50">
-                <td class="p-2 border-b">{{ $athlete->last_name }}</td>
-                <td class="p-2 border-b">{{ $athlete->first_name }}</td>
-                <td class="p-2 border-b">{{ $athlete->middle_name }}</td>
+                <td class="p-2 border-b">
+
+                    @if($athlete->photo)
+                        <img src="{{ asset('storage/' . $athlete->photo) }}" alt="Фото {{ $athlete->last_name }}"
+                             class="w-12 object-cover rounded-lg inline">
+                    @else
+                        --
+                    @endif
+
+                    <b>{{ $athlete->last_name }}</b>
+                {{ $athlete->first_name }}
+                {{ $athlete->middle_name }}</td>
                 <td class="p-2 border-b">
                     {{ $athlete->birth_date ? $athlete->birth_date->format('d.m.Y') : '-' }}
                 </td>
                 <td class="p-2 border-b text-right space-x-2">
-                    <button wire:click="edit({{ $athlete->id }})" class="text-blue-600 hover:underline">Редактировать</button>
+                    <a href="{{ route('admin.athletes.form', $athlete->id) }}" class="text-blue-600 hover:underline">Редактировать</a>
                     <button wire:click="delete({{ $athlete->id }})"
                             onclick="confirm('Удалить спортсмена?') || event.stopImmediatePropagation()"
                             class="text-red-600 hover:underline">

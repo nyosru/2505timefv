@@ -165,7 +165,7 @@ Route::middleware(['auth'])->group(function () {
             ->name('.athletes')//    ->middleware('auth')
         ; // при необходимости
 
-        Route::get('athletes/form/{id?}', A_AdminForm::class)
+        Route::get('athletes/form/{athleteId?}', A_AdminForm::class)
             ->name('.athletes.form')//    ->middleware('auth')
         ; // при необходимости
 

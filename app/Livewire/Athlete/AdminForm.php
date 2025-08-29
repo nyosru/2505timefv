@@ -3,6 +3,7 @@
 namespace App\Livewire\Athlete;
 
 use App\Models\Athlete;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
