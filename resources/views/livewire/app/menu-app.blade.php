@@ -7,9 +7,11 @@
                 @if(
                     !empty($menu['label']) && !empty($menu['route'])
                 )
+                    @if(isset( $menu['off']))<strike>@endif
                     <livewire:app.menuItem label="{{ $menu['label'] ?? 'x' }}" routeName="{{ $menu['route'] }}"
                                            active="{{ $menu['active'] ?? false }}"
                     />
+                        @if(isset( $menu['off']))</strike>@endif
                 @endif
             @endforeach
         </div>

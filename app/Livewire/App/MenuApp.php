@@ -90,18 +90,23 @@ class MenuApp extends Component
         }
 
         if (!empty($this->menus)) {
-            $user = Auth::user();
+            // Получаем текущего пользователя
+            $user = auth()->user();
 
             foreach ($this->menus as $k => $menu) {
 
                 if (!empty($menu['permissions'])) {
-//                    $this->menus[$k]['label'] = $menu['label'].'22';
-                    if( $user->hasPermissionTo($menu['permissions']) ){
-//                        $this->menus[$k]['label'] .= '3';
-                    }else{
-                        continue;
+
+                    // Проверяем, есть ли у пользователя нужное разрешение
+                    if ($user && $user->hasPermissionTo($menu['permissions'])) {
+                        // Разрешение есть — можно оставить пункт меню
+                    } else {
+                        // У пользователя нет разрешения — пропускаем этот пункт
+                        unset($this->menus[$k]);
+//                        $this->menus[$k]['off'] = true;
+//                        continue;
                     }
-//                    $this->menus[$k]['label'] .= '1';
+
                 }
 
                 if (empty($menu['active'])) {
