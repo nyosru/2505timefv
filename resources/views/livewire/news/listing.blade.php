@@ -21,10 +21,7 @@
 
     <!-- Фильтры -->
     <div class="">
-
         <div class="mb-6 flex flex-wrap gap-4 items-center">
-
-
             <select wire:model="sortDirection"
                     wire:change="resetPage" class="
                     border-none
@@ -46,6 +43,7 @@
                     @endforeach
                 </select>
             @endif
+
             @if($athletes->count())
                 <select
                         {{--                    wire:model.live="selectedAthlete" --}}
@@ -58,6 +56,7 @@
                     @endforeach
                 </select>
             @endif
+
             @if($sport_types->count())
                 <select wire:model.live="selectedSportType"
 {{--                        wire:change="resetPage"--}}
