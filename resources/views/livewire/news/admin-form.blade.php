@@ -15,7 +15,7 @@
 
         <!-- Title -->
         <div class="mb-4">
-            <label class="block text-sm font-medium mb-1">Заголовок *</label>
+            <label class="block text-sm font-medium mb-1">Заголовок <sup class="text-red-500">*</sup></label>
             <input
                     type="text"
                     wire:model="title"
@@ -28,8 +28,9 @@
         </div>
 
 
+        <div class="mb-4 flex flex-row">
         <!-- Фото -->
-        <div class="mb-4">
+        <div class="w-1/2">
             <label class="block text-sm font-medium mb-1">Фото</label>
             <input type="file" wire:model="photo" accept="image/*" class="w-full p-2 border rounded" />
             @error('photo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -49,8 +50,8 @@
 
 
         <!-- Date -->
-        <div class="mb-4">
-            <label class="block text-sm font-medium mb-1">Дата *</label>
+            <div class="w-1/2">
+            <label class="block text-sm font-medium mb-1">Дата <sup class="text-red-500">*</sup></label>
             <input
                     type="date"
                     wire:model="date"
@@ -59,6 +60,7 @@
             >
             @error('date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             {{--                    <x-input-error for="date" />--}}
+        </div>
         </div>
 
         <!-- Short Text -->
@@ -77,14 +79,16 @@
             <!-- Подключение TinyMCE -->
             {{--                    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>--}}
 
-            <label class="block text-sm font-medium mb-1">Полный текст *</label>
+            <label class="block text-sm font-medium mb-1">Полный текст <sup class="text-red-500">*</sup></label>
 
 
             {{--                    <livewire:editor />--}}
 {{--            <input id="x" type="hidden" name="content" wire:model.defer="full_text">--}}
 {{--            <trix-editor input="x"></trix-editor>--}}
 
-            <textarea wire:model="full_text" name="full_text"
+            <textarea wire:model="full_text"
+                      name="full_text"
+                      required
                 style="height: 300px; width: 100%;"
                 ></textarea>
 {{--            <input id="x" type="hidden" wire:model="full_text" name="full_text" >--}}
