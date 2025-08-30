@@ -45,10 +45,10 @@
                 <span class="float-right">
                     <span
                             title="Новости"
-                            class="bg-green-200 rounded-50% py-1 px-2 my-2">{{ $sportType->news->count() }}</span>
+                            class="bg-green-200 rounded-50% py-1 px-2 my-2">{{ $sportType->news_count }}</span>
                     <span
                             title="События"
-                            class="bg-blue-200 rounded-50% py-1 px-2">{{ $sportType->events->count() }}</span>
+                            class="bg-blue-200 rounded-50% py-1 px-2">{{ $sportType->events_count }}</span>
                 </span>
                 </td>
                 <td class="border border-gray-300 p-2 text-center space-x-2">

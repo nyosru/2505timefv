@@ -22,7 +22,7 @@ class SportTypeCrud extends Component
 
     public function render()
     {
-        $sportTypes = SportType::orderBy('name')->paginate(100);
+        $sportTypes = SportType::withCount(['news', 'events'])->orderBy('name')->paginate(100);
 
         return view('livewire.sport-type-crud', compact('sportTypes'));
     }
