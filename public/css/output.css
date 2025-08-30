@@ -2822,6 +2822,10 @@ select {
   background-image: linear-gradient(to top left, var(--tw-gradient-stops));
 }
 
+.bg-gradient-to-tr {
+  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
+}
+
 .from-blue-100 {
   --tw-gradient-from: #dbeafe var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(219 234 254 / 0) var(--tw-gradient-to-position);
@@ -2910,6 +2914,10 @@ select {
 
 .to-yellow-500 {
   --tw-gradient-to: #eab308 var(--tw-gradient-to-position);
+}
+
+.to-blue-300 {
+  --tw-gradient-to: #93c5fd var(--tw-gradient-to-position);
 }
 
 .bg-contain {
@@ -4385,6 +4393,10 @@ select {
 
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:w-\[350px\] {
+    width: 350px;
   }
 
   .sm\:max-w-2xl {

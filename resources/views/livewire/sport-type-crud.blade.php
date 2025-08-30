@@ -7,7 +7,7 @@
         </div>
     @endif
 
-    <div class="mb-6">
+    <div class="float-right mb-6 w-full sm:w-[350px] bg-gradient-to-tr from-blue-200 to-blue-300 p-2 rounded">
         @if ($updateMode)
             <h3 class="text-xl mb-2">Редактировать вид спорта</h3>
         @else
