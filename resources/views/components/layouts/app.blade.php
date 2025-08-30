@@ -37,10 +37,9 @@
 <livewire:app.menu-app type="tech"/>
 @endpermission
 
-<div class="block">
-<div class="container px-2 sm:px-0 mx-auto">
+
+<div class="container px-2 sm:px-0 mx-auto float-none">
     {{ $slot ?? ''}}
-</div>
 </div>
 
 @if(1==2)
