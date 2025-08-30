@@ -41,7 +41,16 @@
         @forelse ($sportTypes as $sportType)
             <tr>
                 <td class="border border-gray-300 p-2">{{ $sportType->id }}</td>
-                <td class="border border-gray-300 p-2">{{ $sportType->name }}</td>
+                <td class="border border-gray-300 p-2">{{ $sportType->name }}
+                <span class="float-right">
+                    <span
+                            title="Новости"
+                            class="bg-green-200 rounded-50% py-1 px-2 my-2">{{ $sportType->news->count() }}</span>
+                    <span
+                            title="События"
+                            class="bg-blue-200 rounded-50% py-1 px-2">{{ $sportType->events->count() }}</span>
+                </span>
+                </td>
                 <td class="border border-gray-300 p-2 text-center space-x-2">
                     <button wire:click="edit({{ $sportType->id }})" class="text-blue-600 hover:underline">Редактировать</button>
                     <button wire:click="delete({{ $sportType->id }})"
