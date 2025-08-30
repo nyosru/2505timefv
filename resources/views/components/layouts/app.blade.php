@@ -37,7 +37,7 @@
 <livewire:app.menu-app type="tech"/>
 @endpermission
 
-<div class="container mx-auto">
+<div class="container px-2 sm:px-0 mx-auto">
     {{ $slot ?? ''}}
 </div>
 
