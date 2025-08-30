@@ -15,15 +15,21 @@
         @endif
 
         <form wire:submit.prevent="{{ $updateMode ? 'update' : 'store' }}">
-            <input type="text" wire:model.defer="name" placeholder="Название вида спорта" class="border p-2 rounded w-full mb-2" />
+            <input type="text" wire:model.defer="name" placeholder="Название вида спорта"
+                   class="border p-2 rounded w-full mb-2"/>
             @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
 
             <div>
                 @if ($updateMode)
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Обновить</button>
-                    <button type="button" wire:click="cancel" class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">Отмена</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Обновить
+                    </button>
+                    <button type="button" wire:click="cancel" class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">
+                        Отмена
+                    </button>
                 @else
-                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Добавить</button>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                        Добавить
+                    </button>
                 @endif
             </div>
         </form>
@@ -42,22 +48,30 @@
             <tr>
                 <td class="border border-gray-300 p-2">{{ $sportType->id }}</td>
                 <td class="border border-gray-300 p-2">{{ $sportType->name }}
-                <span class="float-right">
+                    <span class="float-right">
+                    <a href="{{ route('news', ['selectedSportType'=>$sportType->id]) }}" target="_blank"  class="hover:underline">
                     <span
                             title="Новости"
                             class="bg-green-200 rounded-50% py-1 px-2 my-2">{{ $sportType->news_count }}</span>
+                        </a>
+
+                    <a href="{{ route('events.index', ['selectedSportType'=>$sportType->id]) }}" target="_blank" class="hover:underline" >
                     <span
                             title="События"
                             class="bg-blue-200 rounded-50% py-1 px-2">{{ $sportType->events_count }}</span>
+                        </a>
                 </span>
                 </td>
                 <td class="border border-gray-300 p-2 text-center space-x-2">
-                    <button wire:click="edit({{ $sportType->id }})" class="text-blue-600 hover:underline">Редактировать</button>
+                    <button wire:click="edit({{ $sportType->id }})" class="text-blue-600 hover:underline">
+                        Редактировать
+                    </button>
 
                     @if( $sportType->news_count == 0 && $sportType->events_count == 0 )
-                    <button wire:click="delete({{ $sportType->id }})"
-                            onclick="confirm('Удалить вид спорта?') || event.stopImmediatePropagation()"
-                            class="text-red-600 hover:underline">Удалить</button>
+                        <button wire:click="delete({{ $sportType->id }})"
+                                onclick="confirm('Удалить вид спорта?') || event.stopImmediatePropagation()"
+                                class="text-red-600 hover:underline">Удалить
+                        </button>
                     @endif
                 </td>
             </tr>
