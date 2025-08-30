@@ -38,7 +38,7 @@
 @endpermission
 
 
-<div class="container px-2 sm:px-0 mx-auto float-none">
+<div class="container px-2 sm:px-0 mx-auto overflow-auto">
     {{ $slot ?? ''}}
 </div>
 
