@@ -7,40 +7,50 @@
         </div>
     @endif
 
+
     <div class="mb-6">
-        @if ($updateMode)
-            <h3 class="text-xl mb-2">Редактировать город</h3>
-        @else
-            <h3 class="text-xl mb-2">Добавить новый город</h3>
-        @endif
+        <div class="float-right mb-6 w-full sm:w-[350px] bg-gradient-to-tr from-blue-200 to-blue-300 p-2 rounded">
+            @if ($updateMode)
+                <h3 class="text-xl mb-2">Редактировать город</h3>
+            @else
+                <h3 class="text-xl mb-2">Добавить новый город</h3>
+            @endif
 
-        <form wire:submit.prevent="{{ $updateMode ? 'update' : 'store' }}">
-            <div class="mb-3">
-                <label class="block font-semibold mb-1">Название города *</label>
-                <input type="text" wire:model.defer="name" class="border p-2 rounded w-full" />
-                @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-            </div>
+            <form wire:submit.prevent="{{ $updateMode ? 'update' : 'store' }}">
+                <div class="mb-3">
+                    <label class="block font-semibold mb-1">Название города *</label>
+                    <input type="text" wire:model.defer="name" class="border p-2 rounded w-full"/>
+                    @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
 
-            <div class="mb-3">
-                <label class="block font-semibold mb-1">Страна *</label>
-                <select wire:model.defer="country_id" class="border p-2 rounded w-full">
-                    <option value="">Выберите страну</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                    @endforeach
-                </select>
-                @error('country_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-            </div>
+                <div class="mb-3">
+                    <label class="block font-semibold mb-1">Страна *</label>
+                    <select wire:model.defer="country_id" class="border p-2 rounded w-full">
+                        <option value="">Выберите страну</option>
+                        @foreach($countries as $country)
+                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('country_id') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                </div>
 
-            <div>
-                @if ($updateMode)
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Обновить</button>
-                    <button type="button" wire:click="cancel" class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">Отмена</button>
-                @else
-                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Создать</button>
-                @endif
-            </div>
-        </form>
+                <div class="text-right">
+                    @if ($updateMode)
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Обновить
+                        </button>
+                        <button type="button" wire:click="cancel"
+                                class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">Отмена
+                        </button>
+                    @else
+                        <button type="submit" class="
+                    bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700
+                    ">Создать
+                        </button>
+                    @endif
+                </div>
+            </form>
+        </div>
     </div>
 
     <table class="w-full border-collapse border border-gray-300">
@@ -59,10 +69,12 @@
                 <td class="border border-gray-300 p-2">{{ $city->name }}</td>
                 <td class="border border-gray-300 p-2">{{ $city->country->name ?? '-' }}</td>
                 <td class="border border-gray-300 p-2 text-center space-x-2">
-                    <button wire:click="edit({{ $city->id }})" class="text-blue-600 hover:underline">Редактировать</button>
+                    <button wire:click="edit({{ $city->id }})" class="text-blue-600 hover:underline">Редактировать
+                    </button>
                     <button wire:click="delete({{ $city->id }})"
                             onclick="confirm('Удалить город?') || event.stopImmediatePropagation()"
-                            class="text-red-600 hover:underline">Удалить</button>
+                            class="text-red-600 hover:underline">Удалить
+                    </button>
                 </td>
             </tr>
         @empty

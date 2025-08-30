@@ -19,17 +19,16 @@
                    class="border p-2 rounded w-full mb-2"/>
             @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
 
-            <div>
+            <div class="text-right">
                 @if ($updateMode)
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Обновить
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Обновить
                     </button>
                     <button type="button" wire:click="cancel" class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">
                         Отмена
                     </button>
                 @else
-                    <button type="submit" class="
-                    bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700
-                    ">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                         Добавить
                     </button>
                 @endif
@@ -51,13 +50,15 @@
                 <td class="border border-gray-300 p-2">{{ $sportType->id }}</td>
                 <td class="border border-gray-300 p-2">{{ $sportType->name }}
                     <span class="float-right">
-                    <a href="{{ route('news', ['selectedSportType'=>$sportType->id]) }}" target="_blank"  class="hover:underline">
+                    <a href="{{ route('news', ['selectedSportType'=>$sportType->id]) }}" target="_blank"
+                       class="hover:underline">
                     <span
                             title="Новости"
                             class="bg-green-200 rounded-50% py-1 px-2 my-2">{{ $sportType->news_count }}</span>
                         </a>
 
-                    <a href="{{ route('events.index', ['selectedSportType'=>$sportType->id]) }}" target="_blank" class="hover:underline" >
+                    <a href="{{ route('events.index', ['selectedSportType'=>$sportType->id]) }}" target="_blank"
+                       class="hover:underline">
                     <span
                             title="События"
                             class="bg-blue-200 rounded-50% py-1 px-2">{{ $sportType->events_count }}</span>

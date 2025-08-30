@@ -8,6 +8,7 @@
     @endif
 
     <div class="mb-6">
+        <div class="float-right mb-6 w-full sm:w-[350px] bg-gradient-to-tr from-blue-200 to-blue-300 p-2 rounded">
         @if ($updateMode)
             <h3 class="text-xl mb-2">Редактировать спортивное место</h3>
         @else
@@ -50,15 +51,19 @@
                 @error('photo_s3_url') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            <div>
+            <div class="text-right">
                 @if ($updateMode)
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Обновить</button>
                     <button type="button" wire:click="cancel" class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">Отмена</button>
                 @else
-                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Создать</button>
+                    <button type="submit" class="
+{{--                    bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700--}}
+                    bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700
+                    ">Создать</button>
                 @endif
             </div>
         </form>
+    </div>
     </div>
 
     <table class="w-full border-collapse border border-gray-300">
