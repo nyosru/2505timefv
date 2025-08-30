@@ -11,7 +11,7 @@
         @if ($updateMode)
             <h3 class="text-xl mb-2">Редактировать вид спорта</h3>
         @else
-            <h3 class="text-xl mb-2">Добавить новый вид спорта</h3>
+            <h3 class="text-xl mb-2">Добавить вид спорта</h3>
         @endif
 
         <form wire:submit.prevent="{{ $updateMode ? 'update' : 'store' }}">
@@ -23,7 +23,7 @@
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Обновить</button>
                     <button type="button" wire:click="cancel" class="ml-2 px-4 py-2 border rounded hover:bg-gray-100">Отмена</button>
                 @else
-                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Создать</button>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Добавить</button>
                 @endif
             </div>
         </form>
