@@ -53,9 +53,12 @@
                 </td>
                 <td class="border border-gray-300 p-2 text-center space-x-2">
                     <button wire:click="edit({{ $sportType->id }})" class="text-blue-600 hover:underline">Редактировать</button>
+
+                    @if( $sportType->news_count == 0 && $sportType->events_count == 0 )
                     <button wire:click="delete({{ $sportType->id }})"
                             onclick="confirm('Удалить вид спорта?') || event.stopImmediatePropagation()"
                             class="text-red-600 hover:underline">Удалить</button>
+                    @endif
                 </td>
             </tr>
         @empty
