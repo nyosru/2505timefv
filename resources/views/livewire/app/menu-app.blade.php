@@ -1,7 +1,9 @@
 <div class="flex justify-center items-center">
 
     @if( $type == 'tech')
-        <div class="flex flex-row flex-wrap space-x-1 my-2">
+        <div class="flex flex-row flex-wrap space-x-1 my-2
+        justify-center items-center
+        ">
             @foreach( $menus as $menu )
                 {{--                <pre>{{ print_r($menu->label) }}</pre>--}}
                 @if(
