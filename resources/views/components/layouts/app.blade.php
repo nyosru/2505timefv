@@ -37,7 +37,6 @@
 <livewire:app.menu-app type="tech"/>
 @endpermission
 
-
 <div class="container px-2 sm:px-0 mx-auto overflow-auto">
     {{ $slot ?? ''}}
 </div>
@@ -167,7 +166,6 @@
 
 <!-- Футер -->
 <livewire:app.footer/>
-
 
 <!-- Кнопка "Наверх" -->
 <div class="fixed bottom-4 right-4 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-red-800">
