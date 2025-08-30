@@ -10,7 +10,9 @@
         {{--        @permission('р.НовостиАдмин / добавить новость')--}}
         @permission('р.НовостиАдмин / добавить новость')
         {{--        <button wire:click="create" class="btn btn-primary">+ Добавить новость</button>--}}
-        <a href="{{ route('admin.news.create') }}" class="btn btn-primary">+ Добавить новость</a>
+        <a href="{{ route('admin.news.create') }}" class="
+        bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700
+        ">+ Добавить новость</a>
         @endpermission
     </div>
 
