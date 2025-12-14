@@ -94,19 +94,25 @@ class UserController extends Controller
 
         $data = User::whereId($user->id)
             ->with([
-                'boardUser',
+                'boardUser' ,
 //                'currentBoard',
 //                'invitations',
 //                'roles',
 //                    'role'
             ])->first();
 
-        //dd([$data,$data->boardUser->count()]);
+//        dd([
+//            $data,
+//            $data->boardUser->count(),
+//            $data->toArray()
+//        ]);
 
         if ($data->boardUser->count() == 1) {
 
-            self::setInUSerCurentBoard($user, $data->boardUser[0]->board_id);
-            self::setNewRole($user, $data->boardUser[0]->role_id);
+            BoardController::goto($data->boardUser[0]->board_id, $data->boardUser[0]->role_id);
+
+//            self::setInUSerCurentBoard($user, $data->boardUser[0]->board_id);
+//            self::setNewRole($user, $data->boardUser[0]->role_id);
 
             //"board_id" => 1
             //"user_id" => 2

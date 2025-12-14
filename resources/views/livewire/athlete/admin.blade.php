@@ -37,7 +37,30 @@
 
                     <b>{{ $athlete->last_name }}</b>
                 {{ $athlete->first_name }}
-                {{ $athlete->middle_name }}</td>
+                {{ $athlete->middle_name }}
+
+{{--                <br/>--}}
+{{--                    <pre>{{ print_r($athlete->toArray(),1) }}</pre>--}}
+
+{{--                        [events_count] => 13--}}
+{{--                        [news_count] => 1--}}
+                        <span class="float-right">
+                    <a href="{{ route('news', ['selectedAthlete'=>$athlete->id]) }}" target="_blank"
+                       class="hover:underline">
+                    <span
+                            title="Новости"
+                            class="bg-green-200 rounded-50% py-1 px-2 my-2">{{ $athlete->news_count }}</span>
+                        </a>
+
+{{--                    <a href="{{ route('events.index', ['selectedAthlete'=>$athlete->id]) }}" target="_blank"--}}
+{{--                       class="hover:underline">--}}
+{{--                    <span--}}
+{{--                            title="События"--}}
+{{--                            class="bg-blue-200 rounded-50% py-1 px-2">{{ $athlete->events_count }}</span>--}}
+{{--                        </a>--}}
+                </span>
+
+                </td>
                 <td class="p-2 border-b">
                     {{ $athlete->birth_date ? $athlete->birth_date->format('d.m.Y') : '-' }}
                 </td>

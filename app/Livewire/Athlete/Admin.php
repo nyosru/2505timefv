@@ -24,8 +24,7 @@ class Admin extends Component
 
     public function render()
     {
-        $athletes = Athlete::orderBy('last_name')->paginate(10);
-
+        $athletes = Athlete::withCount(['events','news'])->orderBy('last_name')->paginate(10);
         return view('livewire.athlete.admin', compact('athletes'));
     }
 

@@ -2,7 +2,9 @@
 
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
+
         <h2 class="text-2xl font-bold">Управление новостями</h2>
+
         {{--        <button wire:click="create" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">--}}
         {{--            + Добавить новость--}}
         {{--        </button>--}}
@@ -19,7 +21,9 @@
     @permission('р.НовостиАдмин / редактировать, удалить')
     @else
         @permission('р.НовостиАдмин (только свои) / изменить удалить')
-        <div class="bg-yellow-200 p-2 rounded">Показаны ваши записи</div>
+        <div class="text-right">
+        <span class="bg-yellow-200 p-2 rounded">Показаны ваши записи</span>
+        </div>
         @endpermission
         @endpermission
 
@@ -61,8 +65,7 @@
                             <button
                                     class="text-red-600 hover:text-red-800"
                                     wire:click="delete({{ $item->id }})"
-                                    wire:confirm(
-                            'Удалить новость?')
+                                    wire:confirm="Удалить новость?"
                             >
                             🗑️
                             </button>
@@ -78,7 +81,7 @@
                                 <button
                                         class="text-red-600 hover:text-red-800"
                                         wire:click="delete({{ $item->id }})"
-                                        wire:confirm('Удалить новость?')
+                                        wire:confirm="Удалить новость?"
                                 >
                                 🗑️
                                 </button>
