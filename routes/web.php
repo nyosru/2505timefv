@@ -111,9 +111,14 @@ Route::get('logout', function () {
 //use App\Http\Controllers\Service\TrixUploadController;
 //Route::post('/trix-upload', [TrixUploadController::class, 'upload'])->name('trix.upload');
 
-
-Route::get('', \App\Livewire\Index::class)->name('index');
-
+//dd('234');
+//Route::get('', \App\Livewire\Index::class)->name('index');
+Route::get('', function (){
+//    dd('123123');
+    return redirect()->route('news');
+})->name('index');
+//Route::redirect('/', '/news')->name('index');
+//Route::redirect('', '/news', 302)->name('index');
 
 Route::get('news', \App\Livewire\News\Listing::class)->name('news');
 Route::get('news/{id}', \App\Livewire\News\Item::class)->name('news.show');
@@ -406,6 +411,6 @@ if (1 == 2) {
 //require __DIR__ . '/auth.php';
 //Route::get('login', \App\Livewire\Index::class)->name('login');
 //Route::get('', \App\Livewire\Index::class)->name('login');
-Route::get('', \App\Livewire\News\Listing::class)->name('login');
+Route::get('/login', \App\Livewire\News\Listing::class)->name('login');
 
 Route::get('/{any}', \App\Livewire\News\Listing::class);
