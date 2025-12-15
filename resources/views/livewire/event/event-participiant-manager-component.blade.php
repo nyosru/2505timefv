@@ -47,9 +47,9 @@
             </div>
         @endif
 
-{{--        <pre>{{ print_r($events[0]->participants->toArray(),1) }}</pre>--}}
-{{--        <pre class="text-xs max-h-[200px] overflow-y-auto">{{ print_r($events[0]->participants->toArray(),1) }}</pre>--}}
-{{--        <pre class="text-xs max-h-[200px] overflow-y-auto">{{ print_r($athletes->toArray(),1) }}</pre>--}}
+        {{--        <pre>{{ print_r($events[0]->participants->toArray(),1) }}</pre>--}}
+        {{--        <pre class="text-xs max-h-[200px] overflow-y-auto">{{ print_r($events[0]->participants->toArray(),1) }}</pre>--}}
+        {{--        <pre class="text-xs max-h-[200px] overflow-y-auto">{{ print_r($athletes->toArray(),1) }}</pre>--}}
 
         @if($eventId)
             <!-- Выбор спортсмена -->
@@ -136,12 +136,29 @@
                 </li>
                 {{--            <li><pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($group->toArray(),1) }}</pre></li>--}}
                 @foreach($group->athletes as $participant )
-{{--                    <li><pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($participant->toArray(),1) }}</pre></li>--}}
+                    {{--                    <li><pre class="max-h-[200px] text-xs  overflow-y-auto">{{ print_r($participant->toArray(),1) }}</pre></li>--}}
                     <livewire:event.event-participiant-item
-                        :participant="$participant"
-                        :eventId="$eventId"
-                        :key="'parcipant-'.$participant->id"/>
+                            :participant="$participant"
+                            :eventId="$eventId"
+                            :key="'parcipant-'.$participant->id"/>
                 @endforeach
+            @endforeach
+
+
+            <li class="bg-gray-300">
+                без групп
+            </li>
+
+            @foreach( $participants as $participant )
+                @if( empty($participant->event_group_nagrada_id) )
+                    <li>
+{{--                        <pre>{{ print_r($participant->toArray(),1) }}</pre>--}}
+                        <livewire:event.event-participiant-item
+                                :participant="$participant->athlete"
+                                :eventId="$eventId"
+                                :key="'parcipant-'.$participant->id"/>
+                    </li>
+                @endif
             @endforeach
 
         </ul>
