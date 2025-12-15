@@ -1042,10 +1042,6 @@ select {
   float: left;
 }
 
-.float-none {
-  float: none;
-}
-
 .m-0 {
   margin: 0px;
 }
@@ -1802,10 +1798,6 @@ select {
   width: 80%;
 }
 
-.w-\[800px\] {
-  width: 800px;
-}
-
 .w-\[80px\] {
   width: 80px;
 }
@@ -1843,20 +1835,16 @@ select {
   min-width: 0px;
 }
 
-.min-w-full {
-  min-width: 100%;
-}
-
-.min-w-\[80px\] {
-  min-width: 80px;
+.min-w-\[250px\] {
+  min-width: 250px;
 }
 
 .min-w-\[60px\] {
   min-width: 60px;
 }
 
-.min-w-\[250px\] {
-  min-width: 250px;
+.min-w-full {
+  min-width: 100%;
 }
 
 .max-w-2xl {
@@ -2794,6 +2782,16 @@ select {
   background-color: rgb(244 244 245 / var(--tw-bg-opacity, 1));
 }
 
+.bg-yellow-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(161 98 7 / var(--tw-bg-opacity, 1));
+}
+
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -2888,6 +2886,10 @@ select {
   --tw-gradient-to: #bfdbfe var(--tw-gradient-to-position);
 }
 
+.to-blue-300 {
+  --tw-gradient-to: #93c5fd var(--tw-gradient-to-position);
+}
+
 .to-blue-500 {
   --tw-gradient-to: #3b82f6 var(--tw-gradient-to-position);
 }
@@ -2918,10 +2920,6 @@ select {
 
 .to-yellow-500 {
   --tw-gradient-to: #eab308 var(--tw-gradient-to-position);
-}
-
-.to-blue-300 {
-  --tw-gradient-to: #93c5fd var(--tw-gradient-to-position);
 }
 
 .bg-contain {
@@ -3538,11 +3536,6 @@ select {
 .text-yellow-400 {
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity, 1));
-}
-
-.text-red-400 {
-  --tw-text-opacity: 1;
-  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
 }
 
 .underline {
@@ -4396,16 +4389,16 @@ select {
     width: 33.333333%;
   }
 
+  .sm\:w-\[350px\] {
+    width: 350px;
+  }
+
   .sm\:w-auto {
     width: auto;
   }
 
   .sm\:w-full {
     width: 100%;
-  }
-
-  .sm\:w-\[350px\] {
-    width: 350px;
   }
 
   .sm\:max-w-2xl {
@@ -4606,16 +4599,16 @@ select {
     width: 33.333333%;
   }
 
+  .md\:w-1\/4 {
+    width: 25%;
+  }
+
   .md\:w-2\/3 {
     width: 66.666667%;
   }
 
   .md\:w-\[200px\] {
     width: 200px;
-  }
-
-  .md\:w-1\/4 {
-    width: 25%;
   }
 
   .md\:min-w-64 {
@@ -4640,10 +4633,6 @@ select {
 
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .md\:flex-row {
