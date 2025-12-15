@@ -1,4 +1,19 @@
 <header class="bg-white shadow-md text-gray-400">
+
+
+
+    <div class="flag-container-blurred">
+        <!-- Фон с мягкими переходами -->
+        <div class="flag-gradient-blurred"></div>
+
+        <!-- Контент -->
+        <div class="content">
+{{--            <h1>Новый сайт</h1>--}}
+{{--            <p>С анимированным триколором</p>--}}
+
+
+
+
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center">
 {{--            <h1 class="text-2xl md:text-3xl font-bold text-primary">Sport<span class="text-secondary">News</span></h1>--}}
@@ -81,7 +96,127 @@
         </div>
     </div>
 
-    @if(1==2)
+
+
+        </div>
+    </div>
+
+    <style>
+        .flag-container-blurred {
+            position: relative;
+            width: 100%;
+            /*min-height: 300px;*/
+            overflow: hidden;
+            /*border-radius: 20px;*/
+            /*box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);*/
+        }
+
+        .flag-gradient-blurred {
+            position: absolute;
+            inset: 0;
+            /* Плавные градиенты с размытыми переходами */
+            background:
+                    linear-gradient(
+                            45deg,
+                            #ffffff 0%,
+                            rgba(255, 255, 255, 0.9) 20%,
+                            rgba(255, 255, 255, 0.7) 30%,
+                            rgba(115, 159, 228, 0.7) 40%,
+                            #5e87d3 50%,
+                            rgba(134, 166, 220, 0.7) 60%,
+                            rgba(232, 147, 136, 0.7) 70%,
+                            #cc8c89 80%,
+                            rgba(216, 157, 153, 0.9) 90%
+                    );
+            background-size: 400% 400%;
+            /*animation: smoothFlagMove 25s ease infinite;*/
+            animation: smoothFlagMove 125s ease infinite;
+
+            /* Эффекты размытия */
+            filter: blur(2px);
+            backdrop-filter: blur(3px);
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            /*height: 100%;*/
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /*padding: 2rem;*/
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(
+                    to right,
+                    rgba(255, 255, 255, 0.9),
+                    rgba(255, 255, 255, 0.7)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes smoothFlagMove {
+            0% {
+                background-position: 0% 50%;
+                filter: blur(2px) hue-rotate(0deg);
+            }
+            33% {
+                background-position: 100% 25%;
+                filter: blur(3px) hue-rotate(5deg);
+            }
+            66% {
+                background-position: 50% 100%;
+                filter: blur(2px) hue-rotate(-5deg);
+            }
+            100% {
+                background-position: 0% 50%;
+                filter: blur(2px) hue-rotate(0deg);
+            }
+        }
+
+        /* Эффект свечения границ */
+        .flag-container-blurred::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.2),
+                    rgba(0, 57, 166, 0.2),
+                    rgba(213, 43, 30, 0.2)
+            );
+            border-radius: 22px;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.6;
+            animation: borderGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            from {
+                opacity: 0.4;
+                filter: blur(10px);
+            }
+            to {
+                opacity: 0.8;
+                filter: blur(20px);
+            }
+        }
+    </style>
+
+
+
+
+@if(1==2)
         <header class="
         bg-gradient-to-bl from-gray-100 to-blue-200
         py-5
