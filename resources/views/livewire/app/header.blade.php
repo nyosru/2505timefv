@@ -11,9 +11,6 @@
 {{--            <h1>Новый сайт</h1>--}}
 {{--            <p>С анимированным триколором</p>--}}
 
-
-
-
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center">
 {{--            <h1 class="text-2xl md:text-3xl font-bold text-primary">Sport<span class="text-secondary">News</span></h1>--}}
@@ -96,8 +93,6 @@
         </div>
     </div>
 
-
-
         </div>
     </div>
 
@@ -121,20 +116,21 @@
                             #ffffff 0%,
                             rgba(255, 255, 255, 0.9) 20%,
                             rgba(255, 255, 255, 0.7) 30%,
-                            rgba(115, 159, 228, 0.7) 40%,
-                            #5e87d3 50%,
-                            rgba(134, 166, 220, 0.7) 60%,
-                            rgba(232, 147, 136, 0.7) 70%,
+                            rgba(197, 215, 253, 0.7) 40%,
+                            #82aeff 50%,
+                            rgba(167, 200, 255, 0.7) 60%,
+                            rgba(255, 192, 183, 0.7) 70%,
                             #cc8c89 80%,
                             rgba(216, 157, 153, 0.9) 90%
                     );
             background-size: 400% 400%;
             /*animation: smoothFlagMove 25s ease infinite;*/
-            animation: smoothFlagMove 125s ease infinite;
+            animation: smoothFlagMove 75s ease infinite;
 
             /* Эффекты размытия */
             filter: blur(2px);
             backdrop-filter: blur(3px);
+
         }
 
         .content {
@@ -147,7 +143,7 @@
             justify-content: center;
             /*padding: 2rem;*/
             color: white;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .content h1 {
