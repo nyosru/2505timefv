@@ -1,5 +1,7 @@
 <!-- Горизонтальное меню -->
-<nav class="bg-gray-700 text-white">
+<nav class="bg-gray-700 text-white"
+{{--     style="z-index: 100;"--}}
+>
     <div class="container mx-auto px-4">
         <div class="hidden md:flex
 {{--            justify-between --}}

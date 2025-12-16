@@ -1,99 +1,105 @@
 <header class="bg-white shadow-md text-gray-400">
 
 
-
     <div class="flag-container-blurred">
         <!-- Фон с мягкими переходами -->
         <div class="flag-gradient-blurred"></div>
 
         <!-- Контент -->
         <div class="content">
-{{--            <h1>Новый сайт</h1>--}}
-{{--            <p>С анимированным триколором</p>--}}
+            {{--            <h1>Новый сайт</h1>--}}
+            {{--            <p>С анимированным триколором</p>--}}
 
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center">
-{{--            <h1 class="text-2xl md:text-3xl font-bold text-primary">Sport<span class="text-secondary">News</span></h1>--}}
-            <a href="/" class="text-[2.5rem] font-bold text-red-600">
-                <nobr>ВремяПобед<span class="text-[1.5rem]">.рус</span></nobr>
-                {{--                <img src="/img/logo1.svg" class="h-[60px]" alt="" />--}}
-            </a>
-        </div>
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center">
+                    {{--            <h1 class="text-2xl md:text-3xl font-bold text-primary">Sport<span class="text-secondary">News</span></h1>--}}
+                    <a href="/" class="text-[2.5rem] font-bold text-red-600">
+                        <nobr>ВремяПобед<span class="text-[1.5rem]">.рус</span></nobr>
+                        {{--                <img src="/img/logo1.svg" class="h-[60px]" alt="" />--}}
+                    </a>
+                </div>
 
-        <div class="flex items-center space-x-4">
-            <div class="hidden md:flex space-x-2">
-{{--                <button class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full">--}}
-{{--                    <i class="fas fa-search"></i>--}}
-{{--                </button>--}}
-{{--                <button class="bg-primary hover:bg-red-800 px-3 py-1 rounded-full text-white">--}}
-{{--                    Войти--}}
-{{--                </button>--}}
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex space-x-2 text-black">
+                        {{--                <button class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full">--}}
+                        {{--                    <i class="fas fa-search"></i>--}}
+                        {{--                </button>--}}
+                        {{--                <button class="bg-primary hover:bg-red-800 px-3 py-1 rounded-full text-white">--}}
+                        {{--                    Войти--}}
+                        {{--                </button>--}}
 
-{{--                @if (Route::has('login'))--}}
-{{--                    <livewire:app.navigation/>--}}
-{{--                @endif--}}
+                        {{--                @if (Route::has('login'))--}}
+                        {{--                    <livewire:app.navigation/>--}}
+                        {{--                @endif--}}
 
 
 
-                @guest
-                    @if(1==1)
-                        {!! Socialite::driver('telegram')->getButton() !!}
-                    @endif
-                @else
-                    {{--                <div>--}}
-                    <!-- Authentication -->
-                    {{--    {{ auth()->user()->name ?? '-' }}--}}
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="inline xw-full text-start">
-                            {{ auth()->user()->name ?? '-' }}
-                        </button>
-                        <div x-show="open" @click.away="open = false" class="absolute
+                        @guest
+                            @if(request('enter') == 'da')
+                                {!! Socialite::driver('telegram')->getButton() !!}
+                            @endif
+                        @else
+                            {{--                <div>--}}
+                            <!-- Authentication -->
+                            {{--    {{ auth()->user()->name ?? '-' }}--}}
+                            <div x-data="{ open: false }">
+                                <button @click="open = !open" class="inline xw-full text-start">
+                                    {{ auth()->user()->name ?? '-' }}
+                                </button>
+                                <div x-show="open" @click.away="open = false"
+{{--                                     style="z-index: 500;"--}}
+                                     class="
+{{--                                     absolute--}}
+w-auto
                             {{--                        bg-white--}}
                             {{--                         bg-orange-300--}}
                              border-2 border-gray-500
 {{--                             rounded--}}
                              rounded-xl
 {{--                             shadow-lg --}}
-                             z-10">
-                            <div class="flex flex-col w-[150px] ">
-                                <div class="">
-                                    <a href="{{ route('lk.profile') }}"
-                                       class="block bg-white px-4 py-2
+{{--                             z-100--}}
+                             ">
+                                    <div class="flex flex-col w-[150px] ">
+                                        <div class="">
+                                            <a href="{{ route('lk.profile') }}"
+                                               class="block bg-white px-4 py-2
                                         hover:bg-orange-200 hover:underline
                                         "
-                                    >
-                                        Профиль
-                                    </a>
-                                </div>
-                                <div
+                                            >
+                                                Профиль
+                                            </a>
+                                        </div>
+                                        <div
 
-                                >
-                                    <a
-                                            href="{{ route('logout',['r'=>rand()]) }}"
-                                            class=" bg-white px-4 py-2 hover:underline block
+                                        >
+                                            <a
+                                                    href="{{ route('logout',['r'=>rand()]) }}"
+                                                    class=" bg-white px-4 py-2 hover:underline block
                                         hover:bg-orange-200
                                         "
 
-                                    >
-                                        Выйти
-                                    </a>
+                                            >
+                                                Выйти
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            {{--                </div>--}}
+
+                        @endif
+
+
                     </div>
-                    {{--                </div>--}}
-
-                @endif
-
-
+                    <button class="md:hidden text-gray-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-            <button class="md:hidden text-gray-600">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-        </div>
-    </div>
+
 
         </div>
+
     </div>
 
     <style>
@@ -110,19 +116,18 @@
             position: absolute;
             inset: 0;
             /* Плавные градиенты с размытыми переходами */
-            background:
-                    linear-gradient(
-                            45deg,
-                            #ffffff 0%,
-                            rgba(255, 255, 255, 0.9) 20%,
-                            rgba(255, 255, 255, 0.7) 25%,
-                            rgba(197, 215, 253, 0.7) 27%,
-                            #82aeff 30%,
-                            rgba(167, 200, 255, 0.7) 50%,
-                            rgba(255, 192, 183, 0.7) 60%,
-                            #cc8c89 70%,
-                            rgba(216, 157, 153, 0.9) 90%
-                    );
+            background: linear-gradient(
+                    45deg,
+                    #ffffff 0%,
+                    rgba(255, 255, 255, 0.9) 20%,
+                    rgba(255, 255, 255, 0.7) 25%,
+                    rgba(197, 215, 253, 0.7) 27%,
+                    #82aeff 30%,
+                    rgba(167, 200, 255, 0.7) 50%,
+                    rgba(255, 192, 183, 0.7) 60%,
+                    #cc8c89 70%,
+                    rgba(216, 157, 153, 0.9) 90%
+            );
             background-size: 400% 400%;
             /*animation: smoothFlagMove 25s ease infinite;*/
             animation: smoothFlagMove 75s ease infinite;
@@ -210,9 +215,7 @@
     </style>
 
 
-
-
-@if(1==2)
+    @if(1==2)
         <header class="
         bg-gradient-to-bl from-gray-100 to-blue-200
         py-5
