@@ -23,7 +23,21 @@
                 @php
                     $ext = ( substr( strtolower($attachment->filename) , -4) == 'jpeg' ? 'jpg' : strtolower( substr( strtolower($attachment->filename) , -3) ) );
 //                    dump($ext);
-                    $filename = '/file-icon/48px/' . $ext . '.png';
+//                    $filename = '/file-icon/48px/' . $ext . '.png';
+                    switch ($ext) {
+                        case 'mp4':
+                        case 'zip':
+                        case 'pdf':
+                            $filename = '/icon/file/' . $ext . '.png';
+                            break;
+                        case 'jpg':
+                            $filename = '/icon/file/' . $ext . '.svg';
+                            break;
+                        default:
+                            $filename = '/icon/file/default.svg';
+                            break;
+                    }
+
                 @endphp
                 {{--                                <div class="flex-1">--}}
                 <a href="{{ Storage::url($attachment->url) }}"
@@ -32,7 +46,7 @@
                     <div class="flex flex-row items-center justify-left space-x-2 w-full">
                         <div>
                             @if(file_exists(public_path($filename)))
-                                <img src="{{ $filename }}" class="inline" alt=""/>
+                                <img src="{{ $filename }}" class="inline w-[42px] " alt=""/>
                             @else
                                 <strong class="text-lg font-bold
                             border-gray-800
